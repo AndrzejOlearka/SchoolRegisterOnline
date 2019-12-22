@@ -1,0 +1,19 @@
+#container{
+    margin: 20px;
+    color: #020033;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#loginForm #registerForm input{
+    margin:10px;  
+}
+
+#containter h1{
+    margin-left:20px;
+    font-weight: 600
+}
+
