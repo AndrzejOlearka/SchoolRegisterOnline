@@ -43,4 +43,9 @@ class Connection
             throw new PDOexception("Database Error: {$error}");
         }
     }
+
+    public function __call($method, $args)
+    {
+        return call_user_func_array(array($this->pdo, $method), $args);
+    }
 }

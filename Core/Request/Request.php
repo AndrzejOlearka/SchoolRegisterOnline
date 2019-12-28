@@ -19,7 +19,7 @@ Class Request
     public function get($args){
         if(is_array($args)){
             foreach($args as $key => $arg){
-                $vars[$key] = $arg;
+                $vars[$arg] = $this->superglobal[$arg];
             }
             return $vars;
         }

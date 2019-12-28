@@ -7,11 +7,10 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Controllers\\Home' => $baseDir . '/App/Controllers/Home.php',
-    'App\\Controllers\\Register' => $baseDir . '/App/Controllers/Register.php',
     'App\\Lib\\Authentication' => $baseDir . '/App/Lib/Authentication.php',
     'App\\Lib\\Registration' => $baseDir . '/App/Lib/Registration.php',
-    'App\\Model\\Home' => $baseDir . '/App/Models/Home.php',
     'App\\Model\\User' => $baseDir . '/App/Models/User.php',
+    'App\\Provider\\UsersProvider' => $baseDir . '/App/Providers/UsersProvider.php',
     'ComposerAutoloaderInite6180dbdd575fd6b74cc00dfc3bb3c86' => $vendorDir . '/composer/autoload_real.php',
     'Composer\\Autoload\\ClassLoader' => $vendorDir . '/composer/ClassLoader.php',
     'Composer\\Autoload\\ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86' => $vendorDir . '/composer/autoload_static.php',
@@ -21,6 +20,7 @@ return array(
     'Core\\Helpers\\Encrypter' => $baseDir . '/Core/Helpers/Encrypter.php',
     'Core\\Model\\AbstractModel' => $baseDir . '/Core/Model/AbstractModel.php',
     'Core\\Model\\ModelInterface' => $baseDir . '/Core/Model/ModelInterface.php',
+    'Core\\Provider\\AbstractProvider' => $baseDir . '/Core/Providers/AbstractProvider.php',
     'Core\\Request\\Get' => $baseDir . '/Core/Request/Get.php',
     'Core\\Request\\JsonDecoder' => $baseDir . '/Core/Request/JsonDecoder.php',
     'Core\\Request\\JsonEncoder' => $baseDir . '/Core/Request/JsonEncoder.php',
@@ -30,5 +30,5 @@ return array(
     'Core\\Request\\Validator\\Validator' => $baseDir . '/Core/Request/Validator/Validator.php',
     'Core\\Router' => $baseDir . '/Core/Router.php',
     'Core\\Session\\Session' => $baseDir . '/Core/Session/Session.php',
-    'Core\\View\\View' => $baseDir . '/Core/View.php/View.php',
+    'Core\\View\\View' => $baseDir . '/Core/View/View.php',
 );

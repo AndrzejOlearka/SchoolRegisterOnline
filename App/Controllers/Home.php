@@ -3,7 +3,8 @@
 namespace App\Controllers;
 
 use Core\View\View;
-use App\Model as Model;
+use Core\Request\Request;
+use App\Provider\UsersProvider;
 use App\Lib\{Registration, Authentication};
 
 /**
@@ -52,7 +53,9 @@ class Home extends \Core\Controller
      */
     public function login()
     {
-        (new Authentication(new Model\User))->validate();
+        $usersProvider = new UsersProvider;
+        $usersProvider->setFormData(Request::post()->get('loginForm'));
+        (new Authentication($usersProvider))->validate();
     }
     
     /**
@@ -62,6 +65,8 @@ class Home extends \Core\Controller
      */
     public function register()
     {
-        (new Registration(new Model\User))->validate();
+        $usersProvider = new UsersProvider;
+        $usersProvider->setFormData(Request::post()->get('registrationForm'));
+        (new Registration($usersProvider))->validate();
     }
 }

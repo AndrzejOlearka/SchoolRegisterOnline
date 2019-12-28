@@ -2,7 +2,7 @@
 
 namespace Core\Request\Validator;
 
-Class Validator 
+class Validator 
 {
     public static function __callStatic($name, $arguments = null)
     {

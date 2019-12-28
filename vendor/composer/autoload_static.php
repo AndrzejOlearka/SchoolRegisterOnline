@@ -8,11 +8,10 @@ class ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86
 {
     public static $classMap = array (
         'App\\Controllers\\Home' => __DIR__ . '/../..' . '/App/Controllers/Home.php',
-        'App\\Controllers\\Register' => __DIR__ . '/../..' . '/App/Controllers/Register.php',
         'App\\Lib\\Authentication' => __DIR__ . '/../..' . '/App/Lib/Authentication.php',
         'App\\Lib\\Registration' => __DIR__ . '/../..' . '/App/Lib/Registration.php',
-        'App\\Model\\Home' => __DIR__ . '/../..' . '/App/Models/Home.php',
         'App\\Model\\User' => __DIR__ . '/../..' . '/App/Models/User.php',
+        'App\\Provider\\UsersProvider' => __DIR__ . '/../..' . '/App/Providers/UsersProvider.php',
         'ComposerAutoloaderInite6180dbdd575fd6b74cc00dfc3bb3c86' => __DIR__ . '/..' . '/composer/autoload_real.php',
         'Composer\\Autoload\\ClassLoader' => __DIR__ . '/..' . '/composer/ClassLoader.php',
         'Composer\\Autoload\\ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86' => __DIR__ . '/..' . '/composer/autoload_static.php',
@@ -22,6 +21,7 @@ class ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86
         'Core\\Helpers\\Encrypter' => __DIR__ . '/../..' . '/Core/Helpers/Encrypter.php',
         'Core\\Model\\AbstractModel' => __DIR__ . '/../..' . '/Core/Model/AbstractModel.php',
         'Core\\Model\\ModelInterface' => __DIR__ . '/../..' . '/Core/Model/ModelInterface.php',
+        'Core\\Provider\\AbstractProvider' => __DIR__ . '/../..' . '/Core/Providers/AbstractProvider.php',
         'Core\\Request\\Get' => __DIR__ . '/../..' . '/Core/Request/Get.php',
         'Core\\Request\\JsonDecoder' => __DIR__ . '/../..' . '/Core/Request/JsonDecoder.php',
         'Core\\Request\\JsonEncoder' => __DIR__ . '/../..' . '/Core/Request/JsonEncoder.php',
@@ -31,7 +31,7 @@ class ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86
         'Core\\Request\\Validator\\Validator' => __DIR__ . '/../..' . '/Core/Request/Validator/Validator.php',
         'Core\\Router' => __DIR__ . '/../..' . '/Core/Router.php',
         'Core\\Session\\Session' => __DIR__ . '/../..' . '/Core/Session/Session.php',
-        'Core\\View\\View' => __DIR__ . '/../..' . '/Core/View.php/View.php',
+        'Core\\View\\View' => __DIR__ . '/../..' . '/Core/View/View.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
