@@ -54,7 +54,7 @@ class Home extends \Core\Controller
     public function login()
     {
         $usersProvider = new UsersProvider;
-        $usersProvider->setFormData(Request::post()->get('loginForm'));
+        $usersProvider->setFormData(Request::post()->get('loginForm'))->getUser();
         (new Authentication($usersProvider))->validate();
     }
     
@@ -66,7 +66,7 @@ class Home extends \Core\Controller
     public function register()
     {
         $usersProvider = new UsersProvider;
-        $usersProvider->setFormData(Request::post()->get('registrationForm'));
+        $usersProvider->setFormData(Request::post()->get('registrationForm'))->getUser();
         (new Registration($usersProvider))->validate();
     }
 }

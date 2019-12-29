@@ -52,7 +52,6 @@ class AbstractProvider
     public static function data($query, $model, $args = [])
     {
         $db = self::getDatabaseConnection();
-        
         $statement = $db->prepare($query);
         $statement = self::bind($statement, $args);
         $statement->execute();
@@ -60,9 +59,21 @@ class AbstractProvider
         return $statement->fetchAll(\PDO::FETCH_CLASS, $model);
     }
 
+    public static function first($query, $model, $args = [])
+    {
+        $db = self::getDatabaseConnection();
+        $statement = $db->prepare($query);
+        $statement = self::bind($statement, $args);
+        $statement->execute();
+
+        $data = $statement->fetchAll(\PDO::FETCH_CLASS, $model);
+        return $data[0];
+    }
+
     public function setFormData($request)
     {
         $this->formData = $request;
+        return $this;
     }
     public function getFormData()
     {

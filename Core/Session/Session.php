@@ -118,6 +118,10 @@ class Session
     public function destroy()
     {
         if (session_status() == PHP_SESSION_ACTIVE) {
+            $_SESSION = [];
+            if (isset($_COOKIE[session_name()])) {
+                setcookie(session_name(), "", time() - 3600);
+            }
             session_destroy();
         }
     }

@@ -2,12 +2,12 @@
 
 namespace App\Lib;
 
-use App\Provider\UsersProvider;
+use Core\AbstractAction;
 use Core\Helpers\Encrypter;
 use Core\Request\JsonEncoder;
-use Core\Request\Validator\Post as PostValidator;
+use App\Provider\UsersProvider;
 
-class Registration 
+class Registration extends AbstractAction
 {
     public $result = false;
     private $errors = [];
@@ -56,7 +56,7 @@ class Registration
      */
     private function isUserExists()
     {
-        if (!empty($this->provider->originalData->id)) {
+        if (!empty($this->provider->originalData->email)) {
             $this->errors['wrongEmail'] = 'There is an user with this email.';
         }
     }

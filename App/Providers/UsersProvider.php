@@ -29,7 +29,7 @@ class UsersProvider extends AbstractProvider
 
     public function getUser()
     {
-        $this->originalData = self::data("SELECT * FROM {$this->table} WHERE email = ?", $this->model, [$this->formData['email']]);
+        $this->originalData = self::first("SELECT * FROM {$this->table} WHERE email = ?", $this->model, [$this->formData['email']]);
         return $this;
     }
 

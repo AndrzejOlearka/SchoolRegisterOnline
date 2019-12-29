@@ -2,10 +2,11 @@
 
 namespace App\Lib;
 
+use Core\AbstractAction;
 use Core\Request\JsonEncoder;
 use App\Provider\UsersProvider;
 
-class Authentication
+class Authentication extends AbstractAction
 {
     public $result = false;
     private $errors = [];
@@ -24,6 +25,8 @@ class Authentication
     {
         $this->isFormEmpty();
         $this->isUserExists();
+        $this->setResult();
+        $this->setCredentials();
         $this->sendResult();
     }
 
@@ -36,11 +39,9 @@ class Authentication
     {
         if (empty($this->provider->formData['email'])) {
             $this->errors['emptyEmail'] = 'Email is empty.';
-            //d('chuja sie udalo');
         }
         if (empty($this->provider->formData['password'])) {
             $this->errors['emptyLogin'] = 'Login is empty.';
-            //d('chuja sie udalo');
         }
     }
 
@@ -52,19 +53,32 @@ class Authentication
     private function isUserExists()
     {
         if (empty($this->provider->originalData->id)) {
-            $this->error = true;
-            //d('chuja sie udalo');\
             $this->errors['wrongEmail'] = 'There is no user with this email.';
+        }
+    }
+
+    private function isPasswordVerified(){
+        if(!password_verify($this->provider->formData['password'], $this->$this->provider->originalData->id)){
+            $this->errors['wrongEmail'] = 'Wrong password.';
+        }
+    }
+
+    private function setResult()
+    {
+        if (empty($this->errors)) {
+            $this->result = true;
         }
     }
     
     private function sendResult(){
-        if(empty($this->errors)){
-            $this->result = true;
-        }
         JsonEncoder::parse([
             'result' => $this->result,
             'data' => $this->errors
         ]);
+    }
+
+    private function setCredentials(){
+        $this->initSession();
+        $this->setSession('userID', $this->provider->originalData->id);
     }
 }
