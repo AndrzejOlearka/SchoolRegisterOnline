@@ -28,46 +28,30 @@ class Error {
 
 }
 
-class Validator{
-
-    constructor(){
-        this.result = '',
-        this.errors = new Error
-    }
-
+class Action
+{
     getResult(){
         if(this.result == false){
-            return 'kurwo nie dziala';
+            return true;
         }
+        return false;
     }
 
     setResult(response){
         this.result = response.data.result;
         this.errors.errors = response.data.data;
     }
-}
 
-class Registration
-{
-    constructor(){
-        this.validator = new Validator,
-        this.formData = {},
-        this.formData.password = '',
-        this.formData.password2 = '',
-        this.formData.email = ''
-        this.success = false;
-    }
-
-    prepare(){
+    prepare(form){
         var params = new URLSearchParams();
         for(let input in this.formData){
-            params.append('registrationForm['+input+']', this.formData[input]);
+            params.append(form[input], this.formData[input]);
         }
         return params;
     }
 
     execute(){
-        if(this.validator.result){
+        if(this.result){
             this.success = true;
         } else {
 
@@ -75,11 +59,30 @@ class Registration
     }
 }
 
-class Login
+class Registration extends Action
 {
     constructor(){
-        this.password = '',
-        this.email = ''
+        super();
+        this.formData = {
+            password: '',
+            password2: '',
+            email: ''
+        },
+        this.result = ''
+        this.errors = new Error
+    }
+}
+
+class Login extends Action
+{
+    constructor(){
+        super();
+        this.formData = {
+            password: '',
+            email: ''
+        },
+        this.result = ''
+        this.errors = new Error
     }
 }
 
@@ -94,16 +97,11 @@ new Vue({
         registrationForm: new Registration
     },
     methods:{
-        onSubmitLogin() {
-            axios.post('/login', this.data)
-                .then(response => this.validator.result = response.data);
-        },
-        onSubmitRegister() {
-            axios.post('/register', this.registrationForm.prepare())
-                .then(response => this.registrationForm.validator.setResult(response))
+        onSubmit(action, formtype, form){
+            axios.post(action, formtype.prepare(form))
+                .then(response => formtype.setResult(response))
                 .catch(response => console.log(this));
-            this.registrationForm.execute();
-            console.log(this.registrationForm.validator);
+            this.formtype.execute();
         }
     },
     watch:{
