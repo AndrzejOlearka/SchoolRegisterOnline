@@ -42,11 +42,12 @@ class Action
         this.errors.errors = response.data.data;
     }
 
-    prepare(form){
+    prepare(form, formData){
         var params = new URLSearchParams();
-        for(let input in this.formData){
-            params.append(form[input], this.formData[input]);
+        for(let input in formData){
+            params.append(form+'['+input+']', formData[input]);
         }
+        
         return params;
     }
 
@@ -71,6 +72,13 @@ class Registration extends Action
         this.result = ''
         this.errors = new Error
     }
+
+    getCredentials(){
+        return {
+            action: '/register',
+            formtype: 'registrationForm'
+        }
+    }
 }
 
 class Login extends Action
@@ -83,6 +91,13 @@ class Login extends Action
         },
         this.result = ''
         this.errors = new Error
+    }
+
+    getCredentials(){
+        return {
+            action: '/login',
+            formtype: 'loginForm'
+        }
     }
 }
 
@@ -97,11 +112,12 @@ new Vue({
         registrationForm: new Registration
     },
     methods:{
-        onSubmit(action, formtype, form){
-            axios.post(action, formtype.prepare(form))
-                .then(response => formtype.setResult(response))
+        onSubmit(form){
+            let credentials = form.getCredentials();
+            axios.post(credentials.action, form.prepare(credentials.formtype, form.formData))
+                .then(response => form.setResult(response))
                 .catch(response => console.log(this));
-            this.formtype.execute();
+            form.execute();
         }
     },
     watch:{
