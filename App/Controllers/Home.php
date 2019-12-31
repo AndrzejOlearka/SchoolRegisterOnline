@@ -6,13 +6,14 @@ use Core\View\View;
 use Core\Request\Request;
 use App\Provider\UsersProvider;
 use App\Lib\{Registration, Authentication};
+use Core\Controller\Controller;
 
 /**
  * Home controller
  *
  * PHP version 5.4
  */
-class Home extends \Core\Controller
+class Home extends Controller
 {
 
     /**

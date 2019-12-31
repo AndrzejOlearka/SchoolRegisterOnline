@@ -9,20 +9,23 @@
 <body>
     <div id="container">
         <h1>School Register Online</h1>
-        <form id="loginForm" method="post" action="/login"  v-show="login">
+        <form id="loginForm" method="post" action="/login"  v-show="login" @submit.prevent="onSubmit(loginForm)">
             <input type="text" class="form-control" name="loginForm[email]" v-model="loginForm.email">
-            <!--<span class="error" v-if="form.errors.has()" v-text="form.errors.get()"></span>-->
+            <span class="error" v-if="loginForm.errors.has('emptyEmail')" v-text="loginForm.errors.get('emptyEmail')"></span>
+            <span class="error" v-if="loginForm.errors.has('wrongEmail')" v-text="loginForm.errors.get('wrongEmail')"></span>
             <input type="text" class="form-control" name="loginForm[password]" v-model="loginForm.password">
-            <!--<span class="error" v-if="form.errors.has()" v-text="form.errors.get()"></span>-->
+            <span class="error" v-if="loginForm.errors.has('emptyPassword')" v-text="loginForm.errors.get('emptyPassword')"></span>
+            <span class="error" v-if="loginForm.errors.has('wrongPassword')" v-text="loginForm.errors.get('wrongPassword')"></span>
             <p><button type="submit" class="btn btn-primary btn-lg" name="loginForm[login]">Login</button></p>
         </form>
-        <form id="registerForm" method="post" action="/register" v-show="!login" @submit.prevent="onSubmitRegister">
+        <form id="registerForm" method="post" action="/register" v-show="!login" @submit.prevent="onSubmit(registrationForm)">
             <input type="text" class="form-control" name="registrationForm[email]" v-model="registrationForm.formData.email">
-            <!--<span class="error" v-if="form.errors.has(')" v-text="form.errors.get()"></span>-->
+            <span class="error" v-if="registrationForm.errors.has('wrongEmail')" v-text="registrationForm.errors.get('wrongEmail')"></span>
+            <span class="error" v-if="registrationForm.errors.has('emptyEmail')" v-text="registrationForm.errors.get('emptyEmail')"></span>
             <input type="password" class="form-control" name="registrationForm[password]" v-model="registrationForm.formData.password">
-            <span class="error" v-if="registrationForm.validator.errors.has('passwordStrength')" v-text="registrationForm.validator.errors.get('passwordStrength')"></span>
+            <span class="error" v-if="registrationForm.errors.has('passwordStrength')" v-text="registrationForm.errors.get('passwordStrength')"></span>
             <input type="password" class="form-control" name="registrationForm[password2]" v-model="registrationForm.formData.password2">
-            <span class="error" v-if="registrationForm.validator.errors.has('differentPasswords')" v-text="registrationForm.validator.errors.get('differentPasswords')"></span>
+            <span class="error" v-if="registrationForm.errors.has('differentPasswords')" v-text="registrationForm.errors.get('differentPasswords')"></span>
             <p><button type="submit" class="btn btn-primary btn-lg" name="registrationForm[register]">Register</button></p>
         </form>
         <br>

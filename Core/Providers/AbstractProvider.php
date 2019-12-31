@@ -67,7 +67,9 @@ class AbstractProvider
         $statement->execute();
 
         $data = $statement->fetchAll(\PDO::FETCH_CLASS, $model);
-        return $data[0];
+        if(!empty($data[0])){
+            return $data[0];
+        }
     }
 
     public function setFormData($request)

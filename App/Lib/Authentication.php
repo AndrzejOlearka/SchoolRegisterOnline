@@ -41,7 +41,7 @@ class Authentication extends AbstractAction
             $this->errors['emptyEmail'] = 'Email is empty.';
         }
         if (empty($this->provider->formData['password'])) {
-            $this->errors['emptyLogin'] = 'Login is empty.';
+            $this->errors['emptyPassword'] = 'Password is empty.';
         }
     }
 
@@ -59,7 +59,7 @@ class Authentication extends AbstractAction
 
     private function isPasswordVerified(){
         if(!password_verify($this->provider->formData['password'], $this->$this->provider->originalData->id)){
-            $this->errors['wrongEmail'] = 'Wrong password.';
+            $this->errors['wrongPassword'] = 'Wrong password.';
         }
     }
 
