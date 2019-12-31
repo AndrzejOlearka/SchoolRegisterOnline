@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS users (
     id int AUTO_INCREMENT,
     email varchar (255) NOT NULL,
     password varchar (255),
-    role tinyint(2) NOT NULL
+    role tinyint(2) NOT NULL,
     verified boolean,
     PRIMARY KEY (id)
 );
