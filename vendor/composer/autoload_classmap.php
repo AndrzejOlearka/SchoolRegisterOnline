@@ -6,9 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Controllers\\Home' => $baseDir . '/App/Controllers/Admin/Panel.php',
+    'App\\Controllers\\Home' => $baseDir . '/App/Controllers/Home.php',
+    'App\\Controllers\\Panel' => $baseDir . '/App/Controllers/Admin/Panel.php',
     'App\\Lib\\Authentication' => $baseDir . '/App/Lib/Authentication.php',
     'App\\Lib\\Registration' => $baseDir . '/App/Lib/Registration.php',
+    'App\\Model\\Home' => $baseDir . '/App/Models/Home.php',
     'App\\Model\\User' => $baseDir . '/App/Models/User.php',
     'App\\Provider\\UsersProvider' => $baseDir . '/App/Providers/UsersProvider.php',
     'ComposerAutoloaderInite6180dbdd575fd6b74cc00dfc3bb3c86' => $vendorDir . '/composer/autoload_real.php',
@@ -16,7 +18,7 @@ return array(
     'Composer\\Autoload\\ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86' => $vendorDir . '/composer/autoload_static.php',
     'Core\\AbstractAction' => $baseDir . '/Core/AbstractAction.php',
     'Core\\Config' => $baseDir . '/Core/Config.php',
-    'Core\\Controller\\AdminControllers' => $baseDir . '/Core/Controller/AdminController.php',
+    'Core\\Controller\\AdminController' => $baseDir . '/Core/Controller/AdminController.php',
     'Core\\Controller\\Controller' => $baseDir . '/Core/Controller/Controller.php',
     'Core\\Database\\Connection' => $baseDir . '/Core/Database/Connection.php',
     'Core\\Helpers\\Encrypter' => $baseDir . '/Core/Helpers/Encrypter.php',

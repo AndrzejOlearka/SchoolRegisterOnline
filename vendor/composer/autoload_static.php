@@ -7,9 +7,11 @@ namespace Composer\Autoload;
 class ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86
 {
     public static $classMap = array (
-        'App\\Controllers\\Home' => __DIR__ . '/../..' . '/App/Controllers/Admin/Panel.php',
+        'App\\Controllers\\Home' => __DIR__ . '/../..' . '/App/Controllers/Home.php',
+        'App\\Controllers\\Panel' => __DIR__ . '/../..' . '/App/Controllers/Admin/Panel.php',
         'App\\Lib\\Authentication' => __DIR__ . '/../..' . '/App/Lib/Authentication.php',
         'App\\Lib\\Registration' => __DIR__ . '/../..' . '/App/Lib/Registration.php',
+        'App\\Model\\Home' => __DIR__ . '/../..' . '/App/Models/Home.php',
         'App\\Model\\User' => __DIR__ . '/../..' . '/App/Models/User.php',
         'App\\Provider\\UsersProvider' => __DIR__ . '/../..' . '/App/Providers/UsersProvider.php',
         'ComposerAutoloaderInite6180dbdd575fd6b74cc00dfc3bb3c86' => __DIR__ . '/..' . '/composer/autoload_real.php',
@@ -17,7 +19,7 @@ class ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86
         'Composer\\Autoload\\ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86' => __DIR__ . '/..' . '/composer/autoload_static.php',
         'Core\\AbstractAction' => __DIR__ . '/../..' . '/Core/AbstractAction.php',
         'Core\\Config' => __DIR__ . '/../..' . '/Core/Config.php',
-        'Core\\Controller\\AdminControllers' => __DIR__ . '/../..' . '/Core/Controller/AdminController.php',
+        'Core\\Controller\\AdminController' => __DIR__ . '/../..' . '/Core/Controller/AdminController.php',
         'Core\\Controller\\Controller' => __DIR__ . '/../..' . '/Core/Controller/Controller.php',
         'Core\\Database\\Connection' => __DIR__ . '/../..' . '/Core/Database/Connection.php',
         'Core\\Helpers\\Encrypter' => __DIR__ . '/../..' . '/Core/Helpers/Encrypter.php',
