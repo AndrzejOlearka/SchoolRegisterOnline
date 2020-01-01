@@ -2,6 +2,8 @@
 
 namespace Core\Controller;
 
+use Core\Session\Session;
+
 /**
  * Base controller
  *
@@ -41,6 +43,7 @@ abstract class Controller
     public function __call($name, $args)
     {
         if (method_exists($this, $name)) {
+            $this->initSession();
             if ($this->before() !== false) {
                 call_user_func_array([$this, $name], $args);
                 $this->after();
@@ -63,4 +66,8 @@ abstract class Controller
      * @return void
      */
     abstract protected function after();
+    
+    protected function initSession(){
+        $this->session = Session::instance();
+    }
 }

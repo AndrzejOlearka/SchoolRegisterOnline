@@ -3,6 +3,7 @@
 namespace App\Provider;
 
 use App\Model\User;
+use App\Model\Teacher;
 use Core\Request\Request;
 use Core\Provider\AbstractProvider;
 
@@ -36,5 +37,11 @@ class UsersProvider extends AbstractProvider
     public function createUser()
     {
         self::data("INSERT INTO {$this->table} VALUES(null, ?, ?, ".UsersProvider::ROLE.", ".UsersProvider::VERIFIED.")", $this->model, [$this->formData['email'], $this->formData['password']]);
+    }
+
+    public function getUsersWithTeachers(){
+        $teachersTable = (new Teacher)->getTable();
+        $this->originalData = self::data("SELECT * FROM {$this->table} LEFT JOIN {$teachersTable} ON {$this->table}.id = {$teachersTable}.user_id", $this->model);
+        return $this;
     }
 }

@@ -3,17 +3,15 @@
 namespace App\Controllers;
 
 use Core\View\View;
-use Core\Request\Request;
 use App\Provider\UsersProvider;
-use App\Lib\{Registration, Authentication};
-use Core\Controller\AdminController;
+use Core\Controller\Controller;
 
 /**
  * Home controller
  *
  * PHP version 5.4
  */
-class Panel extends AdminController
+class News extends Controller
 {
 
     /**
@@ -44,20 +42,9 @@ class Panel extends AdminController
      */
     public function index()
     {
+        //View::render('news');
         $users = new UsersProvider;
         $users = $users->getUsersWithTeachers();
-        View::render('admin-panel', $users);
-    }
-
-    public function deleteUser(){
-
-    }
-
-    public function addUser(){
-
-    }
-
-    public function updateUser(){
-
+        View::render('news', ['users' => $users->originalData]);
     }
 }

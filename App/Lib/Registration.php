@@ -86,7 +86,7 @@ class Registration extends AbstractAction
     {
         JsonEncoder::parse([
             'result' => $this->result,
-            'data' => $this->errors,
+            'errors' => $this->errors,
         ]);
     }
 

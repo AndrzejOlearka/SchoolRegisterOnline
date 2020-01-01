@@ -4,16 +4,14 @@ namespace App\Controllers;
 
 use Core\View\View;
 use Core\Request\Request;
-use App\Provider\UsersProvider;
-use App\Lib\{Registration, Authentication};
-use Core\Controller\AdminController;
+use Core\Controller\Controller;
 
 /**
  * Home controller
  *
  * PHP version 5.4
  */
-class Panel extends AdminController
+class Settings extends Controller
 {
 
     /**
@@ -44,20 +42,19 @@ class Panel extends AdminController
      */
     public function index()
     {
-        $users = new UsersProvider;
-        $users = $users->getUsersWithTeachers();
-        View::render('admin-panel', $users);
+        $teachersProvider = (new TeachersProvider)->getTeacherData();
+        View::render('home', $teacherData);
     }
 
-    public function deleteUser(){
-
-    }
-
-    public function addUser(){
-
-    }
-
-    public function updateUser(){
-
+    /**
+     * Show the index page
+     *
+     * @return void
+     */
+    public function save()
+    {
+        $teachersProvider = new TeachersProvider;
+        $teachersProvider->setFormData(Request::post()->get('teacherSettingForm'))->getUser();
+        (new TeacherSettings($teachersProvider))->set();
     }
 }

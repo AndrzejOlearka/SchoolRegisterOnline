@@ -25,6 +25,7 @@ class Authentication extends AbstractAction
     {
         $this->isFormEmpty();
         $this->isUserExists();
+        $this->isPasswordVerified();
         $this->setResult();
         $this->setCredentials();
         $this->sendResult();
@@ -58,7 +59,7 @@ class Authentication extends AbstractAction
     }
 
     private function isPasswordVerified(){
-        if(!password_verify($this->provider->formData['password'], $this->$this->provider->originalData->id)){
+        if(!password_verify($this->provider->formData['password'], $this->provider->originalData->password)){
             $this->errors['wrongPassword'] = 'Wrong password.';
         }
     }
@@ -73,12 +74,16 @@ class Authentication extends AbstractAction
     private function sendResult(){
         JsonEncoder::parse([
             'result' => $this->result,
-            'data' => $this->errors
+            'errors' => $this->errors,
+            'data' => [
+                'role' => $this->provider->originalData->role
+            ]
         ]);
     }
 
     private function setCredentials(){
         $this->initSession();
         $this->setSession('userID', $this->provider->originalData->id);
+        $this->setAdminSession($this->provider->originalData->role, 'admin', true);
     }
 }

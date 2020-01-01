@@ -19,10 +19,6 @@ class Error {
     }
 
     clear(field){
-        if(field){
-            delete this.errors[field];
-            return;
-        }
         this.errors = {};
     }
 
@@ -39,7 +35,8 @@ class Action
 
     setResult(response){
         this.result = response.data.result;
-        this.errors.errors = response.data.data;
+        this.errors.errors = response.data.errors;
+        this.data = response.data.data
     }
 
     prepare(form, formData){
@@ -51,12 +48,10 @@ class Action
         return params;
     }
 
-    execute(){
-        if(this.result){
-            this.success = true;
-        } else {
-
-        }
+    reset(){
+        for (let field in this.formData){
+            this.formData[field] = '';
+        }   
     }
 }
 
@@ -70,7 +65,9 @@ class Registration extends Action
             email: ''
         },
         this.result = ''
+        this.success = false;
         this.errors = new Error
+        this.data = {}
     }
 
     getCredentials(){
@@ -78,6 +75,17 @@ class Registration extends Action
             action: '/register',
             formtype: 'registrationForm'
         }
+    }
+
+    execute(){
+        if(this.result){
+            this.success = true;
+            this.reset();
+            var interval = setTimeout(() => {
+                this.success = false;
+            }, 3000);
+        }
+        
     }
 }
 
@@ -90,13 +98,28 @@ class Login extends Action
             email: ''
         },
         this.result = ''
+        this.success = false;
         this.errors = new Error
+        this.data = {}
     }
 
     getCredentials(){
         return {
             action: '/login',
             formtype: 'loginForm'
+        }
+    }
+
+    execute(){
+        if(this.result){
+            this.success = true;
+            var interval = setTimeout(() => {
+                if(this.data.role == 0){
+                    window.location.replace('/News');
+                } else{
+                    window.location.replace('/News');
+                }
+            }, 3000);
         }
     }
 }
@@ -106,8 +129,7 @@ new Vue({
     el: '#container',
     data:{
         login: true,
-        action: '',
-        action2: '',
+        actions: ['register', 'Registration'],
         loginForm: new Login,
         registrationForm: new Registration
     },
@@ -116,18 +138,16 @@ new Vue({
             let credentials = form.getCredentials();
             axios.post(credentials.action, form.prepare(credentials.formtype, form.formData))
                 .then(response => form.setResult(response))
+                .then(response => form.execute())
                 .catch(response => console.log(this));
-            form.execute();
         }
     },
     watch:{
         login: function () {
             if(this.login){
-                this.action = 'register';
-                this.action2 = 'Registration';
+                this.actions = ['register', 'Registration'];
             } else {
-                this.action = 'login';
-                this.action2 = 'Login';
+                this.actions = ['login', 'Login'];
             }
         }
     }

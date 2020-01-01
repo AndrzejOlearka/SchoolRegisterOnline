@@ -18,4 +18,9 @@ abstract class AbstractAction
         $this->session->set($name, $value);
     }
     
+    protected function setAdminSession($role, $name, $value){
+        if($role == 0){
+            $this->setSession($name, $value);        
+        }
+    }
 }
