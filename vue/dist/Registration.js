@@ -1,5 +1,5 @@
-import Action from './vue/src/core/Action.js';
-import Error from './vue/src/core/Error.js';
+import Action from './dist/Action.js';
+import Error from './dist/Error.js';
 
 class Registration extends Action
 {

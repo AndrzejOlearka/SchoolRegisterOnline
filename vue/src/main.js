@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import Login from './vue/src/core/Login.js'
-import Registration from './vue/src/core/Registration.js'
+import Login from './dist/Login.js'
+import Registration from './dist/Registration.js'
 
 new Vue({
 
@@ -32,4 +32,5 @@ new Vue({
           }
       }
   }
+  // render: h => h(App)
 });
