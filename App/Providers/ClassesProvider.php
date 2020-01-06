@@ -15,6 +15,10 @@ class ClassesProvider extends AbstractProvider
         $this->table = $this->model::TABLE;
     }
 
+    public function getClasses(){
+        
+    }
+    
     public function getClassWithStudentsNames(){
         $studentsTable = \App\Model\Student::TABLE;
         $this->originalData = self::data("SELECT * FROM {$this->table} LEFT JOIN {$studentsTable} ON {$this->table}.id = {$studentsTable}.class_id", $this->model);

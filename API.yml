@@ -3,19 +3,25 @@ api:
     - /login
     - /register
     - /users
+  /Settings:
+    - /save
   /Classes:
     - /getClasses
-    - /getClassesWithStudents
+    - /getClassWithStudents
     - /getClassWithGroups
     - /getClassDefaultSchedule
     - /getClassTrips
   /Students:
     - /saveStudent
     - /deleteStudent
-    - /addGrade
-    - /addBehaviourNote
-    - /addParentContact
-    - /addSemestralNote
+    - /saveGrade
+    - /deleteGrade
+    - /saveBehaviourNote
+    - /deleteBehaviourNote
+    - /saveParentContact
+    - /deleteParentContact
+    - /saveSemestralNote
+    - /deleteSemestralNote
   /News:
     - /save
     - /delete
@@ -28,11 +34,17 @@ api:
     - /deleteTemplate
     - /getTemplate
   /Grades:
-    - /listGrades
-    - /listBehaviourGrades
     - /saveGradesType
-    - /saveBehaviourGradesTypes
+    - /saveBehaviourGradesType
+    - /listGradesTypes
+    - /listBehaviourGradesTypes
+    - /deleteGradesTypes
+    - /deleteBehaviourGradesType
   /Admin:
     - /setRole
     - /setPermission
     - /addClass
+  /Groups:
+    - /saveGroup
+    - /deleteGroup
+    - /listGroups
