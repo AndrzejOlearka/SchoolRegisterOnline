@@ -21,21 +21,14 @@ class Home extends Controller
      *
      * @return void
      */
-    protected function before()
-    {
-        //echo "(before) ";
-        //return false;
-    }
+    protected function before(){}
 
     /**
      * After filter
      *
      * @return void
      */
-    protected function after()
-    {
-        //echo " (after)";
-    }
+    protected function after(){}
 
     /**
      * Show the index page

@@ -53,8 +53,7 @@ CREATE TABLE IF NOT EXISTS students (
     class_id int (10),
     birthday date,
     father varchar (255),
-    mother varchar (255),
-    contact_numbers varchar (255),
+    mother varchar (255)
     PRIMARY KEY (id),
     FOREIGN KEY (class_id) REFERENCES classes(id)
 )
@@ -71,7 +70,7 @@ CREATE TABLE IF NOT EXISTS groups (
 
 CREATE TABLE IF NOT EXISTS class_school_subjects(
     school_subject_id int(10) NOT NULL,
-    class_id int(10),
+    class_id int(10) NOT NULL,
     teacher_id int(10) NOT NULL,
     group_id int(10),
     FOREIGN KEY (school_subject_id) REFERENCES school_subjects(id),
@@ -112,7 +111,7 @@ CREATE TABLE IF NOT EXISTS grades(
     FOREIGN KEY (student_id) REFERENCES students(id)
 )
 
-CREATE TABLE IF NOT EXISTS behavior_notes(
+CREATE TABLE IF NOT EXISTS behaviuor_notes(
     id int AUTO_INCREMENT,
     weight varchar(255),
     student_id int NOT NULL,
@@ -124,11 +123,9 @@ CREATE TABLE IF NOT EXISTS behavior_notes(
 )
 
 CREATE TABLE IF NOT EXISTS semestral_grades(
-    id int AUTO_INCREMENT,
     student_id int NOT NULL,
     grades varchar(10000),
     semestr tinyint,
-    PRIMARY KEY (id),
     FOREIGN KEY (student_id) REFERENCES students(id)
 )
 
@@ -177,6 +174,7 @@ CREATE TABLE IF NOT EXISTS lessons_subjects(
 
 CREATE TABLE IF NOT EXISTS parents_contacts(
     id int AUTO_INCREMENT,
+    student_id int NOT NULL,
     class_id int NOT NULL,
     description text,
     PRIMARY KEY (id),
@@ -197,4 +195,60 @@ CREATE TABLE IF NOT EXISTS classes_trips(
     class_id int,
     FOREIGN KEY (trip_id) REFERENCES trips(id),
     FOREIGN KEY (class_id) REFERENCES classes(id)
+)
+
+CREATE TABLE IF NOT EXISTS news(
+    id int AUTO_INCREMENT,
+    user_id int,
+    description text,
+    PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS messages(
+    id int AUTO_INCREMENT,
+    user_id int,
+    recipients_ids varchar(1000),
+    template varchar (255),
+    subject varchar (255),
+    message text,
+    PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS templates(
+    id int AUTO_INCREMENT,
+    name varchar (255),
+    message text
+)
+
+CREATE TABLE IF NOT EXISTS school_lessons(
+    id int AUTO_INCREMENT,
+    number int,
+    date_start time,
+    date_end time,
+    PRIMARY KEY (id)
+)
+    
+CREATE TABLE IF NOT EXISTS school_breaks(
+    id int AUTO_INCREMENT,
+    number int,
+    date_start time,
+    date_end time,
+    PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS frequency(
+    class_id int AUTO_INCREMENT,
+    number int,
+    date_start time,
+    date_end time,
+    PRIMARY KEY (id)
+)
+    
+
+
+CREATE TABLE IF NOT EXISTS lessons_data(
+    class_id int,
+    week tinyint,
+    data text //
+
 )

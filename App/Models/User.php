@@ -16,7 +16,7 @@ class User extends AbstractModel
      *
      * @var string
      */
-    protected $table = 'users';
+    const TABLE = 'users';
 
     public $id;
 

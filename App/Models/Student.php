@@ -5,22 +5,19 @@ namespace App\Model;
 use Core\Model\AbstractModel;
 
 /**
- * Home model
+ * Student model
  *
- * PHP version 5.4
  */
-class Teacher extends AbstractModel
+class Student extends AbstractModel 
 {
     /**
      * model table name
      *
      * @var string
      */
-    const TABLE = 'teachers';
+    const TABLE = 'students';
 
     public $id;
-
-    public $user_id;
 
     public $firstname;
 
@@ -28,7 +25,11 @@ class Teacher extends AbstractModel
 
     public $sex;
 
-    public $school_subjects;
+    public $class_id;
 
-    public $class_tutor;
+    public $birthday;
+
+    public $father;
+
+    public $mother;
 }

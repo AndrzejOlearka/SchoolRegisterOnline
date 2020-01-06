@@ -40,7 +40,7 @@ class UsersProvider extends AbstractProvider
     }
 
     public function getUsersWithTeachers(){
-        $teachersTable = (new Teacher)->getTable();
+        $teachersTable = \App\Model\Teacher::TABLE;
         $this->originalData = self::data("SELECT * FROM {$this->table} LEFT JOIN {$teachersTable} ON {$this->table}.id = {$teachersTable}.user_id", $this->model);
         return $this;
     }
