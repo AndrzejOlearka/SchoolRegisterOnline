@@ -13,4 +13,15 @@ class Header
     public static function redirect($location){
         header('Location: '.$location);	
     }
+
+    public static function httpCodeAndDie($type)
+    {
+        header($type);
+        die;
+    }
+
+    public static function httpCode($type)
+    {
+        header($type);
+    }
 }

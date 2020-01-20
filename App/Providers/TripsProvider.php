@@ -4,7 +4,7 @@ namespace App\Provider;
 
 use Core\Provider\AbstractProvider;
 
-class ClassesProvider extends AbstractProvider
+class TripsProvider extends AbstractProvider
 {
     private $model;
     private $table;

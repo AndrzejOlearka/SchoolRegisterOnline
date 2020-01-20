@@ -11,7 +11,6 @@ use Core\Controller\Controller;
 /**
  * Home controller
  *
- * PHP version 5.4
  */
 class Home extends Controller
 {
@@ -31,24 +30,18 @@ class Home extends Controller
     protected function after(){}
 
     /**
-     * Show the index page
-     *
-     * @return void
-     */
-    public function index()
-    {
-        View::render('home');
-    }
-
-    /**
      * Login action
      *
      * @return void
      */
-    public function login()
+    protected function login()
     {
         $usersProvider = new UsersProvider;
-        $usersProvider->setFormData(Request::post()->get('loginForm'))->getUser();
+        $usersProvider->formData = [
+            'email' => $_POST['email'],
+            'password' => $_POST['password']
+        ];
+        $usersProvider->getUser();
         (new Authentication($usersProvider))->validate();
     }
     
@@ -62,5 +55,23 @@ class Home extends Controller
         $usersProvider = new UsersProvider;
         $usersProvider->setFormData(Request::post()->get('registrationForm'))->getUser();
         (new Registration($usersProvider))->validate();
+    }
+
+    /**
+     * getUsers
+     *
+     * @return void
+     */
+    public function getUsers(){
+        
+    }
+
+    /**
+     * getUserWithSetttings
+     *
+     * @return void
+     */
+    public function getUserWithSetttings(){
+        
     }
 }

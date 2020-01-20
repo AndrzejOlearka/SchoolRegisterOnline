@@ -1,11 +1,11 @@
 <?php
 
 $routes =  [
-    ['route' => '', 'params' => ['controller' => 'Home', 'action' => 'index']],
-    ['route' => 'login', 'params' => ['controller' => 'Home', 'action' => 'login']],
-    ['route' => 'register', 'params' => ['controller' => 'Home', 'action' => 'register']],
-    ['route' => '{controller}/{action}', 'params' => []],
-    ['route' => '{controller}', 'params' => ['action' => 'index']],
-    ['route' => '{controller}/{id:\d+}/{action}', 'params' => []],
-    ['route' => 'admin/{controller}/{action}', 'params' => ['namespace' => 'Admin']]  
+    ['route' => 'api', 'params' => ['controller' => 'Home', 'action' => 'index']],
+    ['route' => 'api/login', 'params' => ['controller' => 'Home', 'action' => 'login']],
+    ['route' => 'api/register', 'params' => ['controller' => 'Home', 'action' => 'register']],
+    ['route' => 'api/{controller}/{action}', 'params' => []],
+    ['route' => 'api/{controller}', 'params' => ['action' => 'index']],
+    ['route' => 'api/{controller}/{id:\d+}/{action}', 'params' => []],
+    ['route' => 'api/admin/{controller}/{action}', 'params' => ['namespace' => 'Admin']]  
 ];

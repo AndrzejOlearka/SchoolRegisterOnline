@@ -1,19 +1,12 @@
 <?php
 
-namespace App\Controllers;
-
-use Core\View\View;
-use Core\Request\Request;
-use App\Provider\UsersProvider;
-use App\Lib\{Registration, Authentication};
-use Core\Controller\Controller;
+namespace App\Api;
 
 /**
  * Api users endpoint controller
  */
-class Users 
+class Home 
 {
-
     public static function login(){
         return [
             'type' => [

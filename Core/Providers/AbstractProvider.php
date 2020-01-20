@@ -10,7 +10,7 @@ class AbstractProvider extends QueryAbstractProvider
     public $formData;
     public $originalData;
 
-    public function setFormData($request)
+    public function setFormData()
     {
         $this->formData = $request;
         return $this;

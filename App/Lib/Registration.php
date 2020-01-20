@@ -3,8 +3,8 @@
 namespace App\Lib;
 
 use Core\AbstractAction;
+use Core\Request\Response;
 use Core\Helpers\Encrypter;
-use Core\Request\JsonEncoder;
 use App\Provider\UsersProvider;
 
 class Registration extends AbstractAction
@@ -84,7 +84,7 @@ class Registration extends AbstractAction
 
     private function sendResult()
     {
-        JsonEncoder::parse([
+        Response::json([
             'result' => $this->result,
             'errors' => $this->errors,
         ]);

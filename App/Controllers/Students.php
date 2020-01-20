@@ -7,10 +7,10 @@ use Core\Request\Request;
 use Core\Controller\Controller;
 
 /**
- * Classes controller
+ * Students controller
  *
  */
-class Classes extends Controller
+class Students extends Controller
 {
 
     /**

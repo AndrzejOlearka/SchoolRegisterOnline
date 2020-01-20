@@ -2,9 +2,10 @@ api:
   /Users:
     - /login
     - /register
-    - /users
+    - /getUsers
+    - /getUserWithSettings
   /Settings:
-    - /save
+    - /edit
   /Classes:
     - /getClasses
     - /getClassWithStudents
@@ -12,39 +13,64 @@ api:
     - /getClassDefaultSchedule
     - /getClassTrips
   /Students:
-    - /saveStudent
+    - /addStudent
     - /deleteStudent
-    - /saveGrade
+    - /editStudent
+    - /addGrade
+
     - /deleteGrade
-    - /saveBehaviourNote
+    - /editGrade
+    - /addBehaviourNote
     - /deleteBehaviourNote
-    - /saveParentContact
+
+    - /editBehaviourNote
+    - /addParentContact
     - /deleteParentContact
-    - /saveSemestralNote
+    - /editParentContact
+
+    - /addSemestralNote
+    - /getSemestralNote
     - /deleteSemestralNote
+    - /editSemestralNote
   /News:
-    - /save
+    - /add
     - /delete
-    - /list
+    - /get
   /Message:
-    - /list
+    - /add
     - /delete
-    - /send
-    - /saveTemplate
+    - /get
+
+    - /addTemplate
+    - /editTemplate
     - /deleteTemplate
     - /getTemplate
   /Grades:
-    - /saveGradesType
-    - /saveBehaviourGradesType
-    - /listGradesTypes
-    - /listBehaviourGradesTypes
+    - /addGradesType
+    - /getGradesTypes
+    - /editGradesTypes
     - /deleteGradesTypes
+
+    - /addBehaviourGradesType
+    - /getBehaviourGradesType
+    - /editBehaviourGradesType
     - /deleteBehaviourGradesType
   /Admin:
     - /setRole
     - /setPermission
     - /addClass
   /Groups:
-    - /saveGroup
+    - /addGroup
+    - /editGroup
     - /deleteGroup
-    - /listGroups
+    - /getGroups
+  /Schedule:
+    - /addSchedule
+    - /editSchedule
+    - /getSchedule
+    - /deleteSchedule
+
+    - /addTerm
+    - /editTerm
+    - /getTerm
+    - /deleteTerm

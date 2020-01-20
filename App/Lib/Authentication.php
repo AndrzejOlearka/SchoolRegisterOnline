@@ -3,7 +3,7 @@
 namespace App\Lib;
 
 use Core\AbstractAction;
-use Core\Request\JsonEncoder;
+use Core\Request\Response;
 use App\Provider\UsersProvider;
 
 class Authentication extends AbstractAction
@@ -27,7 +27,6 @@ class Authentication extends AbstractAction
         $this->isUserExists();
         $this->isPasswordVerified();
         $this->setResult();
-        $this->setCredentials();
         $this->sendResult();
     }
 
@@ -58,12 +57,22 @@ class Authentication extends AbstractAction
         }
     }
 
+    /**
+     * check if hash password is verified
+     *
+     * @return void
+     */
     private function isPasswordVerified(){
         if(!password_verify($this->provider->formData['password'], $this->provider->originalData->password)){
             $this->errors['wrongPassword'] = 'Wrong password.';
         }
     }
 
+    /**
+     * set final result of action
+     *
+     * @return void
+     */
     private function setResult()
     {
         if (empty($this->errors)) {
@@ -71,19 +80,18 @@ class Authentication extends AbstractAction
         }
     }
     
+    /**
+     * send API response
+     *
+     * @return void
+     */
     private function sendResult(){
-        JsonEncoder::parse([
+        Response::json([
             'result' => $this->result,
             'errors' => $this->errors,
             'data' => [
                 'role' => $this->provider->originalData->role
             ]
         ]);
-    }
-
-    private function setCredentials(){
-        $this->initSession();
-        $this->setSession('userID', $this->provider->originalData->id);
-        $this->setAdminSession($this->provider->originalData->role, 'admin', true);
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Core\Helpers\Header;
+
 /**
  * Router
  *
@@ -132,21 +134,33 @@ class Router
         if (!$this->match($this->url)) {
             throw new \Exception('No route matched.', 404);
         }    
-
         $controller = $this->params['controller'];
         $controller = $this->convertToStudlyCaps($controller);
-        $controller = $this->getNamespace() . $controller;
 
-        if (!class_exists($controller)) {
-            throw new \Exception("Controller class $controller not found");
-        }
-
-        $controller_object = new $controller($this->params);
         $action = $this->params['action'];
         $action = $this->convertToCamelCase($action);
 
+        $apiClass = $this->getApiParamsNamespace().$controller;
+
+        if (!class_exists($apiClass)) {
+            Header::httpCodeAndDie("HTTP/1.0 404 Method does not exists.");
+        }
+
+        $apiParams = $apiClass::$action();
+
+        $controller = $this->getControllerNamespace() . $controller;
+
+        if (!class_exists($controller)) {
+            Header::httpCodeAndDie("HTTP/1.0 404 Method does not exists.");
+        }
+       
+        $this->params['request_method'] = $_SERVER['REQUEST_METHOD'];
+        $this->params['data'] = $apiParams;
+
+        $controller_object = new $controller($this->params);
+
         if (!is_callable([$controller_object, $action])) {
-            throw new \Exception("Method $action (in controller $controller) not found");
+            Header::httpCodeAndDie("HTTP/1.0 404 Method does not exists.");
         } 
     
         /**
@@ -210,13 +224,25 @@ class Router
      *
      * @return string The request URL
      */
-    protected function getNamespace()
+    protected function getControllerNamespace()
     {
         $namespace = 'App\Controllers\\';
 
         if (array_key_exists('namespace', $this->params)) {
             $namespace .= $this->params['namespace'] . '\\';
         }
+
+        return $namespace;
+    }
+
+    /**
+     * Get the namespace for the data container for API 
+     *
+     * @return string The request URL
+     */
+    protected function getApiParamsNamespace()
+    {
+        $namespace = 'App\\Api\\';
 
         return $namespace;
     }

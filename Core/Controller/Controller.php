@@ -2,7 +2,9 @@
 
 namespace Core\Controller;
 
+use Core\Helpers\Header;
 use Core\Session\Session;
+use Core\Request\DataValidator;
 
 /**
  * Base controller
@@ -30,10 +32,9 @@ abstract class Controller
     }
 
     /**
-     * Magic method called when a non-existent or inaccessible method is
-     * called on an object of this class. Used to execute before and after
-     * filter methods on action methods. Action methods need to be named
-     * with an "Action" suffix, e.g. indexAction, showAction etc.
+     * Call action of controller and check if method exists,
+     * then validate api data
+     * 
      *
      * @param string $name  Method name
      * @param array $args Arguments passed to the method
@@ -43,31 +44,19 @@ abstract class Controller
     public function __call($name, $args)
     {
         if (method_exists($this, $name)) {
-            $this->initSession();
-            if ($this->before() !== false) {
-                call_user_func_array([$this, $name], $args);
-                $this->after();
-            }
+            $this->validateApiData();
+            call_user_func_array([$this, $name], $args);
         } else {
-            throw new \Exception("Method $name not found in controller " . get_class($this));
+            Header::httpCodeAndDie("HTTP/1.0 404 Method does not exists.");
         }
     }
 
-    /**
-     * Before filter - called before an action method.
-     *
-     * @return void
-     */
-    abstract protected function before();
+    protected function validateApiData(){
+        $api = new DataValidator();
+        $api->setData($this)->process();
+    }
 
-    /**
-     * After filter - called after an action method.
-     *
-     * @return void
-     */
-    abstract protected function after();
-    
-    protected function initSession(){
-        $this->session = Session::instance();
+    public function getRouteParams(){
+        return $this->route_params;
     }
 }

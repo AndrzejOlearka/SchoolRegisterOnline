@@ -8,14 +8,14 @@ use Core\Model\AbstractModel;
  * DefaultSchedule model
  *
  */
-class DefaultSchedule extends AbstractModel 
+class SubjectTeacher extends AbstractModel 
 {
     /**
      * model table name
      *
      * @var string
      */
-    const TABLE = 'classes_schedule_default';
+    const TABLE = 'subject_teachers';
 
     public $school_subject_id;
 
