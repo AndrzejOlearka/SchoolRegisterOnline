@@ -10,19 +10,4 @@ Class Request
         $requestClass = "Core\\Request\\{$className}";
         return new $requestClass;
     }
-
-    public function set($name, $value = null){
-        $this->superglobal[$name] = $value;
-        return $this;
-    }
-
-    public function get($args){
-        if(is_array($args)){
-            foreach($args as $key => $arg){
-                $vars[$arg] = $this->superglobal[$arg];
-            }
-            return $vars;
-        }
-        return $this->superglobal[$args];
-    }
 }

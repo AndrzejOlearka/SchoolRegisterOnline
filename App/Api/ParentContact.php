@@ -3,11 +3,11 @@
 namespace App\Controllers;
 
 /**
- * Api grades endpoint controller
+ * Api users endpoint controller
  */
-class News 
+class Notes 
 {
-    public static function get(){
+    public static function getParentContact(){
         return [
             'type' => [
                 'GET'
@@ -16,26 +16,26 @@ class News
                 
             ], 
             'optional' => [
-                'id'
+                'id', 'student_id'
             ]
         ];
     }
 
-    public static function add(){
+    public static function addParentContact(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-                'name', 'description'
+                'student_id'
             ], 
             'optional' => [
-                'user_id'
+                'parent', 'description', 'email'
             ]
         ];
     }
 
-    public static function edit(){
+    public static function editParentContact(){
         return [
             'type' => [
                 'POST'
@@ -44,21 +44,21 @@ class News
                 'id'
             ], 
             'optional' => [
-                'name', 'description'
+                'parent', 'description', 'email'
             ]
         ];
     }
 
-    public static function deleteGrade(){
+    public static function deleteParentContact(){
         return [
             'type' => [
                 'POST', 'DELETE'
             ],
             'required' => [
-                'id'
+                'id', 
             ], 
             'optional' => [
-
+                
             ]
         ];
     }

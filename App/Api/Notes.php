@@ -3,11 +3,11 @@
 namespace App\Controllers;
 
 /**
- * Api grades endpoint controller
+ * Api users endpoint controller
  */
-class Grades 
+class Notes 
 {
-    public static function getGrades(){
+    public static function getNotes(){
         return [
             'type' => [
                 'GET'
@@ -16,21 +16,21 @@ class Grades
                 
             ], 
             'optional' => [
-                'student_id', 'class_id', 'school_subject_id', 'group_id'
+                'student_id', 'class_id', 'school_subject_id'
             ]
         ];
     }
 
-    public static function addGrade(){
+    public static function addNote(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-                'student_id', 'school_subject_id', 'teacher_id'
+                'student_id', 'teacher_id'
             ], 
             'optional' => [
-                'weight', 'group_id', 'native_grade_id', 'date'
+                'weight', 'date'
             ]
         ];
     }
@@ -44,12 +44,12 @@ class Grades
                 'id'
             ], 
             'optional' => [
-                'weight', 'group_id', 'native_grade_id', 'date'
+                'weight', 'date'
             ]
         ];
     }
 
-    public static function deleteGrade(){
+    public static function deleteNote(){
         return [
             'type' => [
                 'POST'
@@ -58,12 +58,13 @@ class Grades
                 'id'
             ], 
             'optional' => [
-
+                
             ]
         ];
     }
 
-    public static function getSemestralGrade(){
+    
+    public static function getSemestralNote(){
         return [
             'type' => [
                 'GET'
@@ -77,7 +78,7 @@ class Grades
         ];
     }
 
-    public static function editSemestralGrade(){
+    public static function editSemestralNote(){
         return [
             'type' => [
                 'POST'
@@ -91,7 +92,7 @@ class Grades
         ];
     }
 
-    public static function deleteSemestralGrade(){
+    public static function deleteSemestralNote(){
         return [
             'type' => [
                 'GET'

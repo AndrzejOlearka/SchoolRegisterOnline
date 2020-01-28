@@ -10,4 +10,8 @@ Class Post extends Request
     {
         $this->superglobal = $_POST;
     }
+
+    public function get(){
+        return $_POST;
+    }
 }

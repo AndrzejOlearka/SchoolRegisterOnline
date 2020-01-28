@@ -2,12 +2,14 @@
 
 namespace App\Provider;
 
+use App\Lib\Filters\ClassFilter;
 use Core\Provider\AbstractProvider;
 
 class ClassesProvider extends AbstractProvider
 {
     private $model;
     private $table;
+    private $classFilter;
 
     public function __construct()
     {
@@ -16,26 +18,15 @@ class ClassesProvider extends AbstractProvider
     }
 
     public function getClasses(){
-        
+        d($this);
+        $this->classFilter = new ClassFilter($this->formData);
+        $query = $this->classFilter->schoolClassesTableFilter();
+        $this->originalData = self::data("SELECT * FROM {$this->table}{$query}", $this->model);
+        return $this;
     }
     
-    public function getClassWithStudentsNames(){
-        $studentsTable = \App\Model\Student::TABLE;
-        $this->originalData = self::data("SELECT * FROM {$this->table} LEFT JOIN {$studentsTable} ON {$this->table}.id = {$studentsTable}.class_id", $this->model);
+    public function getClass(){
+        $this->originalData = self::data("SELECT * FROM {$this->table} WHERE id = {$this->data['required']['id']}", $this->model);
         return $this;
-    }
-
-    public function getClassGroups(){
-        $groupsTable = \App\Model\Group::TABLE;
-        $this->originalData = self::data("SELECT * FROM {$this->table} LEFT JOIN {$groupsTable} ON {$this->table}.id = {$groupsTable}.class_id", $this->model);
-        return $this;
-    }
-
-    public function getClassDefaultSchedule(){
-        
-    }
-
-    public function getClassTrips(){
-        
     }
 }

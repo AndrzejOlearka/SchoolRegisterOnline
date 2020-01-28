@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Api;
 
 use Core\View\View;
 use Core\Request\Request;

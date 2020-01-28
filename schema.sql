@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS classes (
     number int(1) NOT NULL,
     department varchar(1),
     class_tutor int(10),
-    profile varchar(255),
+    profile_id int(10),
     default_year int(4),
     PRIMARY KEY (id),
     FOREIGN KEY (class_tutor) REFERENCES teachers(id)
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS students (
     firstname varchar(255) NOT NULL,
     lastname varchar(255) NOT NULL,
     sex int (1),
-    class_id int (10),
+    class_id int NOT NULL(10),
     birthday date,
     father varchar (255),
     mother varchar (255)
@@ -82,14 +82,8 @@ CREATE TABLE IF NOT EXISTS class_school_subjects(
 CREATE TABLE IF NOT EXISTS grades_types(
     id int AUTO_INCREMENT,
     type varchar(1000) NOT NULL,
-    marks varchar(1000) NOT NULL,
-    weight varchar(1000),
-    PRIMARY KEY (id)
-)
-
-CREATE TABLE IF NOT EXISTS behaviour_grades_types(
-    id int AUTO_INCREMENT,
-    type varchar(1000) NOT NULL,
+    role varchar(20) NOT NULL,
+    usage varchar(20) NOT NULL,
     marks varchar(1000) NOT NULL,
     weight varchar(1000),
     PRIMARY KEY (id)
@@ -123,8 +117,10 @@ CREATE TABLE IF NOT EXISTS behaviuor_notes(
 )
 
 CREATE TABLE IF NOT EXISTS semestral_grades(
+    id int AUTO_INCREMENT,
     student_id int NOT NULL,
-    grades varchar(10000),
+    school_subject int NOT NULL,
+    grade_type_id int NOT NULL,
     semestr tinyint,
     FOREIGN KEY (student_id) REFERENCES students(id)
 )
@@ -175,7 +171,8 @@ CREATE TABLE IF NOT EXISTS lessons_subjects(
 CREATE TABLE IF NOT EXISTS parents_contacts(
     id int AUTO_INCREMENT,
     student_id int NOT NULL,
-    class_id int NOT NULL,
+    parent varchar(255),
+    email varchar(255),
     description text,
     PRIMARY KEY (id),
     FOREIGN KEY (class_id) REFERENCES classes(id)
@@ -200,7 +197,8 @@ CREATE TABLE IF NOT EXISTS classes_trips(
 CREATE TABLE IF NOT EXISTS news(
     id int AUTO_INCREMENT,
     user_id int,
-    description text,
+    name varchar(255) NOT NULL,
+    description text NOT NULL,
     PRIMARY KEY (id)
 )
 
@@ -208,9 +206,9 @@ CREATE TABLE IF NOT EXISTS messages(
     id int AUTO_INCREMENT,
     user_id int,
     recipients_ids varchar(1000),
-    template varchar (255),
-    subject varchar (255),
-    message text,
+    template_id varchar (255),
+    subject varchar (255) NOT NULL,
+    message text NOT NULL,
     PRIMARY KEY (id)
 )
 

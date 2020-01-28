@@ -4,47 +4,60 @@ api:
     - /register
     - /getUsers
     - /getUserWithSettings
-  /Settings:
-    - /edit
   /Classes:
     - /getClasses
-    - /getClassWithStudents
-    - /getClassWithGroups
-    - /getClassDefaultSchedule
-    - /getClassTrips
+    - /getClass
+    - /addClass
+    - /editClass
+    - /deleteClass
   /Students:
+    - /getStudents
+    - /getStudent
     - /addStudent
     - /deleteStudent
     - /editStudent
+  /Grades:
+    - /getGrades
     - /addGrade
-
-    - /deleteGrade
     - /editGrade
+    - /deleteGrade
+    - /getSemestralGrade
+    - /addSemestralGrade
+    - /editSemestralGrades
+  /Notes:
+    - /getNotes
     - /addBehaviourNote
-    - /deleteBehaviourNote
-
     - /editBehaviourNote
+    - /deleteBehabiourNote
+    - /getSemestralNote
+    - /addSemestralNote
+    - /editSemestralNote
+ /ParentContact:
+    - /getParentContact
     - /addParentContact
     - /deleteParentContact
     - /editParentContact
-
-    - /addSemestralNote
-    - /getSemestralNote
-    - /deleteSemestralNote
-    - /editSemestralNote
-  /News:
-    - /add
-    - /delete
-    - /get
-  /Message:
-    - /add
-    - /delete
-    - /get
-
+ /Message:
+    - /addMessage
+    - /deleteMessage
+    - /getMessages
     - /addTemplate
     - /editTemplate
     - /deleteTemplate
     - /getTemplate
+ /Settings:
+    - /editSettings
+ /Groups:
+    - /addGroup
+    - /editGroup
+    - /deleteGroup
+    - /getGroups
+  /News:
+    - /add
+    - /edit
+    - /delete
+    - /get
+ 
   /Grades:
     - /addGradesType
     - /getGradesTypes
@@ -58,12 +71,7 @@ api:
   /Admin:
     - /setRole
     - /setPermission
-    - /addClass
-  /Groups:
-    - /addGroup
-    - /editGroup
-    - /deleteGroup
-    - /getGroups
+ 
   /Schedule:
     - /addSchedule
     - /editSchedule

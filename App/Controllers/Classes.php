@@ -5,6 +5,8 @@ namespace App\Controllers;
 use Core\View\View;
 use Core\Request\Request;
 use Core\Controller\Controller;
+use App\Provider\ClassesProvider;
+use Core\Request\Response;
 
 /**
  * Classes controller
@@ -34,32 +36,20 @@ class Classes extends Controller
      *
      * @return void
      */
-    public function getClasses()
-    {
-        (new ClassesProvider)->getClasses();
-    }
-
-    public function getClassWithStudents()
+    protected function getClasses()
     {
         $classesProvider = new ClassesProvider;
-        $usersProvider->setProviderData(Request::post()->get('class_id'))->getClassesWithStudents();
+        $classesProvider->setParams($this->getRouteParams());
+        Response::json($classesProvider->getClasses()->getOriginalData());
     }
 
-    public function getClassWithGroups()
+    protected function getClassWithStudents()
     {
-        $classesProvider = new ClassesProvider;
-        $usersProvider->setProviderData(Request::post()->get('class_id'))->getClassWithGroups();
+        $classes = new ClassesProvider;
+        $class = $classes->getClasses();
+        $students = (new StudentsProvider)->getStudents();
+        $groups = (new GroupsProvider)->getGroups();
+        $classes->classFilter->classesDetailsFilter($class, $students, $groups);
     }
 
-    public function getClassDefaultSchedule()
-    {
-        $classesProvider = new ClassesProvider;
-        $usersProvider->setProviderData(Request::post()->get('class_id'))->getClassWithGroups();
-    }
-
-    public function getClassTrips()
-    {
-        $classesProvider = new ClassesProvider;
-        $usersProvider->setProviderData(Request::post()->get('class_id'))->getClassTrips();
-    }
 }
