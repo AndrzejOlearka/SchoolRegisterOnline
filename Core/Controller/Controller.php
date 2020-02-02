@@ -4,6 +4,7 @@ namespace Core\Controller;
 
 use Core\Helpers\Header;
 use Core\Session\Session;
+use Core\Request\DataCreator;
 use Core\Request\DataValidator;
 
 /**
@@ -12,14 +13,13 @@ use Core\Request\DataValidator;
  */
 abstract class Controller
 {
-
+    public $params;
+    
     /**
      * Parameters from the matched route
      * @var array
      */
     protected $route_params = [];
-
-
 
     /**
      * Class constructor
@@ -31,7 +31,8 @@ abstract class Controller
     public function __construct($route_params)
     {
         $this->route_params = $route_params;
-        $this->validator = new DataValidator($this);
+        $this->creator = new DataCreator();
+        $this->validator = new DataValidator();
     }
 
     /**
@@ -47,25 +48,45 @@ abstract class Controller
     public function __call($name, $args)
     {
         if (method_exists($this, $name)) {
-            dd($this);
-            $this->dataValidation();
-            $this->setFormData();
-            $this->validateApiData();
+            $this->dataProccess();
             call_user_func_array([$this, $name], $args);
         } else {
             Header::httpCodeAndDie("HTTP/1.0 404 Method does not exists.");
         }
     }
-    protected function dataValidation(){
-        $this->validator->setRequestType();
-        $this->validator->setFormData();
-        $this->validator->setRequiredFields();
+
+    protected function dataProccess(){
+        $this->setApiData();
+        $this->validateApiData();
+        return $this;
+    }
+
+    private function setApiData(){
+        $this->creator->setData($this);
+        $this->setData($this->creator);
+    }
+
+    private function setData(DataCreator $dataCreator){
+        $this->params['requestMethod'] = $dataCreator->getRequestMethod();
+        $this->params['apiData'] = $dataCreator->getApiData();
+        $this->params['formData'] = $dataCreator->getFormData();
+    }
+
+    protected function validateApiData(){
+        $this->validator->setData($this);
+        $this->validator->process();
+        $this->unsetData();
+    }
+
+    private function unsetData(){
+        
+        unset($this->route_params);
+        unset($this->validator);
+        unset($this->creator);
         return $this;
     }
 
     public function getRouteParams(){
         return $this->route_params;
     }
-
-
 }

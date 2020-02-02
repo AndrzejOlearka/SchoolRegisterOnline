@@ -73,6 +73,7 @@ return array(
     'Core\\Provider\\AbstractProvider' => $baseDir . '/Core/Providers/AbstractProvider.php',
     'Core\\Provider\\Provider' => $baseDir . '/Core/Providers/Provider.php',
     'Core\\Provider\\QueryAbstractProvider' => $baseDir . '/Core/Providers/QueryAbstractProvider.php',
+    'Core\\Request\\DataCreator' => $baseDir . '/Core/Request/DataCreator.php',
     'Core\\Request\\DataValidator' => $baseDir . '/Core/Request/DataValidator.php',
     'Core\\Request\\Get' => $baseDir . '/Core/Request/Get.php',
     'Core\\Request\\JsonDecoder' => $baseDir . '/Core/Request/JsonDecoder.php',

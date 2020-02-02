@@ -74,6 +74,7 @@ class ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86
         'Core\\Provider\\AbstractProvider' => __DIR__ . '/../..' . '/Core/Providers/AbstractProvider.php',
         'Core\\Provider\\Provider' => __DIR__ . '/../..' . '/Core/Providers/Provider.php',
         'Core\\Provider\\QueryAbstractProvider' => __DIR__ . '/../..' . '/Core/Providers/QueryAbstractProvider.php',
+        'Core\\Request\\DataCreator' => __DIR__ . '/../..' . '/Core/Request/DataCreator.php',
         'Core\\Request\\DataValidator' => __DIR__ . '/../..' . '/Core/Request/DataValidator.php',
         'Core\\Request\\Get' => __DIR__ . '/../..' . '/Core/Request/Get.php',
         'Core\\Request\\JsonDecoder' => __DIR__ . '/../..' . '/Core/Request/JsonDecoder.php',
