@@ -8,6 +8,7 @@ Class Request
     {
         $className = ucfirst($name);
         $requestClass = "Core\\Request\\{$className}";
-        return new $requestClass;
+        $requestClass = new $requestClass;
+        return $requestClass->get();
     }
 }

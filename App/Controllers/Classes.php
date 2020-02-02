@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use Core\View\View;
-use Core\Request\Request;
 use Core\Controller\Controller;
 use App\Provider\ClassesProvider;
 use Core\Request\Response;
@@ -32,7 +30,7 @@ class Classes extends Controller
     {}
 
     /**
-     * Show the index page
+     * Get classes with basic data
      *
      * @return void
      */
@@ -43,10 +41,13 @@ class Classes extends Controller
         Response::json($classesProvider->getClasses()->getOriginalData());
     }
 
-    protected function getClassWithStudents()
+    protected function getClass()
     {
         $classes = new ClassesProvider;
-        $class = $classes->getClasses();
+        dd($this);
+        $classesProvider->setParams($this->getRouteParams());
+        $data = $classesProvider->getClass()->getOriginalData();
+        dd($this);
         $students = (new StudentsProvider)->getStudents();
         $groups = (new GroupsProvider)->getGroups();
         $classes->classFilter->classesDetailsFilter($class, $students, $groups);

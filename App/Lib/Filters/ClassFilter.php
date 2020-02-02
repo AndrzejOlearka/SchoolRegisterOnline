@@ -2,27 +2,18 @@
 
 namespace App\Lib\Filters;
 
+use Core\Request\Request;
 use App\Provider\ClassesProvider;
 
-class ClassFilter 
+class ClassFilter extends BasicFilter
 {
-    public function __construct(ClassesProvider $classes)
+    public function __construct(Request $request)
     {
-        $this->data = $classes;
+        $this->formData = $request;
     }
-    public function schoolClassesTableFilter(){
-        $optionalFieldIterator = 0;
-        $query = '';
-        foreach($this->optionalFields as $key => $value){
-            $value = $this->formData[$value];
-            if($optionalFieldIterator == 0){
-                $query .= " WHERE {$key} = {$value} ";
-            } else {
-                $query .= " AND {$key} = {$value} ";
-            }
-            $optionalFieldIterator++;
-        }
-        return $query;
+    
+    public function schoolClassesTableFilter($optionalFields){
+        parent::onlyOptionalFilter($optionalFields);
     }
 
     public function classesDetailsFilter(){

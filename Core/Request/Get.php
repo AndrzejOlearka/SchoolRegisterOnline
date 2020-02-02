@@ -4,7 +4,9 @@ namespace Core\Request;
 
 Class Get extends Request
 {
+    public $get;
     public function get(){
-        return $_GET;
+        $this->get = $_GET;
+        return $this;
     }
 }

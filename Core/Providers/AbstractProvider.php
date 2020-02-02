@@ -3,13 +3,14 @@
 namespace Core\Provider;
 
 use Core\Request\Request;
-use Core\Database\Connection;
 
 class AbstractProvider extends QueryAbstractProvider
 {
-    public $formData;
-    public $originalData;
-
+    protected $params;
+    protected $formData;
+    protected $originalData;
+    protected $optionalFields;
+    protected $requiredFields;
 
     public function getFormData()
     {
@@ -34,7 +35,7 @@ class AbstractProvider extends QueryAbstractProvider
     }
 
     public function setRequestType(){
-        if(count($this->params['data']['type'] > 1)){
+        if(count($this->params['data']['type']) > 1){
             //???
             return strtolower($this->params['data']['type'][0]);
         } else {

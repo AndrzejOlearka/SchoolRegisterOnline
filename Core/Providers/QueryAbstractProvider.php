@@ -3,9 +3,10 @@
 namespace Core\Provider;
 
 use Core\Request\Request;
+use Core\Provider\Provider;
 use Core\Database\Connection;
 
-class QueryAbstractProvider 
+class QueryAbstractProvider implements Provider
 {
     private static function getDatabaseConnection()
     {
@@ -52,7 +53,7 @@ class QueryAbstractProvider
         $statement->execute();
 
         $data = $statement->fetchAll(\PDO::FETCH_CLASS, $model);
-        return !empty($data) ? $data : new $model; 
+        return !empty($data) ? $data : null; 
     }
 
     public static function first($query, $model, $args = [])

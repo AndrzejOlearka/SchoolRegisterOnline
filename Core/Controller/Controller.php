@@ -19,6 +19,8 @@ abstract class Controller
      */
     protected $route_params = [];
 
+
+
     /**
      * Class constructor
      *
@@ -29,6 +31,7 @@ abstract class Controller
     public function __construct($route_params)
     {
         $this->route_params = $route_params;
+        $this->validator = new DataValidator($this);
     }
 
     /**
@@ -44,19 +47,25 @@ abstract class Controller
     public function __call($name, $args)
     {
         if (method_exists($this, $name)) {
+            dd($this);
+            $this->dataValidation();
+            $this->setFormData();
             $this->validateApiData();
             call_user_func_array([$this, $name], $args);
         } else {
             Header::httpCodeAndDie("HTTP/1.0 404 Method does not exists.");
         }
     }
-
-    protected function validateApiData(){
-        $api = new DataValidator();
-        $api->setData($this)->process();
+    protected function dataValidation(){
+        $this->validator->setRequestType();
+        $this->validator->setFormData();
+        $this->validator->setRequiredFields();
+        return $this;
     }
 
     public function getRouteParams(){
         return $this->route_params;
     }
+
+
 }

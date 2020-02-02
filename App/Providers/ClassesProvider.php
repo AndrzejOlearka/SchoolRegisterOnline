@@ -9,7 +9,7 @@ class ClassesProvider extends AbstractProvider
 {
     private $model;
     private $table;
-    private $classFilter;
+    private $filters;
 
     public function __construct()
     {
@@ -17,10 +17,14 @@ class ClassesProvider extends AbstractProvider
         $this->table = $this->model::TABLE;
     }
 
+    /**
+     * return all classes with ids and basic data
+     * no required fields or single optional element
+     * 
+    */
     public function getClasses(){
-        d($this);
-        $this->classFilter = new ClassFilter($this->formData);
-        $query = $this->classFilter->schoolClassesTableFilter();
+        $this->filters['classes'] = new ClassFilter($this->formData);
+        $query = $this->filters['classes']->schoolClassesTableFilter($this->optionalFields);
         $this->originalData = self::data("SELECT * FROM {$this->table}{$query}", $this->model);
         return $this;
     }

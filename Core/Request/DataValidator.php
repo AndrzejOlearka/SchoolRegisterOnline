@@ -8,9 +8,11 @@ use Core\Controller\Controller;
 
 Class DataValidator
 {   
+    
     public function setData(Controller $controller){
         $routeParams = $controller->getRouteParams();
         $this->data = $routeParams['data'];
+        $this->data['id'] = $routeParams['id'];
         $this->method = $routeParams['request_method'];
         return $this;
     }
@@ -29,6 +31,7 @@ Class DataValidator
 
     public function checkRequiredFields(){
         $emptyFields = [];
+        dd($this->data);
         foreach($this->data['required'] as $requiredField){
             if(empty($_POST[$requiredField])){
                 $emptyFields[] = $requiredField;
@@ -37,11 +40,10 @@ Class DataValidator
         if(!empty($emptyFields)){
             $string = implode(', ', $emptyFields);
             Header::httpCode("HTTP/1.0 400 Missing required fields.");
-            Response::json([
-                'result' => 'error',
-                'message' => 'Empty required fields: '.$string
-            ]);
+            Response::json(false, 'Empty required fields: '.$string);
         }
         return $this;
     }
+
+    //private function setFormData
 }
