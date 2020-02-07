@@ -31,13 +31,17 @@ Class DataCreator
         switch($this->requestMethod){
             case 'GET':
                 $this->formData = $_GET;
+            break;
             case 'DELETE':
                 $this->formData = $_POST;
                 $this->formData['route_id'] = $id;
+            break;
             case 'POST':
                 $this->formData = $_POST;
+            break;
             default:
                 $this->formData = $_POST;
+            break;
         }
         return $this;
     }

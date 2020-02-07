@@ -6,8 +6,8 @@ use Core\Provider\AbstractProvider;
 
 class StudentsProvider extends AbstractProvider
 {
-    private $model;
-    private $table;
+    protected $model;
+    protected $table;
 
     public function __construct()
     {
@@ -15,9 +15,10 @@ class StudentsProvider extends AbstractProvider
         $this->table = $this->model::TABLE;
     }
 
-    public function getStudentGrades(){
-        $gradesTable = \App\Model\Grade::TABLE;
-        $this->originalData = self::data("SELECT * FROM {$this->table} LEFT JOIN {$gradesTable} ON {$this->table}.id = {$gradesTable}.student_id", $this->model);
+    public function getStudents(){
+        //$filter = new StudentsFilter($this);
+        //$this->query ?: $this->query = $filter->schoolClassesTableFilter();
+        $this->originalData = self::data("SELECT * FROM {$this->table}{$this->query}", $this->model);
         return $this;
     }
 }

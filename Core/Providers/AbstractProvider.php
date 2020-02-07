@@ -7,14 +7,11 @@ use Core\Request\Request;
 class AbstractProvider extends QueryAbstractProvider
 {
     protected $params;
-    protected $formData;
-    protected $originalData;
-    protected $optionalFields;
-    protected $requiredFields;
+    protected $query;
 
     public function getFormData()
     {
-        return $this->formData;
+        return $this->params['formData'];
     }
 
     public function getOriginalData()
@@ -25,37 +22,26 @@ class AbstractProvider extends QueryAbstractProvider
     public function setParams($params)
     {
         $this->params = $params;
-       
-        $request = $this->setRequestType();
-
-        $this
-            ->setFormData(Request::$request())
-            ->setOptionalFields()
-            ->setRequiredFields();
     }
 
-    public function setRequestType(){
-        if(count($this->params['data']['type']) > 1){
-            //???
-            return strtolower($this->params['data']['type'][0]);
-        } else {
-            return strtolower($this->params['data']['type'][0]);
-        }
+    public function getOptionalFields(){
+        return $this->params['apiData']['optional'];
     }
 
-    public function setFormData($formData)
-    {
-        $this->formData = $formData;
+    public function getRequiredFields(){
+        return $this->params['apiData']['required'];
+    }
+
+    public function setQuery($query){
+        $this->query = $query;
         return $this;
     }
 
-    public function setOptionalFields(){
-        $this->optionalFields = $this->params['data']['optional'];
-        return $this;
+    public function getQuery(){
+        return $this->query;
     }
 
-    public function setRequiredFields(){
-        $this->requiredFields = $this->params['data']['required'];
-        return $this;
+    public function getModel(){
+        return $this->model;
     }
 }

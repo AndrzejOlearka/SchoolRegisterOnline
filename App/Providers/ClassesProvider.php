@@ -7,9 +7,8 @@ use Core\Provider\AbstractProvider;
 
 class ClassesProvider extends AbstractProvider
 {
-    private $model;
-    private $table;
-    private $filters;
+    protected $model;
+    protected $table;
 
     public function __construct()
     {
@@ -23,14 +22,16 @@ class ClassesProvider extends AbstractProvider
      * 
     */
     public function getClasses(){
-        $this->filters['classes'] = new ClassFilter($this->formData);
-        $query = $this->filters['classes']->schoolClassesTableFilter($this->optionalFields);
-        $this->originalData = self::data("SELECT * FROM {$this->table}{$query}", $this->model);
+        $filter = new ClassFilter($this);
+        $this->query ?: $this->query = $filter->schoolClassesTableFilter();
+        $this->originalData = self::data("SELECT * FROM {$this->table}{$this->query}", $this->model);
         return $this;
     }
     
     public function getClass(){
-        $this->originalData = self::data("SELECT * FROM {$this->table} WHERE id = {$this->data['required']['id']}", $this->model);
-        return $this;
+        $filter = new ClassFilter($this);
+        $filter->singleClassDetailsFilter();
+       // $students = (new StudentsProvider)->getStudents();
+       // $groups = (new GroupsProvider)->getGroups();
     }
 }

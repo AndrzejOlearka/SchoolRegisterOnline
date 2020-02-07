@@ -48,14 +48,14 @@ abstract class Controller
     public function __call($name, $args)
     {
         if (method_exists($this, $name)) {
-            $this->dataProccess();
+            $this->dataProcess();
             call_user_func_array([$this, $name], $args);
         } else {
             Header::httpCodeAndDie("HTTP/1.0 404 Method does not exists.");
         }
     }
 
-    protected function dataProccess(){
+    protected function dataProcess(){
         $this->setApiData();
         $this->validateApiData();
         return $this;
@@ -88,5 +88,9 @@ abstract class Controller
 
     public function getRouteParams(){
         return $this->route_params;
+    }
+
+    public function getParams(){
+        return $this->params;
     }
 }

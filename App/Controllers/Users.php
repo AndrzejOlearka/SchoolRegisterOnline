@@ -38,7 +38,7 @@ class Users extends Controller
     protected function login()
     {
         $usersProvider = new UsersProvider;
-        $usersProvider->setParams($this->getRouteParams());
+        $usersProvider->setParams($this->getParams());
         (new Authentication($usersProvider->getUser()))->validate();
     }
     
@@ -50,7 +50,7 @@ class Users extends Controller
     public function register()
     {
         $usersProvider = new UsersProvider;
-        $usersProvider->setParams($this->getRouteParams());
+        $usersProvider->setParams($this->getParams());
         (new Registration($usersProvider->getUser()))->validate();
     }
 
