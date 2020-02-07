@@ -46,7 +46,7 @@ class Classes extends Controller
     {
         $classesProvider = new ClassesProvider;
         $classesProvider->setParams($this->getParams());
-        $classesProvider->getClasses()->getClass();
+        Response::json($classesProvider->getClasses()->getClass()->getOriginalData());
     }
 
     protected function addClass(){

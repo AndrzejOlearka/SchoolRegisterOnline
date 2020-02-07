@@ -44,4 +44,14 @@ class AbstractProvider extends QueryAbstractProvider
     public function getModel(){
         return $this->model;
     }
+
+    protected function prepareSingleResult($data, $table){
+        foreach($table as $key => $single){
+            if(!isset($data[$single])){
+                continue;
+            }
+            $this->originalData[0]->$single = $data[$single];
+        }
+        return $this;
+    }
 }

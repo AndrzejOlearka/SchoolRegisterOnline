@@ -50,10 +50,10 @@ CREATE TABLE IF NOT EXISTS students (
     firstname varchar(255) NOT NULL,
     lastname varchar(255) NOT NULL,
     sex int (1),
-    class_id int NOT NULL(10),
+    class_id int(10) NOT NULL,
     birthday date,
     father varchar (255),
-    mother varchar (255)
+    mother varchar (255),
     PRIMARY KEY (id),
     FOREIGN KEY (class_id) REFERENCES classes(id)
 )

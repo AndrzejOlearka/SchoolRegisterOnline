@@ -30,8 +30,9 @@ class ClassesProvider extends AbstractProvider
     
     public function getClass(){
         $filter = new ClassFilter($this);
-        $filter->singleClassDetailsFilter();
-       // $students = (new StudentsProvider)->getStudents();
-       // $groups = (new GroupsProvider)->getGroups();
+        $data = $filter->singleClassDetailsFilter();
+        $this->prepareSingleResult($data, ['students', 'groups']);
+        $this->originalData[0]->students = $data['students'];
+        return $this;
     }
 }
