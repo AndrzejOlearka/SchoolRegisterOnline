@@ -5,7 +5,7 @@ namespace App\Lib\Validators;
 trait NumberValidator{
 
     function isInteger($data){
-        return ctype_alpha($data) ? true : false;
+        return is_int((int)$data) ? true : false;
     }
 
 }

@@ -52,7 +52,6 @@ class Classes extends Controller
     protected function addClass(){
         $classesProvider = new ClassesProvider;
         $classesProvider->setParams($this->getParams());
-        $classesProvider->getClasses();
         $action = new ClassCreator($classesProvider);
         $action->create();
     }

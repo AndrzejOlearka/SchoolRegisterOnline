@@ -15,22 +15,35 @@ class ClassCreator extends AbstractAction implements CreatorAction
     use NumberValidator;
     use ContentValidator;
 
+    const MSG_CREATE_CLASS = 'Class has been created successfully.';
+
     public function __construct(ClassesProvider $provider)
     {
-        $this->formData = $provider->getFormData();
-        $this->originalData = $provider->getOriginalData();
+        $this->provider = $provider;
+        $this->formData = $this->provider->getFormData();
+        $this->provider->setQuery(" WHERE number = {$this->formData['number']} AND department = '{$this->formData['department']}' ");
+        $this->provider->getClasses();
+        $this->originalData = $this->provider->getOriginalData();
     }
 
     public function create(){
-        $this->issetClass()
+
+        $this->isExistsClass()
              ->isNumberInteger()
              ->isDepartmentAlpha()
-             ->setResult();
+             ->setResult()
+             ->addClass()
+             ->sendResult(ClassCreator::MSG_CREATE_CLASS);
     }
 
-    protected function issetClass(){
-        $result = $this->issetRow($this->originalData[0]->id);
-        if($result){
+    protected function isExistsClass(){
+        if(empty($this->originalData)){
+            return $this;
+        }
+        if(
+            $this->compareRow($this->originalData[0]->number, $this->formData['number']) &&
+            $this->compareRow($this->originalData[0]->department, $this->formData['department'])
+        ){
             $this->errors['classExists'] = 'There is class with this number and department';
         }
         return $this;
@@ -46,8 +59,16 @@ class ClassCreator extends AbstractAction implements CreatorAction
 
     protected function isDepartmentAlpha(){
         $result = $this->isAlpha($this->formData['department']);
-        if($result){
+        if(!$result){
             $this->errors['classDepartment'] = 'class number is not an alpha type';
+        }
+        return $this;
+    }
+
+    protected function addClass(){
+        if($this->result){
+            $this->provider->addClass();
+            $this->originalData = $this->provider->getOriginalData();
         }
         return $this;
     }

@@ -11,8 +11,8 @@ Class Response
      *
      * @return void
      */
-    public static function json($data, $message = null){
-        $data = self::prepare($data, $message);
+    public static function json($data, $message = null, $errors = null){
+        $data = self::prepare($data, $message, $errors);
         echo json_encode($data);
         die;
     }
@@ -24,10 +24,14 @@ Class Response
      *
      * @return void
      */
-    public static function prepare($data, $message){
+    public static function prepare($data, $message, $errors){
         $data == false ? $response['result'] = 'error' : $response['result'] = 'success';
         empty($message) ? $response['message'] = '' : $response['message'] = $message;
         is_null($data) ? $response['data'] = [] : $response['data'] = $data;
+        if(!is_null($errors)){
+            $response['errors'] = $errors;
+            unset($response['data']);
+        }
         return $response;
     }
 }

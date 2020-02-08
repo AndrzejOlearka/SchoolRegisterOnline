@@ -66,4 +66,35 @@ class QueryAbstractProvider implements Provider
         $data = $statement->fetchAll(\PDO::FETCH_CLASS, $model);
         return !empty($data[0]) ? $data[0] : new $model;
     }
+
+    public static function insert($query, $model, $args = [])
+    {
+        $db = self::getDatabaseConnection();
+        $result = self::creatorHelper($query, $args);
+        $statement = $db->prepare($result['query']);
+        $statement = self::bind($statement, $result['values']);
+        $statement->execute();
+        return ['id' => $db->lastInsertId()];
+    }
+
+    public static function creatorHelper($query, $args){
+        $keys = [];
+        $values = [];
+        foreach($args as $key => $value){
+            if($key == 'id'){
+                continue;
+            }
+            $keys[] = $key;
+            $values[] = $value;
+            $binders[] = '?';
+        }
+        $binders = implode(', ', $binders);
+        $implodedKeys = implode(', ', $keys);
+        $query .= " ($implodedKeys) ";
+        $query .= " VALUES ($binders) ";
+        return [
+            'query' => $query,
+            'values' => $values
+        ];
+    }
 }

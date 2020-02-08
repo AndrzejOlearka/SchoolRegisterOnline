@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS school_subjects_teachers(
 
 CREATE TABLE IF NOT EXISTS classes (
     id int AUTO_INCREMENT,
-    number int(1) NOT NULL,
-    department varchar(1),
+    number int(3) NOT NULL,
+    department varchar(100) NOT NULL,
     class_tutor int(10),
     profile_id int(10),
     default_year int(4),

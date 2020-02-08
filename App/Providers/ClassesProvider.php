@@ -35,4 +35,9 @@ class ClassesProvider extends AbstractProvider
         $this->originalData[0]->students = $data['students'];
         return $this;
     }
+
+    public function addClass(){
+        $this->originalData = self::insert("INSERT INTO {$this->table}", $this->model, $this->getFormData());
+        return $this;
+    }
 }
