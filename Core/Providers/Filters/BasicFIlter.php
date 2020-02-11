@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Lib\Filters;
+namespace Core\Providers\Filters;
 
 use Core\Request\Request;
 use App\Provider\ClassesProvider;

@@ -48,11 +48,20 @@ abstract class Controller
     public function __call($name, $args)
     {
         if (method_exists($this, $name)) {
+            $this->setDataProvider();
             $this->dataProcess();
             call_user_func_array([$this, $name], $args);
         } else {
             Header::httpCodeAndDie("HTTP/1.0 404 Method does not exists.");
         }
+    }
+
+    protected function setDataProvider(){
+        $namespace = "App\\Provider\\";
+        $name = $this->getRouteParams()['controller']."Provider";
+        $fullname = $namespace.$name;
+        $this->provider = new $fullname;
+        $this->provider->setParams($this->getParams());
     }
 
     protected function dataProcess(){

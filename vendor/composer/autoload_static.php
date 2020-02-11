@@ -25,7 +25,6 @@ class ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86
         'App\\Lib\\Actions\\Users\\Authentication' => __DIR__ . '/../..' . '/App/Lib/Actions/Users/Authentication.php',
         'App\\Lib\\Actions\\Users\\Registration' => __DIR__ . '/../..' . '/App/Lib/Actions/Users/Registration.php',
         'App\\Lib\\Authentication' => __DIR__ . '/../..' . '/App/Lib/Authentication.php',
-        'App\\Lib\\Filters\\BasicFilter' => __DIR__ . '/../..' . '/Core/BasicFIlters.php',
         'App\\Lib\\Filters\\ClassFilter' => __DIR__ . '/../..' . '/App/Lib/Filters/ClassFilter.php',
         'App\\Lib\\Registration' => __DIR__ . '/../..' . '/App/Lib/Registration.php',
         'App\\Lib\\Validators\\ContentValidator' => __DIR__ . '/../..' . '/Core/Validators/ContentValidator.php',
@@ -64,7 +63,6 @@ class ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86
         'ComposerAutoloaderInite6180dbdd575fd6b74cc00dfc3bb3c86' => __DIR__ . '/..' . '/composer/autoload_real.php',
         'Composer\\Autoload\\ClassLoader' => __DIR__ . '/..' . '/composer/ClassLoader.php',
         'Composer\\Autoload\\ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86' => __DIR__ . '/..' . '/composer/autoload_static.php',
-        'Core\\AbstractAction' => __DIR__ . '/../..' . '/Core/AbstractAction.php',
         'Core\\Action\\AbstractAction' => __DIR__ . '/../..' . '/Core/Action/AbstractAction.php',
         'Core\\Action\\CreatorAction' => __DIR__ . '/../..' . '/Core/Action/CreatorAction.php',
         'Core\\Action\\EditAction' => __DIR__ . '/../..' . '/Core/Action/EditAction.php',
@@ -82,6 +80,7 @@ class ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86
         'Core\\Provider\\AbstractProvider' => __DIR__ . '/../..' . '/Core/Providers/AbstractProvider.php',
         'Core\\Provider\\Provider' => __DIR__ . '/../..' . '/Core/Providers/Provider.php',
         'Core\\Provider\\QueryAbstractProvider' => __DIR__ . '/../..' . '/Core/Providers/QueryAbstractProvider.php',
+        'Core\\Providers\\Filters\\BasicFilter' => __DIR__ . '/../..' . '/Core/Providers/Filters/BasicFIlter.php',
         'Core\\Request\\DataCreator' => __DIR__ . '/../..' . '/Core/Request/DataCreator.php',
         'Core\\Request\\DataValidator' => __DIR__ . '/../..' . '/Core/Request/DataValidator.php',
         'Core\\Request\\Get' => __DIR__ . '/../..' . '/Core/Request/Get.php',
@@ -92,8 +91,6 @@ class ComposerStaticInite6180dbdd575fd6b74cc00dfc3bb3c86
         'Core\\Request\\Validator\\Post' => __DIR__ . '/../..' . '/Core/Request/Validator/Post.php',
         'Core\\Request\\Validator\\Validator' => __DIR__ . '/../..' . '/Core/Request/Validator/Validator.php',
         'Core\\Router' => __DIR__ . '/../..' . '/Core/Router.php',
-        'Core\\Session\\Session' => __DIR__ . '/../..' . '/Core/Session/Session.php',
-        'Core\\View\\View' => __DIR__ . '/../..' . '/Core/View/View.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

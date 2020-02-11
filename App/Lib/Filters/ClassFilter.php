@@ -2,9 +2,9 @@
 
 namespace App\Lib\Filters;
 
-use Core\Request\Request;
 use App\Provider\ClassesProvider;
 use App\Provider\StudentsProvider;
+use Core\Providers\Filters\BasicFilter;
 
 class ClassFilter extends BasicFilter
 {

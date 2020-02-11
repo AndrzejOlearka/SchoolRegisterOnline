@@ -77,6 +77,24 @@ class QueryAbstractProvider implements Provider
         return ['id' => $db->lastInsertId()];
     }
 
+    public static function update($query, $model, $args = [])
+    {
+        $db = self::getDatabaseConnection();
+        $result = self::updaterHelper($query, $args);
+        $statement = $db->prepare($result['query']);
+        $statement = self::bind($statement, $result['values']);
+        $statement->execute();
+        return;
+    }
+
+    public static function delete($query, $model, $args = [])
+    {
+        $db = self::getDatabaseConnection();
+        $statement = $db->prepare($query);
+        $statement = self::bind($statement, $args);
+        return $statement->execute(); 
+    }
+
     public static function creatorHelper($query, $args){
         $keys = [];
         $values = [];
@@ -92,6 +110,29 @@ class QueryAbstractProvider implements Provider
         $implodedKeys = implode(', ', $keys);
         $query .= " ($implodedKeys) ";
         $query .= " VALUES ($binders) ";
+        return [
+            'query' => $query,
+            'values' => $values
+        ];
+    }
+
+    public static function updaterHelper($query, $args){
+        $id = $args['id'];
+        if(isset($args['id'])){
+            unset($args['id']);
+        }
+        $iterator = 1;
+        $amount = count($args);
+        $values = [];
+        foreach($args as $key => $value){
+            $query .= " $key = ?";
+            $values[] = $value;
+            if($iterator != $amount){
+                $query .= ", ";
+            }
+            $iterator++;
+        }
+        $query .= " WHERE id = $id ";
         return [
             'query' => $query,
             'values' => $values

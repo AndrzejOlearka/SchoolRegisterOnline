@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use Core\Request\Response;
 use Core\Controller\Controller;
-use App\Provider\ClassesProvider;
 use App\Lib\Actions\Classes\{ClassEditor, ClassCreator};
 
 /**
@@ -37,36 +36,27 @@ class Classes extends Controller
      */
     protected function getClasses()
     {
-        $classesProvider = new ClassesProvider;
-        $classesProvider->setParams($this->getParams());
-        Response::json($classesProvider->getClasses()->getOriginalData());
+        Response::json($this->provider->getClasses()->getOriginalData());
     }
 
     protected function getClass()
     {
-        $classesProvider = new ClassesProvider;
-        $classesProvider->setParams($this->getParams());
-        Response::json($classesProvider->getClasses()->getClass()->getOriginalData());
+        $this->provider->setQuery(" WHERE id = {$this->provider->getFormData()['id']}")->getClasses();
+        Response::json($this->provider->getClasses()->getClass()->getOriginalData());
     }
 
     protected function addClass(){
-        $classesProvider = new ClassesProvider;
-        $classesProvider->setParams($this->getParams());
-        $action = new ClassCreator($classesProvider);
+        $action = new ClassCreator($this->provider);
         $action->create();
     }
 
     protected function editClass(){
-        $classesProvider = new ClassesProvider;
-        $classesProvider->setParams($this->getParams());
-        $classesProvider->getClasses();
-        $action = new ClassEditor($classesProvider);
+        $this->provider->getClasses();
+        $action = new ClassEditor($this->provider);
         $action->edit();
     }
     
     protected function deleteClass(){
-        $classesProvider = new ClassesProvider;
-        $classesProvider->setParams($this->getParams());
-        $classesProvider->deleteClass();
+        Response::json($this->provider->deleteClass());
     }
 }

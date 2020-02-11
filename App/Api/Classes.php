@@ -72,7 +72,7 @@ class Classes
     public static function deleteClass(){
         return [
             'type' => [
-                'DELETE'
+                'POST', 'DELETE'
             ],
             'required' => [
                 'id'
