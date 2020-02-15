@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Api;
 
 /**
  * Api users endpoint controller
  */
-class Students 
+class Students
 {
     public static function getStudents(){
         return [

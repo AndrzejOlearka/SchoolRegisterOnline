@@ -12,23 +12,6 @@ use App\Lib\Actions\Classes\{ClassEditor, ClassCreator};
  */
 class Classes extends Controller
 {
-
-    /**
-     * Before filter
-     *
-     * @return void
-     */
-    protected function before()
-    {}
-
-    /**
-     * After filter
-     *
-     * @return void
-     */
-    protected function after()
-    {}
-
     /**
      * Get classes with basic data
      *
@@ -42,7 +25,7 @@ class Classes extends Controller
     protected function getClass()
     {
         $this->provider->setQuery(" WHERE id = {$this->provider->getFormData()['id']}")->getClasses();
-        Response::json($this->provider->getClasses()->getClass()->getOriginalData());
+        Response::json($this->provider->getClass()->getOriginalData());
     }
 
     protected function addClass(){

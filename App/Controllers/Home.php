@@ -14,26 +14,6 @@ use Core\Controller\Controller;
  */
 class Home extends Controller
 {
-
-    /**
-     * Before filter
-     *
-     * @return void
-     */
-    protected function before(){}
-
-    /**
-     * After filter
-     *
-     * @return void
-     */
-    protected function after(){}
-
-    /**
-     * Login action
-     *
-     * @return void
-     */
     protected function login()
     {
         $usersProvider = new UsersProvider;

@@ -18,8 +18,12 @@ class BasicFilter
     {
         $query = '';
         $optionalFieldIterator = 0;
-        
+        $data = $this->provider->getFormData();
+        if(empty($data)){
+            return $query;
+        }
         $optionalFields = $this->provider->getOptionalFields();
+        
         foreach ($this->provider->getFormData() as $fieldname => $value) {
             if (!in_array($fieldname, $optionalFields) || !$this->hasModelProperty($fieldname)){
                 continue;

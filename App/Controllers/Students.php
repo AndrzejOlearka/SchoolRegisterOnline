@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use Core\View\View;
-use Core\Request\Request;
+use Core\Request\Response;
 use Core\Controller\Controller;
+use App\Lib\Actions\Students\{StudentEditor, StudentCreator};
 
 /**
  * Students controller
@@ -12,86 +12,29 @@ use Core\Controller\Controller;
  */
 class Students extends Controller
 {
-
-    /**
-     * Before filter
-     *
-     * @return void
-     */
-    protected function before()
-    {}
-
-    /**
-     * After filter
-     *
-     * @return void
-     */
-    protected function after()
-    {}
-
-    /**
-     * Show the index page
-     *
-     * @return void
-     */
-    public function saveStudent()
+    protected function getStudents()
     {
-        $studentsProvider = new StudentsProvider;
-        $usersProvider->setProviderData(Request::post()->get('student_id'))->saveStudent();
+        Response::json($this->provider->getStudents()->getOriginalData());
     }
 
-    public function deleteStudent()
+    protected function getStudent()
     {
-        $studentsProvider = new StudentsProvider;
-        $usersProvider->setProviderData(Request::post()->get('student_id'))->deleteStudent();
+        $this->provider->setQuery(" WHERE id = {$this->provider->getFormData()['id']}")->getStudents();
+        Response::json($this->provider->getStudent()->getOriginalData());
     }
 
-    public function saveGrade()
-    {
-        $studentsProvider = new StudentsProvider;
-        $usersProvider->setProviderData(Request::post()->get('student_id'))->saveStudent();
+    protected function addStudent(){
+        $action = new StudentCreator($this->provider);
+        $action->create();
     }
 
-    public function deleteGrade()
-    {
-        $studentsProvider = new StudentsProvider;
-        $usersProvider->setProviderData(Request::post()->get('student_id'))->deleteStudent();
-    }
-
-    public function saveBehaviourNote()
-    {
-        $studentsProvider = new StudentsProvider;
-        $usersProvider->setProviderData(Request::post()->get('student_id'))->saveBehaviourNote();
-    }
-
-    public function deleteBehaviourNote()
-    {
-        $studentsProvider = new StudentsProvider;
-        $usersProvider->setProviderData(Request::post()->get('student_id'))->deleteBehaviourNote();
-    }
-
-    public function saveParentContact()
-    {
-        $studentsProvider = new StudentsProvider;
-        $usersProvider->setProviderData(Request::post()->get('student_id'))->saveParentContact();
-    }
-
-    public function deleteParentContact()
-    {
-        $studentsProvider = new StudentsProvider;
-        $usersProvider->setProviderData(Request::post()->get('student_id'))->deleteParentContact();
-    }
-
-    public function saveSemestralNote()
-    {
-        $studentsProvider = new StudentsProvider;
-        $usersProvider->setProviderData(Request::post()->get('student_id'))->saveSemestralNote();
+    protected function editStudent(){
+        $this->provider->getStudents();
+        $action = new StudentEditor($this->provider);
+        $action->edit();
     }
     
-    public function deleteParentContact()
-    {
-        $studentsProvider = new StudentsProvider;
-        $usersProvider->setProviderData(Request::post()->get('student_id'))->deleteSemestralNote();
+    protected function deleteStudent(){
+        Response::json($this->provider->deleteStudent());
     }
-    
 }

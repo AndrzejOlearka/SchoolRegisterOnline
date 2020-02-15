@@ -48,8 +48,8 @@ abstract class Controller
     public function __call($name, $args)
     {
         if (method_exists($this, $name)) {
-            $this->setDataProvider();
             $this->dataProcess();
+            $this->setDataProvider();
             call_user_func_array([$this, $name], $args);
         } else {
             Header::httpCodeAndDie("HTTP/1.0 404 Method does not exists.");
@@ -62,6 +62,7 @@ abstract class Controller
         $fullname = $namespace.$name;
         $this->provider = new $fullname;
         $this->provider->setParams($this->getParams());
+        $this->clearData();
     }
 
     protected function dataProcess(){
@@ -84,11 +85,9 @@ abstract class Controller
     protected function validateApiData(){
         $this->validator->setData($this);
         $this->validator->process();
-        $this->unsetData();
     }
 
-    private function unsetData(){
-        
+    private function clearData(){
         unset($this->route_params);
         unset($this->validator);
         unset($this->creator);

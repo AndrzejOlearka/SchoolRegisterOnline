@@ -2,12 +2,6 @@
 
 namespace App\Api;
 
-use Core\View\View;
-use Core\Request\Request;
-use App\Provider\UsersProvider;
-use App\Lib\{Registration, Authentication};
-use Core\Controller\Controller;
-
 /**
  * Api users endpoint controller
  */
