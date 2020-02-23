@@ -7,7 +7,7 @@ use Core\Action\EditAction;
 
 class StudentEditor extends StudentCreator implements EditAction
 {
-    const MSG_EDIT_CLASS = 'Class has been edited successfully.';
+    const MSG_EDIT_CLASS = 'Student has been edited successfully.';
 
     public function __construct(StudentsProvider $provider)
     {

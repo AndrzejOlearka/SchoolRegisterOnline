@@ -2,19 +2,41 @@
 
 namespace App\Api;
 
-use Core\View\View;
-use Core\Request\Request;
-use App\Provider\UsersProvider;
-use App\Lib\{Registration, Authentication};
-use Core\Controller\Controller;
 
 /**
  * Api users endpoint controller
  */
 class Users 
 {
+    public static function getUsers(){
+        return [
+            'type' => [
+                'GET'
+            ],
+            'required' => [
+                
+            ], 
+            'optional' => [
+                'role', 'verified'
+            ]
+        ];
+    }
 
-    public static function login(){
+    public static function getUser(){
+        return [
+            'type' => [
+                'GET'
+            ],
+            'required' => [
+                
+            ], 
+            'optional' => [
+                'woth_settings', 'with_data'
+            ]
+        ];
+    }
+
+    public static function verifyUser(){
         return [
             'type' => [
                 'POST'
@@ -28,41 +50,41 @@ class Users
         ];
     }
 
-    public static function register(){
+    public static function addUser(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-                'email', 'password', 'password2'
+                'email', 'password'
             ], 
             'optional' => [
-
+                'role', 'verified'
             ]
         ];
     }
 
-    public static function getUsers(){
+    public static function editUser(){
         return [
             'type' => [
-                'GET', 'POST'
+                'POST'
             ],
             'required' => [
                 'id'
             ], 
             'optional' => [
-                'role'
+                'email', 'role', 'verified', 'password'
             ]
         ];
     }
 
-    public static function getUserWithSettings(){
+    public static function deleteUser(){
         return [
             'type' => [
-                'GET', 'POST'
+                'POST', 'DELETE'
             ],
             'required' => [
-                'email', 'password', 'password2'
+                'id'
             ], 
             'optional' => [
                 

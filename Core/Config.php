@@ -14,6 +14,8 @@ class Config
     /**
      * get config parsed data
      * @var string
+     * 
+     * return parsed config from .ini file
      */
 
     public static function get()

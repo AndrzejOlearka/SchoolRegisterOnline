@@ -2,12 +2,10 @@
 
 namespace App\Controllers;
 
-use Core\View\View;
-use Core\Request\Request;
 use Core\Request\Response;
 use App\Provider\UsersProvider;
 use Core\Controller\Controller;
-use App\Lib\Actions\Users\{Registration, Authentication};
+use App\Lib\Actions\Users\{Registration, Authentication, UserEditor};
 
 /**
  * Users controller
@@ -16,61 +14,31 @@ use App\Lib\Actions\Users\{Registration, Authentication};
 class Users extends Controller
 {
 
-    /**
-     * Before filter
-     *
-     * @return void
-     */
-    protected function before(){}
-
-    /**
-     * After filter
-     *
-     * @return void
-     */
-    protected function after(){}
-
-    /**
-     * Login action
-     *
-     * @return void
-     */
-    protected function login()
-    {
-        $usersProvider = new UsersProvider;
-        $usersProvider->setParams($this->getParams());
-        (new Authentication($usersProvider->getUser()))->validate();
-    }
-    
-    /**
-     * Login action
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $usersProvider = new UsersProvider;
-        $usersProvider->setParams($this->getParams());
-        (new Registration($usersProvider->getUser()))->validate();
+    protected function getUsers(){
+        Response::json($this->provider->getUsers()->getOriginalData());
     }
 
-    /**
-     * getUsers
-     *
-     * @return void
-     */
-    public function getUsers(){
-        $usersProvider = new UsersProvider;
-        $usersProvider->setParams($this->getRouteParams());
-        Response::json($usersProvider->getUsers()->getOriginalData());
+    protected function getUser(){
+        $this->provider->setQuery(" WHERE id = {$this->provider->getFormData()['id']}")->getClasses();
+        Response::json($this->provider->getClass()->getOriginalData());
     }
 
-    /**
-     * getUserWithSetttings
-     *
-     * @return void
-     */
-    public function getUserWithSetttings(){
-        
+    protected function addUser(){
+        $action = new Registration($this->provider);
+        $action->create();
+    }
+
+    protected function verifyUser(){
+        $action = new Authentication($this->provider);
+        $action->verify();
+    }
+
+    protected function editUser(){
+        $action = new UserEditor($this->provider);
+        $action->edit();
+    }
+
+    protected function deleteUser(){
+        Response::json($this->provider->deleteClass());
     }
 }

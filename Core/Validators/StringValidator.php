@@ -8,4 +8,7 @@ trait StringValidator{
         return ctype_alpha($data) ? true : false;
     }
 
+    function isOnlyNumbersAndCommas($string){
+        return preg_match('/^[0-9,]*$/', $string) == true ? true : false;
+    }
 }

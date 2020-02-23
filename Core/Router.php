@@ -7,7 +7,6 @@ use Core\Helpers\Header;
 /**
  * Router
  *
- * PHP version 5.4
  */
 class Router
 {
@@ -180,7 +179,8 @@ class Router
      */
     protected function convertToStudlyCaps($string)
     {
-        return str_replace(' ', '', ucwords(str_replace('-', ' ', $string)));
+        $string = str_replace(' ', '', ucwords(str_replace('-', ' ', $string)));
+        return ucfirst($string);
     }
 
     /**

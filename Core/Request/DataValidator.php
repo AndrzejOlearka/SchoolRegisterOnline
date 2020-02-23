@@ -32,13 +32,17 @@ Class DataValidator
             }
         }
         if(!empty($emptyFields)){
-            $string = implode(', ', $emptyFields);
-            Header::httpCode("HTTP/1.0 400 Missing required fields.");
-            Response::json([
-                'result' => 'error',
-                'message' => 'Empty required fields: '.$string
-            ]);
+            $this->sendResponseWithEmptyFields($emptyFields);
         }
         return $this;
+    }
+
+    private function sendResponseWithEmptyFields($emptyFields){
+        $string = implode(', ', $emptyFields);
+        Header::httpCode("HTTP/1.0 400 Missing required fields.");
+        Response::json([
+            'result' => 'error',
+            'message' => 'Empty required fields: '.$string
+        ]);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Core\Provider;
 
-use Core\Request\Request;
 use Core\Provider\Provider;
 use Core\Database\Connection;
 
@@ -56,6 +55,15 @@ class QueryAbstractProvider implements Provider
         return !empty($data) ? $data : null; 
     }
 
+    /**
+     * retrieving only one row by model name and query
+     *
+     * @param  mixed $query
+     * @param  mixed $model
+     * @param  mixed $args
+     *
+     * @return PDO fetch data into model class
+     */
     public static function first($query, $model, $args = [])
     {
         $db = self::getDatabaseConnection();
@@ -67,6 +75,15 @@ class QueryAbstractProvider implements Provider
         return !empty($data[0]) ? $data[0] : new $model;
     }
 
+    /**
+     * creating data by model
+     *
+     * @param  mixed $query
+     * @param  mixed $model
+     * @param  mixed $args
+     *
+     * @return PDO last inserted id with data
+     */
     public static function insert($query, $model, $args = [])
     {
         $db = self::getDatabaseConnection();
@@ -77,6 +94,15 @@ class QueryAbstractProvider implements Provider
         return ['id' => $db->lastInsertId()];
     }
 
+    /**
+     * editing data by model
+     *
+     * @param  mixed $query
+     * @param  mixed $model
+     * @param  mixed $args
+     *
+     * @return nothing at this time
+     */
     public static function update($query, $model, $args = [])
     {
         $db = self::getDatabaseConnection();
@@ -87,6 +113,15 @@ class QueryAbstractProvider implements Provider
         return;
     }
 
+    /**
+     * delete data by model
+     *
+     * @param  mixed $query
+     * @param  mixed $model
+     * @param  mixed $args
+     *
+     * @return boolean success or error
+     */
     public static function delete($query, $model, $args = [])
     {
         $db = self::getDatabaseConnection();
@@ -95,6 +130,14 @@ class QueryAbstractProvider implements Provider
         return $statement->execute(); 
     }
 
+    /**
+     * creatorHelper helps during creator actions
+     *
+     * @param  mixed $query
+     * @param  mixed $args
+     *
+     * @return array [string $query, string $values]
+     */
     public static function creatorHelper($query, $args){
         $keys = [];
         $values = [];
@@ -116,6 +159,14 @@ class QueryAbstractProvider implements Provider
         ];
     }
 
+    /**
+     * creatorHelper helps during editor actions
+     *
+     * @param  mixed $query
+     * @param  mixed $args
+     *
+     * @return array [string $query, string $values]
+     */
     public static function updaterHelper($query, $args){
         $id = $args['id'];
         if(isset($args['id'])){

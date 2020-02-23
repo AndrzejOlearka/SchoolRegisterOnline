@@ -58,7 +58,7 @@ abstract class Controller
 
     protected function setDataProvider(){
         $namespace = "App\\Provider\\";
-        $name = $this->getRouteParams()['controller']."Provider";
+        $name = ucfirst($this->getRouteParams()['controller'])."Provider";
         $fullname = $namespace.$name;
         $this->provider = new $fullname;
         $this->provider->setParams($this->getParams());

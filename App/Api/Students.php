@@ -13,10 +13,10 @@ class Students
                 'GET'
             ],
             'required' => [ 
-                'class_id'
+                
             ], 
             'optional' => [
-                'sex', 'firstname', 'lastname'
+                'class_id', 'sex', 'firstname', 'lastname'
             ]
         ];
     }

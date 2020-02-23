@@ -10,6 +10,11 @@ use Core\Request\Response;
  */
 abstract class AbstractAction
 {
+    public $provider;
+    protected $result;
+    protected $formData;
+    protected $originalData;
+   
     protected function setResult(){
         empty($this->errors) ? $this->result = true : $this->result = false;
         return $this;
@@ -21,5 +26,9 @@ abstract class AbstractAction
         } else {
             Response::json($this->originalData, $message, null);
         }
+    }
+
+    public function getFormData(){
+        return $this->formData;
     }
 }

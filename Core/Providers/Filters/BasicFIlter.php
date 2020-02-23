@@ -2,19 +2,20 @@
 
 namespace Core\Providers\Filters;
 
-use Core\Request\Request;
-use App\Provider\ClassesProvider;
-
 class BasicFilter
 {
     /**
-     * prepare sql query with "where" and "and" only
+     * onlyOptionalFilter
+     * 
+     * accepts also fields for WHERE LIKE queries
+     * accepts also fields for WHERE IN queries
      *
-     * @param  mixed $optionalFields
+     * @param array $likeOptional
+     * @param array $inOptional
      *
-     * @return void
+     * @return string with full query
      */
-    protected function onlyOptionalFilter()
+    protected function onlyOptionalFilter(array $likeOptional = [], $inOptional = []  )
     {
         $query = '';
         $optionalFieldIterator = 0;
@@ -29,17 +30,32 @@ class BasicFilter
                 continue;
             }
             if ($optionalFieldIterator == 0) {
-                $query .= " WHERE {$fieldname} = {$value} ";
+                if(in_array($fieldname, $likeOptional)){
+                    $query .= " WHERE ({$fieldname} = '{$value}' OR {$fieldname} LIKE '{$value},%' OR '%,$value,%' OR '%,{$value}') ";
+                } else {
+                    $query .= " WHERE {$fieldname} = '{$value}' ";
+                }
             } else {
-                $query .= " AND {$fieldname} = {$value} ";
+                if (in_array($fieldname, $likeOptional)) {
+                    $query .= " AND ({$fieldname} = '{$value}' OR {$fieldname} LIKE '{$value},%' OR '%,$value,%' OR '%,{$value}') ";
+                } else {
+                    $query .= " AND {$fieldname} = '{$value}' ";
+                }
             }
             $optionalFieldIterator++;
         }
         return $query;
     }
 
+    /**
+     * hasModelProperty
+     *
+     * @param string $fieldname
+     *
+     * @return boolean if property of that model exists
+     */
     protected function hasModelProperty($fieldname){
         $model = $this->provider->getModel();
-        return property_exists($fieldname, $model) ? true : false;
+        return property_exists($model, $fieldname) ? true : false;
     }
 }

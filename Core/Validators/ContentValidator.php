@@ -24,12 +24,13 @@ trait ContentValidator
     public function isPredefinedValue($data, $value){
         $i = 1;
         $predefiniedValues = [];
-        for($i; $i < $value; $value++){
+        for($i; $i <= $value; $i++){
             $predefiniedValues[] = $i;
         }
-        if(in_array($data, $predefiniedValues)){
-            return false;
-        }
-        return true;
+        return in_array($data, $predefiniedValues) ? true : false;
+    }
+
+    public function changeToSqlDate($date){
+        return date('Y-m-d', strtotime($date));
     }
 }

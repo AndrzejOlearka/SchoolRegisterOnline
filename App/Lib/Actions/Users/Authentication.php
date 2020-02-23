@@ -2,96 +2,43 @@
 
 namespace App\Lib\Actions\Users;
 
-use Core\AbstractAction;
-use Core\Request\Response;
 use App\Provider\UsersProvider;
+use App\Lib\Validators\NumberValidator;
+use App\Lib\Validators\StringValidator;
+use App\Lib\Validators\ContentValidator;
 
-class Authentication extends AbstractAction
+class Authentication extends Registration
 {
-    public $result = false;
-    private $errors = [];
-    private $provider;
+    use StringValidator;
+    use NumberValidator;
+    use ContentValidator;
+
+    const MSG_USER_VERIFY = 'User has been verified successfully.';
 
     public function __construct(UsersProvider $provider)
     {
-        $this->provider = $provider;
-    }
-    /**
-     * run all santizing and validating functions
-     *
-     * @return void
-     */
-    public function validate()
-    {
-        $this->isFormEmpty();
-        $this->isUserExists();
-        $this->isPasswordVerified();
-        $this->setResult();
-        $this->sendResult();
+        parent::__construct(...func_get_args());
     }
 
-    /**
-     * check if login form is empty
-     *
-     * @return void
-     */
-    private function isFormEmpty()
-    {
-        if (empty($this->provider->formData['email'])) {
-            $this->errors['emptyEmail'] = 'Email is empty.';
-        }
-        if (empty($this->provider->formData['password'])) {
-            $this->errors['emptyPassword'] = 'Password is empty.';
-        }
+    public function verify(){
+
+        $this->isUserExists()
+             ->isPasswordVerified()
+             ->setResult()
+             ->sendResult(Authentication::MSG_USER_VERIFY);
     }
 
-    /**
-     * check if user with this id exists;
-     *
-     * @return void
-     */
-    private function isUserExists()
-    {
-        if (empty($this->provider->originalData->id)) {
-            $this->errors['wrongEmail'] = 'There is no user with this email.';
+    protected function isUserExists(){
+        if(empty($this->originalData)){
+            $this->errors['userNotExists'] = 'There is no user with this email';
         }
+        return $this;
     }
 
-    /**
-     * check if hash password is verified
-     *
-     * @return void
-     */
     private function isPasswordVerified(){
-        if(!password_verify($this->provider->formData['password'], $this->provider->originalData->password)){
+        if(!password_verify($this->formData['password'], $this->originalData->password)){
             $this->errors['wrongPassword'] = 'Wrong password.';
         }
-    }
-
-    /**
-     * set final result of action
-     *
-     * @return void
-     */
-    private function setResult()
-    {
-        if (empty($this->errors)) {
-            $this->result = true;
-        }
-    }
-    
-    /**
-     * send API response
-     *
-     * @return void
-     */
-    private function sendResult(){
-        Response::json([
-            'result' => $this->result,
-            'errors' => $this->errors,
-            'data' => [
-                'role' => $this->provider->originalData->role
-            ]
-        ]);
+        return $this;
     }
 }

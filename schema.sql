@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS teachers (
     user_id integer(10) NOT NULL,
     firstname varchar(255) NOT NULL,
     lastname varchar(255) NOT NULL,
-    sex int (1),
+    sex enum (1, 2),
     school_subjects varchar(255),
     class_tutor int (10),
     PRIMARY KEY (id),
@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS grades_types(
 
 CREATE TABLE IF NOT EXISTS grades(
     id int AUTO_INCREMENT,
+    grade 
     weight varchar(255),
     student_id int NOT NULL,
     school_subject_id int(10) NOT NULL,

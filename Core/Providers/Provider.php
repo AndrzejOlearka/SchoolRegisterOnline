@@ -3,8 +3,7 @@
 namespace Core\Provider;
 
 
-interface Provider{
+interface Provider {
 
-    
 
 }

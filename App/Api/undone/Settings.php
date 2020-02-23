@@ -5,7 +5,7 @@ namespace App\Controllers;
 /**
  * Api settings endpoint controller
  */
-class Students 
+class Settings 
 {
     public static function editSettings(){
         return [

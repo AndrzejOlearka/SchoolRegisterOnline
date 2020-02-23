@@ -12,11 +12,7 @@ class StudentFilter extends BasicFilter
         $this->provider = $provider;
     }
     
-    public function schoolClassesTableFilter(){
+    public function studentsTableFilter(){
         return parent::onlyOptionalFilter();
-    }
-
-    public function singleClassDetailsFilter(){
-
     }
 }

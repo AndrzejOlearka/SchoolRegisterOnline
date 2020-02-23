@@ -1,9 +1,17 @@
 api:
   /Users:
-    - /login
-    - /register
     - /getUsers
-    - /getUserWithSettings
+    - /getUser
+    - /verifyUser
+    - /addUser
+    - /editUser
+    - /deleteUser
+  /Teachers:
+    - /getTeachers
+    - /getTeacher
+    - /addTeacher
+    - /editTeacher
+    - /deleteTeacher
   /Classes:
     - /getClasses
     - /getClass
@@ -28,7 +36,7 @@ api:
     - /getNotes
     - /addBehaviourNote
     - /editBehaviourNote
-    - /deleteBehabiourNote
+    - /deleteBehaviourNote
     - /getSemestralNote
     - /addSemestralNote
     - /editSemestralNote

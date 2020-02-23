@@ -2,19 +2,13 @@
 
 namespace App\Provider;
 
-use App\Model\User;
-use App\Model\Teacher;
-use Core\Request\Request;
+use App\Lib\Filters\UserFilter;
 use Core\Provider\AbstractProvider;
 
 class UsersProvider extends AbstractProvider
 {
     private $model;
     private $table;
-    
-    const VERIFIED = 0;
-
-    const ROLE = 0;
 
     public function __construct()
     {
@@ -24,24 +18,32 @@ class UsersProvider extends AbstractProvider
     
     public function getUsers()
     {
-        $this->originalData = self::data("SELECT * FROM {$this->table}", $this->model);
+        $filter = new UserFilter($this);
+        $this->query ?: $this->query = $filter->usersTableFilter();
+        $this->originalData = self::data("SELECT * FROM {$this->table}{$this->query}", $this->model);
         return $this;
     }
 
     public function getUser()
     {
-        $this->originalData = self::first("SELECT * FROM {$this->table} WHERE email = ?", $this->model, [$this->formData['email']]);
+        $filter = new UserFilter($this);
+        $data = $filter->singleClassDetailsFilter();
+        $this->prepareSingleResult($data, ['settings', 'data']);
         return $this;
     }
 
-    public function createUser()
-    {
-        self::data("INSERT INTO {$this->table} VALUES(null, ?, ?, ".UsersProvider::ROLE.", ".UsersProvider::VERIFIED.")", $this->model, [$this->formData['email'], $this->formData['password']]);
+    public function addUser(){
+        $this->originalData = self::insert("INSERT INTO {$this->table} ", $this->model, $this->getFormData());
+        return $this;
     }
 
-    public function getUsersWithTeachers(){
-        $teachersTable = \App\Model\Teacher::TABLE;
-        $this->originalData = self::data("SELECT * FROM {$this->table} LEFT JOIN {$teachersTable} ON {$this->table}.id = {$teachersTable}.user_id", $this->model);
+    public function editUser(){
+        $this->originalData = self::update("UPDATE {$this->table} SET ", $this->model, $this->getFormData());
+        return $this;
+    }
+
+    public function deleteUser(){
+        $this->originalData = self::delete("DELETE FROM {$this->table} WHERE id = ?", $this->model, [$this->getFormData()['id']]);
         return $this;
     }
 }

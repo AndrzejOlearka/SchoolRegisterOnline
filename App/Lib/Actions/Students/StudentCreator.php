@@ -21,17 +21,7 @@ class StudentCreator extends AbstractAction implements CreatorAction
     {
         $this->provider = $provider;
         $this->formData = $this->provider->getFormData();
-        $this->provider->setQuery(" 
-            WHERE firstname = {$this->formData['firstname']} 
-            AND lastname = '{$this->formData['lastname']}' 
-            AND sex = '{$this->formData['sex']}' 
-            AND class_id = '{$this->formData['class_id']}'
-            AND birthday = '{$this->formData['birthday']}'
-            AND father = '{$this->formData['father']}'
-            AND mother = '{$this->formData['mother']}' 
-        ");
-        $this->provider->getClasses();
-        $this->originalData = $this->provider->getOriginalData();
+        $this->checkForIdenticalStudent();
     }
 
     public function create(){
@@ -41,6 +31,8 @@ class StudentCreator extends AbstractAction implements CreatorAction
              ->isClassInteger()
              ->isFullnameAlpha()
              ->isParentsAlpha()
+             ->sanitazeBirthday()
+             ->setResult()
              ->addStudent()
              ->sendResult(StudentCreator::MSG_CREATE_STUDENT);
     }
@@ -53,15 +45,19 @@ class StudentCreator extends AbstractAction implements CreatorAction
     }
 
     protected function isSexPredefiniedValues(){
+        if(!isset($this->formData['sex'])){
+            return;
+        }
         if(!$this->isPredefinedValue($this->formData['sex'], 2)){
             $this->errors['sexValue'] = 'Sex value can be only 1 for men and 2 for women';
         }
+        return $this;
     }
 
     protected function isClassInteger(){
-        $result = $this->isInteger($this->formData['number']);
+        $result = $this->isInteger($this->formData['class_id']);
         if(!$result){
-            $this->errors['classId'] = 'class number is not an integer';
+            $this->errors['classId'] = 'class id is not an integer';
         }
         return $this;
     }
@@ -75,17 +71,36 @@ class StudentCreator extends AbstractAction implements CreatorAction
         if(!$result){
             $this->errors['studentLastname'] = 'Student lastname can contains only letters';
         }
+        return $this;
     }
 
     protected function isParentsAlpha(){
+        if(!isset($this->formData['father'])){
+            return;
+        }
         $result = $this->isAlpha($this->formData['father']);
         if(!$result){
             $this->errors['studentFather'] = 'Student father fullname can contains only letters';
+        }
+        if(!isset($this->formData['mother'])){
+            return;
         }
         $result = $this->isAlpha($this->formData['mother']);
         if(!$result){
             $this->errors['studentMother'] = 'Student mother fullname can contains only letters';
         }
+        return $this;
+    }
+
+    protected function sanitazeBirthday(){
+        if(!isset($this->formData['birthday'])){
+            return;
+        }
+        $result = $this->changeToSqlDate($this->formData['birthday']);
+        if(!$result){
+            $this->errors['studentMother'] = 'Student mother fullname can contains only letters';
+        }
+        return $this;
     }
 
     protected function addStudent(){
@@ -94,5 +109,25 @@ class StudentCreator extends AbstractAction implements CreatorAction
             $this->originalData = $this->provider->getOriginalData();
         }
         return $this;
+    }
+
+    protected function checkForIdenticalStudent(){
+        $array = ['firstname', 'lastname', 'sex', 'class_id', 'birthday', 'father', 'mother'];
+        foreach($array as $element){
+            if(!isset($this->formData[$element]) || is_null($this->formData[$element])){
+                return $this;
+            }
+        }
+        $this->provider->setQuery(" 
+            WHERE firstname = '{$this->formData['firstname']}' 
+            AND lastname = '{$this->formData['lastname']}' 
+            AND sex = '{$this->formData['sex']}' 
+            AND class_id = '{$this->formData['class_id']}'
+            AND birthday = '{$this->formData['birthday']}'
+            AND father = '{$this->formData['father']}'
+            AND mother = '{$this->formData['mother']}' 
+        ");
+        $this->provider->getStudents();
+        $this->originalData = $this->provider->getOriginalData();
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Api;
 
 /**
- * Api grades endpoint controller
+ * Api users endpoint controller
  */
-class Grades 
+class Teachers
 {
-    public static function getGroups(){
+    public static function getTeachers(){
         return [
             'type' => [
                 'GET'
@@ -16,26 +16,39 @@ class Grades
                 
             ], 
             'optional' => [
-                'id', 'class_id', 'teacher_id'
+                'sex', 'school_subjects', 'class_tutor'
+            ]
+        ];
+    }
+    public static function getTeacher(){
+        return [
+            'type' => [
+                'GET'
+            ],
+            'required' => [
+                'id'
+            ], 
+            'optional' => [
+               'with_userdata', 'with_settings'
             ]
         ];
     }
 
-    public static function addGroup(){
+    public static function addTeacher(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-                'name'
+                'user_id', 'firstname', 'lastname'
             ], 
             'optional' => [
-                'class_id', 'teacher_id', 'school_subject_id'
+                'sex', 'school_subjects', 'class_tutor'
             ]
         ];
     }
-
-    public static function editGrade(){
+        
+    public static function editTeacher(){
         return [
             'type' => [
                 'POST'
@@ -44,12 +57,12 @@ class Grades
                 'id'
             ], 
             'optional' => [
-                'class_id', 'teacher_id', 'school_subject_id'
+                'firstname', 'lastname', 'sex', 'class_tutor', 'school_subjects'
             ]
         ];
     }
-
-    public static function deleteGrade(){
+        
+    public static function deleteTeacher(){
         return [
             'type' => [
                 'POST', 'DELETE'
@@ -58,7 +71,7 @@ class Grades
                 'id'
             ], 
             'optional' => [
-
+                
             ]
         ];
     }

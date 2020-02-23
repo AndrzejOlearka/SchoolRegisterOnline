@@ -1,64 +1,64 @@
 <?php
 
-namespace App\Api;
+namespace App\Controllers;
 
 /**
- * Api users endpoint controller
+ * Api grades endpoint controller
  */
-class Home 
+class Groups 
 {
-    public static function login(){
+    public static function getGroups(){
+        return [
+            'type' => [
+                'GET'
+            ],
+            'required' => [ 
+                
+            ], 
+            'optional' => [
+                'id', 'class_id', 'teacher_id'
+            ]
+        ];
+    }
+
+    public static function addGroup(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-                'email', 'password'
+                'name'
             ], 
             'optional' => [
-
+                'class_id', 'teacher_id', 'school_subject_id'
             ]
         ];
     }
 
-    public static function register(){
+    public static function editGrade(){
         return [
             'type' => [
                 'POST'
-            ],
-            'required' => [
-                'email', 'password', 'password2'
-            ], 
-            'optional' => [
-
-            ]
-        ];
-    }
-
-    public static function getUsers(){
-        return [
-            'type' => [
-                'GET', 'POST'
             ],
             'required' => [
                 'id'
             ], 
             'optional' => [
-                'role'
+                'class_id', 'teacher_id', 'school_subject_id'
             ]
         ];
     }
 
-    public static function getUserWithSettings(){
+    public static function deleteGrade(){
         return [
             'type' => [
-                'GET', 'POST'
+                'POST', 'DELETE'
             ],
             'required' => [
-                'email', 'password', 'password2'
+                'id'
             ], 
             'optional' => [
-                
+
             ]
         ];
     }
