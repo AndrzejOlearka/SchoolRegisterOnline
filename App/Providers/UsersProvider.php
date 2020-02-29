@@ -20,15 +20,7 @@ class UsersProvider extends AbstractProvider
     {
         $filter = new UserFilter($this);
         $this->query ?: $this->query = $filter->usersTableFilter();
-        $this->originalData = self::data("SELECT * FROM {$this->table}{$this->query}", $this->model);
-        return $this;
-    }
-
-    public function getUser()
-    {
-        $filter = new UserFilter($this);
-        $data = $filter->singleClassDetailsFilter();
-        $this->prepareSingleResult($data, ['settings', 'data']);
+        $this->originalData = $filter->setFilterData(self::data("SELECT * FROM {$this->table}{$this->query}", $this->model))->filterProcessing();
         return $this;
     }
 

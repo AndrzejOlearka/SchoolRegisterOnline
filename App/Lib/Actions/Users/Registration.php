@@ -11,12 +11,6 @@ use App\Lib\Validators\ContentValidator;
 
 class Registration extends AbstractAction
 {
-    use StringValidator;
-    use NumberValidator;
-    use ContentValidator;
-
-    const MSG_CREATE_USER = 'User has been created successfully.';
-
     public function __construct(UsersProvider $provider)
     {
         $this->provider = $provider;
@@ -33,7 +27,7 @@ class Registration extends AbstractAction
              ->hashPassword()
              ->setResult()
              ->addUser()
-             ->sendResult(Registration::MSG_CREATE_USER);
+             ->sendResult();
     }
 
     protected function isUserExists(){

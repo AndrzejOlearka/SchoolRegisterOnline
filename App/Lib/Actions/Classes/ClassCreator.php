@@ -48,7 +48,7 @@ class ClassCreator extends AbstractAction implements CreatorAction
             ->isDepartmentAlpha()
             ->setResult()
             ->addClass()
-            ->sendResult(ClassCreator::MSG_CREATE_CLASS);
+            ->sendResult();
     }
 
     protected function isExistsClass()

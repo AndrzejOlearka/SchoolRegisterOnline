@@ -1,33 +1,32 @@
 <?php
 
-namespace App\Lib\Actions\Classes;
+namespace App\Lib\Actions\SchoolSubjects;
 
-use App\Provider\ClassesProvider;
+use App\Provider\SchoolSubjectsProvider;
 use Core\Action\EditAction;
 
-class ClassEditor extends ClassCreator implements EditAction
+class SchoolSubjectEditor extends SchoolSubjectCreator implements EditAction
 {
-    public function __construct(ClassesProvider $provider)
+    public function __construct(SchoolSubjectsProvider $provider)
     {
         $this->provider = $provider;
         $this->formData = $this->provider->getFormData();
         $this->provider->setQuery(" WHERE id = {$this->formData['id']}");
-        $this->provider->getClasses();
+        $this->provider->getSchoolSubjects();
         $this->originalData = $this->provider->getOriginalData();
     }
 
     public function edit(){
-        $this->isExistsClass()
-             ->isNumberInteger()
-             ->isDepartmentAlpha()
+        $this->isExistsSchoolSubject()
+             ->isNameAlpha()
              ->setResult()
-             ->editClass()
+             ->editSchoolSubject()
              ->sendResult();
     }
     
-    public function editClass(){
+    public function editSchoolSubject(){
         if($this->result){
-            $this->provider->editClass();
+            $this->provider->editSchoolSubject();
             $this->originalData = $this->provider->getOriginalData();
         }
         return $this;

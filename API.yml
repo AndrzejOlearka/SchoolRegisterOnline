@@ -1,29 +1,30 @@
 api:
   /Users:
     - /getUsers
-    - /getUser
     - /verifyUser
     - /addUser
     - /editUser
     - /deleteUser
   /Teachers:
     - /getTeachers
-    - /getTeacher
     - /addTeacher
     - /editTeacher
     - /deleteTeacher
   /Classes:
     - /getClasses
-    - /getClass
     - /addClass
     - /editClass
     - /deleteClass
   /Students:
     - /getStudents
-    - /getStudent
     - /addStudent
     - /deleteStudent
     - /editStudent
+  /Subjects:
+    - /getSubjects
+    - /addSubject
+    - /editSubject
+    - /deleteSubject
   /Grades:
     - /getGrades
     - /addGrade

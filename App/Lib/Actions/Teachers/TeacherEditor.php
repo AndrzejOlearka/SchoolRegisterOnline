@@ -11,12 +11,6 @@ use App\Lib\Actions\Students\TeacherCreator;
 
 class TeacherEditor extends TeacherCreator implements EditAction
 {
-    use StringValidator;
-    use NumberValidator;
-    use ContentValidator;
-
-    const MSG_EDIT_TEACHER = 'Teacher has been edited successfully.';
-
     public function __construct(TeachersProvider $provider)
     {
         $this->provider = $provider;
@@ -33,7 +27,7 @@ class TeacherEditor extends TeacherCreator implements EditAction
              ->sanitazeSchoolSubjects()
              ->setResult()
              ->editTeacher()
-             ->sendResult(TeacherEditor::MSG_EDIT_TEACHER);
+             ->sendResult();
     }
 
     protected function editTeacher(){

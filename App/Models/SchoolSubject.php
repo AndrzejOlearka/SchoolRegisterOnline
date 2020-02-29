@@ -5,10 +5,10 @@ namespace App\Model;
 use Core\Model\AbstractModel;
 
 /**
- * Subject model
+ * SchoolSubject model
  *
  */
-class Subject extends AbstractModel 
+class SchoolSubject extends AbstractModel 
 {
     /**
      * model table name

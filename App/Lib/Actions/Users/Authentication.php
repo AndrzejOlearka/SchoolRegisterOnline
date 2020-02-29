@@ -9,12 +9,6 @@ use App\Lib\Validators\ContentValidator;
 
 class Authentication extends Registration
 {
-    use StringValidator;
-    use NumberValidator;
-    use ContentValidator;
-
-    const MSG_USER_VERIFY = 'User has been verified successfully.';
-
     public function __construct(UsersProvider $provider)
     {
         parent::__construct(...func_get_args());
@@ -25,7 +19,7 @@ class Authentication extends Registration
         $this->isUserExists()
              ->isPasswordVerified()
              ->setResult()
-             ->sendResult(Authentication::MSG_USER_VERIFY);
+             ->sendResult();
     }
 
     protected function isUserExists(){

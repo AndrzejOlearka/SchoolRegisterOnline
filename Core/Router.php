@@ -51,19 +51,19 @@ class Router
         $this->url = $_SERVER['QUERY_STRING'];
     }
 
-    public function load(){
+    public function load()
+    {
 
         require self::ROUTES;
 
-        foreach ($routes as $route)
-        {
+        foreach ($routes as $route) {
             $this->add($route['route'], $route['params']);
         }
 
         return $this;
     }
 
-     /**
+    /**
      * Add a route to the routing table
      *
      * @param string $route  The route URL
@@ -131,17 +131,18 @@ class Router
         $this->removeQueryStringVariables();
 
         if (!$this->match($this->url)) {
-            throw new \Exception('No route matched.', 404);
-        }    
+            Header::httpCodeAndDie("HTTP/1.0 404 No route matched.");
+        }
+
         $controller = $this->params['controller'];
         $controller = $this->convertToStudlyCaps($controller);
 
         $action = $this->params['action'];
         $action = $this->convertToCamelCase($action);
 
-        $apiClass = $this->getApiParamsNamespace().$controller;
+        $apiClass = $this->getApiParamsNamespace() . $controller;
 
-        if (!class_exists($apiClass)) {
+        if (!class_exists($apiClass) || !is_callable([$apiClass, $action])) {
             Header::httpCodeAndDie("HTTP/1.0 404 Method does not exists.");
         }
 
@@ -152,7 +153,7 @@ class Router
         if (!class_exists($controller)) {
             Header::httpCodeAndDie("HTTP/1.0 404 Method does not exists.");
         }
-       
+
         $this->params['request_method'] = $_SERVER['REQUEST_METHOD'];
         $this->params['data'] = $apiParams;
 
@@ -160,8 +161,8 @@ class Router
 
         if (!is_callable([$controller_object, $action])) {
             Header::httpCodeAndDie("HTTP/1.0 404 Method does not exists.");
-        } 
-    
+        }
+
         /**
          * Get correct controller
          * Then get a view and the model
@@ -236,7 +237,7 @@ class Router
     }
 
     /**
-     * Get the namespace for the data container for API 
+     * Get the namespace for the data container for API
      *
      * @return string The request URL
      */

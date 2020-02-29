@@ -28,8 +28,8 @@ CREATE TABLE IF NOT EXISTS school_subjects (
 
 CREATE TABLE IF NOT EXISTS school_subjects_teachers(
     school_subject_id int (10) NOT NULL,
+    class_id int (10) NOT NULL,
     teacher_id int (10) NOT NULL,
-    teacher_main boolean,
     FOREIGN KEY (school_subject_id) REFERENCES school_subjects(id),
     FOREIGN KEY (teacher_id) REFERENCES teachers(id)
 )
@@ -79,19 +79,18 @@ CREATE TABLE IF NOT EXISTS class_school_subjects(
     FOREIGN KEY (group_id) REFERENCES groups(id)
 )
 
-CREATE TABLE IF NOT EXISTS grades_types(
+CREATE TABLE IF NOT EXISTS grade_types(
     id int AUTO_INCREMENT,
-    type varchar(1000) NOT NULL,
-    role varchar(20) NOT NULL,
-    usage varchar(20) NOT NULL,
-    marks varchar(1000) NOT NULL,
-    weight varchar(1000),
+    mark varchar(1000) NOT NULL,
+    type enum ('1', '2') NOT NULL,
+    description varchar (255),
+    weight int(10),
     PRIMARY KEY (id)
 )
 
 CREATE TABLE IF NOT EXISTS grades(
     id int AUTO_INCREMENT,
-    grade 
+    grade varchar(255),
     weight varchar(255),
     student_id int NOT NULL,
     school_subject_id int(10) NOT NULL,

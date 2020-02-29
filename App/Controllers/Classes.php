@@ -22,21 +22,14 @@ class Classes extends Controller
         Response::json($this->provider->getClasses()->getOriginalData());
     }
 
-    protected function getClass()
-    {
-        $this->provider->setQuery(" WHERE id = {$this->provider->getFormData()['id']}")->getClasses();
-        Response::json($this->provider->getClass()->getOriginalData());
-    }
-
     protected function addClass(){
         $action = new ClassCreator($this->provider);
-        $action->create();
+        Response::json($action->create(), $action->getResult(), $action->getErrors());
     }
 
     protected function editClass(){
-        $this->provider->getClasses();
         $action = new ClassEditor($this->provider);
-        $action->edit();
+        Response::json($action->edit(), $action->getResult(), $action->getErrors());
     }
     
     protected function deleteClass(){

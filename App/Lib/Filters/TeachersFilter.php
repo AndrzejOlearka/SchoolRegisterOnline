@@ -11,8 +11,9 @@ class TeachersFilter extends BasicFilter
     {
         $this->provider = $provider;
     }
-    
-    public function teachersTableFilter(){
+
+    public function teachersTableFilter()
+    {
         return parent::onlyOptionalFilter(['school_subjects']);
     }
 }

@@ -6,6 +6,8 @@ class AbstractProvider extends QueryAbstractProvider
 {
     protected $params;
     protected $query;
+    protected $model;
+    protected $table;
 
     /**
      * getFormData
@@ -72,6 +74,18 @@ class AbstractProvider extends QueryAbstractProvider
     }
 
     /**
+     * getFiltersFields
+     *
+     * @return array with required api request fields
+     */
+    public function getFiltersFields(){
+        if(!array_key_exists('filters', $this->params['apiData'])){
+            return [];
+        }
+        return $this->params['apiData']['filters'];
+    }
+
+    /**
      * setQuery custom query for provider 
      *
      * @param string $query
@@ -99,23 +113,5 @@ class AbstractProvider extends QueryAbstractProvider
      */
     public function getModel(){
         return $this->model;
-    }
-
-    /**
-     * prepareSingleResult
-     *
-     * @param array of data
-     * @param array of tables to set data
-     *
-     * @return void
-     */
-    protected function prepareSingleResult($data, $table){
-        foreach($table as $key => $single){
-            if(!isset($data[$single])){
-                continue;
-            }
-            $this->originalData[0]->$single = $data[$single];
-        }
-        return $this;
     }
 }

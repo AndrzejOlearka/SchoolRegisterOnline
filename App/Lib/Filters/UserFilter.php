@@ -11,12 +11,9 @@ class UserFilter extends BasicFilter
     {
         $this->provider = $provider;
     }
-    
-    public function usersTableFilter(){
-        return parent::onlyOptionalFilter();
-    }
 
-    public function singleClassDetailsFilter(){
-     
+    public function usersTableFilter()
+    {
+        return parent::onlyOptionalFilter();
     }
 }

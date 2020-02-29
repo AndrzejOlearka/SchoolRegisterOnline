@@ -12,12 +12,6 @@ use App\Provider\TeachersProvider;
 
 class TeacherCreator extends AbstractAction implements CreatorAction
 {
-    use StringValidator;
-    use NumberValidator;
-    use ContentValidator;
-
-    const MSG_CREATE_TEACHER = 'Teacher has been created successfully.';
-
     public function __construct(TeachersProvider $provider)
     {
         $this->provider = $provider;
@@ -36,7 +30,7 @@ class TeacherCreator extends AbstractAction implements CreatorAction
              ->sanitazeSchoolSubjects()
              ->setResult()
              ->addTeacher()
-             ->sendResult(TeacherCreator::MSG_CREATE_TEACHER);
+             ->sendResult();
     }
 
     protected function isTeacherAssignedToThisUser(){
@@ -80,7 +74,7 @@ class TeacherCreator extends AbstractAction implements CreatorAction
         if(!isset($this->formData['school_subjects'])){
             return $this;
         }
-        if(!$this->isOnlyNumbersAndCommas($this->formData['school_subjects'])){
+        if(!$this->isValidJson($this->formData['school_subjects'])){
             $this->errors['subjectsString'] = 'School subjects has to be comma separated and contains only integers';
         }
         return $this;

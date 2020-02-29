@@ -7,8 +7,6 @@ use Core\Action\EditAction;
 
 class StudentEditor extends StudentCreator implements EditAction
 {
-    const MSG_EDIT_CLASS = 'Student has been edited successfully.';
-
     public function __construct(StudentsProvider $provider)
     {
         $this->provider = $provider;
@@ -26,7 +24,7 @@ class StudentEditor extends StudentCreator implements EditAction
              ->isFullnameAlpha()
              ->isParentsAlpha()
              ->editStudent()
-             ->sendResult(StudentCreator::MSG_CREATE_STUDENT);
+             ->sendResult();
     }
 
     public function editStudent()

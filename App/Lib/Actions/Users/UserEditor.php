@@ -7,8 +7,6 @@ use Core\Action\EditAction;
 
 class UserEditor extends Authentication implements EditAction
 {
-    const MSG_USER_VERIFY = 'User has been successfully edited.';
-
     public function __construct(UsersProvider $provider)
     {
         parent::__construct(...func_get_args());
@@ -20,7 +18,7 @@ class UserEditor extends Authentication implements EditAction
              ->hashPassword()
              ->setResult()
              ->editUser()
-             ->sendResult(Registration::MSG_CREATE_USER);
+             ->sendResult();
     }
 
     private function isPasswordDifferent(){

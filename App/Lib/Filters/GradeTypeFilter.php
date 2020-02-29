@@ -2,12 +2,12 @@
 
 namespace App\Lib\Filters;
 
-use App\Provider\ClassesProvider;
+use App\Provider\GradeTypesProvider;
 use Core\Providers\Filters\BasicFilter;
 
-class ClassFilter extends BasicFilter
+class GradeTypeFilter extends BasicFilter
 {
-    public function __construct(ClassesProvider $provider)
+    public function __construct(GradeTypesProvider $provider)
     {
         $this->provider = $provider;
         $this->filtering = false;
@@ -15,7 +15,7 @@ class ClassFilter extends BasicFilter
         $this->requestFilters();
     }
 
-    public function schoolClassesTableFilter()
+    public function GradeTypesTableFilter()
     {
         return parent::onlyOptionalFilter();
     }

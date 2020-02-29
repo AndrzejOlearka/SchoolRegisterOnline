@@ -5,54 +5,40 @@ namespace App\Api;
 /**
  * Api users endpoint controller
  */
-class Classes 
+class SchoolSubjects
 {
-    public static function getClasses(){
+    public static function getSchoolSubjects(){
         return [
             'type' => [
                 'GET'
             ],
-            'required' => [
-
+            'required' => [ 
+                
             ], 
             'optional' => [
-               'id', 'class_tutor', 'profile_id', 'default_year', 'number', 'department'
+                'id', 'name'
             ],
             'filters' => [
-                'with_students', 'with_groups', 'with_schedule'
+                
             ]
         ];
     }
-    
-    public static function getClass(){
-        return [
-            'type' => [
-                'GET'
-            ],
-            'required' => [
-                'id'
-            ], 
-            'optional' => [
-                'with_students', 'with_groups', 'with_schedule'
-            ]
-        ];
-    }
-        
-    public static function addClass(){
+
+    public static function addSchoolSubject(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-                'number'
+                'name'
             ], 
             'optional' => [
-                'department', 'class_tutor', 'profile_id', 'default_year'
+                
             ]
         ];
     }
         
-    public static function editClass(){
+    public static function editSchoolSubject(){
         return [
             'type' => [
                 'POST'
@@ -61,12 +47,12 @@ class Classes
                 'id'
             ], 
             'optional' => [
-                'department', 'class_tutor', 'profile_id', 'default_year'
+                'name'
             ]
         ];
     }
         
-    public static function deleteClass(){
+    public static function deleteSchoolSubject(){
         return [
             'type' => [
                 'POST', 'DELETE'

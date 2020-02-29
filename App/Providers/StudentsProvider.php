@@ -16,24 +16,11 @@ class StudentsProvider extends AbstractProvider
         $this->table = $this->model::TABLE;
     }
 
-    /**
-     * return all classes with ids and basic data
-     * no required fields or single optional element
-     *
-    */
     public function getStudents()
     {
         $filter = new StudentFilter($this);
         $this->query ?: $this->query = $filter->studentsTableFilter();
-        $this->originalData = self::data("SELECT * FROM {$this->table}{$this->query}", $this->model);
-        return $this;
-    }
-    
-    public function getStudent()
-    {
-        $filter = new StudentFilter($this);
-        //$data = $filter->singleClassDetailsFilter();
-        //$this->prepareSingleResult($data, ['students', 'groups']);
+        $this->originalData = $filter->setFilterData(self::data("SELECT * FROM {$this->table}{$this->query}", $this->model))->filterProcessing();
         return $this;
     }
 

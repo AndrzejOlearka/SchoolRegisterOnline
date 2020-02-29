@@ -19,7 +19,7 @@ Class DataValidator
 
     public function checkRequestType(){
         if(!in_array($this->params['requestMethod'], $this->params['apiData']['type'])){
-            Header::httpCodeAndDie("HTTP/1.0 405 Method not allowed.");
+            Header::httpCodeAndDie("HTTP/1.0 405 Request Method not allowed.");
         }
         return $this;
     }

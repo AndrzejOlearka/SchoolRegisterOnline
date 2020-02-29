@@ -4,6 +4,9 @@ namespace Core\Providers\Filters;
 
 class BasicFilter
 {
+    protected $filtering;
+    protected $provider;
+    protected $filterData;
     /**
      * onlyOptionalFilter
      * 
@@ -30,17 +33,9 @@ class BasicFilter
                 continue;
             }
             if ($optionalFieldIterator == 0) {
-                if(in_array($fieldname, $likeOptional)){
-                    $query .= " WHERE ({$fieldname} = '{$value}' OR {$fieldname} LIKE '{$value},%' OR '%,$value,%' OR '%,{$value}') ";
-                } else {
-                    $query .= " WHERE {$fieldname} = '{$value}' ";
-                }
+                $query .= " WHERE {$fieldname} = '\"{$value}\"' ";
             } else {
-                if (in_array($fieldname, $likeOptional)) {
-                    $query .= " AND ({$fieldname} = '{$value}' OR {$fieldname} LIKE '{$value},%' OR '%,$value,%' OR '%,{$value}') ";
-                } else {
-                    $query .= " AND {$fieldname} = '{$value}' ";
-                }
+                $query .= " AND {$fieldname} = '\"{$value}\"' ";
             }
             $optionalFieldIterator++;
         }
@@ -57,5 +52,96 @@ class BasicFilter
     protected function hasModelProperty($fieldname){
         $model = $this->provider->getModel();
         return property_exists($model, $fieldname) ? true : false;
+    }
+
+    /**
+     * prepare request filters to other providers from api defined filters
+     *
+     * @return void
+     */
+    protected function requestFilters(){
+        $data = $this->provider->getFiltersFields();
+        foreach($data as $filter){
+            if(isset($this->provider->getFormData()[$filter])){
+                $this->filtering = true;
+                $this->filters[] = $this->parseFilter($filter);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * parse filter from request version to className or MethodName
+     *
+     * @param string $filter
+     *
+     * @return void
+     */
+    private function parseFilter($filter){
+        $first = preg_replace('/with_/', '', $filter);
+        $string = explode('_', $first);
+        foreach($string as $key => $value){
+            if($key == 0){
+                $filter = $value;
+            } else {
+                $filter .= ucfirst($value);
+            }
+        }
+        return $filter;
+    }
+
+    /**
+     * set original data from provider to filter 
+     *
+     * @param array from provider
+     *
+     * @return void
+     */
+    public function setFilterData($filterData){
+        $this->filterData = $filterData;
+        return $this;
+    }
+
+    /**
+     * fitler process for every possible table for this endpoint
+     *
+     * @param array $tables of possible tables
+     *
+     * @return array of filtered data
+     */
+    public function filterProcessing(){
+        if(!$this->filtering){
+            return $this->filterData;
+        }
+        foreach($this->filterData as $key => $singleData){
+            foreach ($this->filters as $table){
+                $returnedData = $this->filterData[$key]->$table = $this->getSingleTablesData($table, $singleData->id);
+                if($returnedData){   
+                    $this->filterData[$key]->$table = $returnedData;
+                }
+            }
+        }
+        return $this->filterData;
+    }
+
+    /**
+     * get to one row one package of data
+     *
+     * @param string $table
+     * @param mixed $id
+     *
+     * @return void
+     */
+    private function getSingleTablesData($table, $id){
+        $provider = 'App\\Provider\\'.ucfirst($table).'Provider';
+        if(class_exists($provider)){
+            $dataProvider = new $provider;
+        } else {
+            return false;
+        }
+        $dataProvider->setQuery(" WHERE class_id = {$id}");
+        $getter = 'get'.ucfirst($table);
+        $dataProvider->{$getter}();
+        return $dataProvider->getOriginalData();
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use Core\Request\Response;
-use Core\Controller\Controller;
-use App\Lib\Actions\Students\{StudentEditor, StudentCreator};
+use App\Lib\Actions\Students\StudentCreator;
+use App\Lib\Actions\Students\StudentEditor;
+use Core\Controller\Controller;use Core\Request\Response;
 
 /**
  * Students controller
@@ -17,24 +17,20 @@ class Students extends Controller
         Response::json($this->provider->getStudents()->getOriginalData());
     }
 
-    protected function getStudent()
+    protected function addStudent()
     {
-        $this->provider->setQuery(" WHERE id = {$this->provider->getFormData()['id']}")->getStudents();
-        Response::json($this->provider->getStudent()->getOriginalData());
-    }
-
-    protected function addStudent(){
         $action = new StudentCreator($this->provider);
-        $action->create();
+        Response::json($action->create(), $action->getResult(), $action->getErrors());
     }
 
-    protected function editStudent(){
-        $this->provider->getStudents();
+    protected function editStudent()
+    {
         $action = new StudentEditor($this->provider);
-        $action->edit();
+        Response::json($action->edit(), $action->getResult(), $action->getErrors());
     }
-    
-    protected function deleteStudent(){
+
+    protected function deleteStudent()
+    {
         Response::json($this->provider->deleteStudent());
     }
 }

@@ -15,13 +15,15 @@ class GradeType extends AbstractModel
      *
      * @var string
      */
-    const TABLE = 'grades_types';
+    const TABLE = 'grade_types';
 
     public $id;
 
+    public $mark;
+
     public $type;
 
-    public $marks;
+    public $description;
 
     public $weight;
 }

@@ -11,8 +11,9 @@ class StudentFilter extends BasicFilter
     {
         $this->provider = $provider;
     }
-    
-    public function studentsTableFilter(){
+
+    public function studentsTableFilter()
+    {
         return parent::onlyOptionalFilter();
     }
 }

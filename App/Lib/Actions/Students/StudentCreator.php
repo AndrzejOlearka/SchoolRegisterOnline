@@ -11,12 +11,6 @@ use App\Provider\StudentsProvider;
 
 class StudentCreator extends AbstractAction implements CreatorAction
 {
-    use StringValidator;
-    use NumberValidator;
-    use ContentValidator;
-
-    const MSG_CREATE_STUDENT = 'Student has been created successfully.';
-
     public function __construct(StudentsProvider $provider)
     {
         $this->provider = $provider;
@@ -34,7 +28,7 @@ class StudentCreator extends AbstractAction implements CreatorAction
              ->sanitazeBirthday()
              ->setResult()
              ->addStudent()
-             ->sendResult(StudentCreator::MSG_CREATE_STUDENT);
+             ->sendResult();
     }
 
     protected function isExistsStudentInThisClass(){

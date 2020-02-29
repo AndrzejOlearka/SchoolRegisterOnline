@@ -2,6 +2,8 @@
 
 namespace Core\Request;
 
+use Core\Helpers\Header;
+
 Class Response 
 {
     /**
@@ -11,8 +13,8 @@ Class Response
      *
      * @return void
      */
-    public static function json($data, $message = null, $errors = null){
-        $data = self::prepare($data, $message, $errors);
+    public static function json($data, $result = null, $errors = null){
+        $data = self::prepare($data, $result, $errors);
         echo json_encode($data);
         die;
     }
@@ -24,12 +26,12 @@ Class Response
      *
      * @return void
      */
-    public static function prepare($data, $message, $errors){
-        $data == false ? $response['result'] = 'error' : $response['result'] = 'success';
-        empty($message) ? $response['message'] = '' : $response['message'] = $message;
+    public static function prepare($data, $result, $errors){
+        $result == false && $result !== null ? $response['result'] = 'error' : $response['result'] = 'success';
         is_null($data) ? $response['data'] = [] : $response['data'] = $data;
-        if(!is_null($errors)){
+        if(!empty($errors)){
             $response['errors'] = $errors;
+            Header::httpCode("HTTP/1.0 400 Bad API Request.");
             unset($response['data']);
         }
         return $response;
