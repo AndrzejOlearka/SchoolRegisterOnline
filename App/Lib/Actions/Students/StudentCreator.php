@@ -90,9 +90,9 @@ class StudentCreator extends AbstractAction implements CreatorAction
         if(!isset($this->formData['birthday'])){
             return;
         }
-        $result = $this->changeToSqlDate($this->formData['birthday']);
-        if(!$result){
-            $this->errors['studentMother'] = 'Student mother fullname can contains only letters';
+        $this->formData['birthday'] = $this->changeToSqlDate($this->formData['birthday']);
+        if(!$this->formData['birthday']){
+            $this->errors['invalidBirthday'] = 'Birthday has to be in correct date format.';
         }
         return $this;
     }

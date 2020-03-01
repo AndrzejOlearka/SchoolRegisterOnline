@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Api;
 
 /**
  * Api grades endpoint controller
  */
-class Grades 
+class LessonGrades
 {
-    public static function getGrades(){
+    public static function getLessonGrades(){
         return [
             'type' => [
                 'GET'
@@ -16,91 +16,77 @@ class Grades
                 
             ], 
             'optional' => [
-                'student_id', 'class_id', 'school_subject_id', 'group_id'
+                'id', 'student_id', 'class_id', 'school_subject_id', 'native_grade_id', 'created_date', 'updated_date'
             ]
         ];
     }
 
-    public static function addGrade(){
+    public static function addLessonGrade(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-                'student_id', 'school_subject_id', 'teacher_id'
+                'grade_type_id', 'student_id', 'school_subject_id', 'teacher_id', 'created_date'
             ], 
             'optional' => [
-                'weight', 'group_id', 'native_grade_id', 'date'
+
             ]
         ];
     }
 
-    public static function editGrade(){
+    public static function addCorrectedLessonGrade(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-                'id'
+                'grade_type_id', 'student_id', 'school_subject_id', 'teacher_id', 'created_date', 'native_grade_id'
             ], 
             'optional' => [
-                'weight', 'group_id', 'native_grade_id', 'date'
+
             ]
         ];
     }
 
-    public static function deleteGrade(){
+    public static function editLessonGrade(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-                'id'
-            ], 
-            'optional' => [
-
-            ]
-        ];
-    }
-
-    public static function getSemestralGrade(){
-        return [
-            'type' => [
-                'GET'
-            ],
-            'required' => [
-                
-            ], 
-            'optional' => [
-                'id', 'student_id', 'semestr', 'class_id', 'school_subject_id'
-            ]
-        ];
-    }
-
-    public static function editSemestralGrade(){
-        return [
-            'type' => [
-                'POST'
-            ],
-            'required' => [
-                'id'
-            ], 
-            'optional' => [
-                'semestr', 'grade_type_id'
-            ]
-        ];
-    }
-
-    public static function deleteSemestralGrade(){
-        return [
-            'type' => [
-                'GET'
-            ],
-            'required' => [
-                'id'
+                'id', 'grade_type_id', 'updated_date'
             ], 
             'optional' => [
                 
+            ]
+        ];
+    }
+
+    public static function editCorrectedLessonGrade(){
+        return [
+            'type' => [
+                'POST'
+            ],
+            'required' => [
+                'id', 'grade_type_id', 'updated_date'
+            ], 
+            'optional' => [
+                
+            ]
+        ];
+    }
+
+    public static function deleteLessonGrade(){
+        return [
+            'type' => [
+                'POST'
+            ],
+            'required' => [
+                'id'
+            ], 
+            'optional' => [
+
             ]
         ];
     }

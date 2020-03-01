@@ -90,19 +90,17 @@ CREATE TABLE IF NOT EXISTS grade_types(
 
 CREATE TABLE IF NOT EXISTS lesson_grades(
     id int AUTO_INCREMENT,
-    grade_id varchar(255) NOT NULL,
+    grade_type_id int(10) NOT NULL,
     student_id int NOT NULL,
     teacher_id int(10) NOT NULL,
     school_subject_id int(10) NOT NULL,
-    group_id int(10),
     native_grade_id int,
     created_date date,
-    updated_date date
+    updated_date date,
     PRIMARY KEY (id),
-    FOREIGN KEY (grade_id) REFERENCES grade_types(id),
+    FOREIGN KEY (grade_type_id) REFERENCES grade_types(id),
     FOREIGN KEY (school_subject_id) REFERENCES school_subjects(id),
     FOREIGN KEY (teacher_id) REFERENCES teachers(id),
-    FOREIGN KEY (group_id) REFERENCES groups(id),
     FOREIGN KEY (student_id) REFERENCES students(id)
 )
 

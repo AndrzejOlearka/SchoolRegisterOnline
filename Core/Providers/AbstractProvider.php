@@ -79,6 +79,9 @@ class AbstractProvider extends QueryAbstractProvider
      * @return array with required api request fields
      */
     public function getFiltersFields(){
+        if(!isset($this->params)){
+            return [];
+        }
         if(!array_key_exists('filters', $this->params['apiData'])){
             return [];
         }

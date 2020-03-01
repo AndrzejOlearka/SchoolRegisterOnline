@@ -5,23 +5,27 @@ namespace App\Model;
 use Core\Model\AbstractModel;
 
 /**
- * Grade model
+ * LessonGrade model
  *
  */
-class Grade extends AbstractModel 
+class LessonGrade extends AbstractModel 
 {
     /**
      * model table name
      *
      * @var string
      */
-    const TABLE = 'grades';
+    const TABLE = 'lesson_grades';
 
     const GRADETYPES_FOREIGN = 'grade_type_id';
 
+    const STUDENTS_FOREIGN = 'student_id';
+
+    const LESSON_GRADE_TYPE = '1';
+
     public $id;
 
-    public $weight;
+    public $grade_id;
 
     public $student_id;
 
@@ -29,9 +33,9 @@ class Grade extends AbstractModel
 
     public $teacher_id;
 
-    public $group_id;
-
     public $native_grade_id;
 
-    public $date;
+    public $created_date;
+
+    public $updated_date;
 }
