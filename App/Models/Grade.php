@@ -17,6 +17,8 @@ class Grade extends AbstractModel
      */
     const TABLE = 'grades';
 
+    const GRADETYPES_FOREIGN = 'grade_type_id';
+
     public $id;
 
     public $weight;

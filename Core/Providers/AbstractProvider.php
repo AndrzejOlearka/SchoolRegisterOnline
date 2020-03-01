@@ -86,6 +86,15 @@ class AbstractProvider extends QueryAbstractProvider
     }
 
     /**
+     * getControllerName
+     *
+     * @return string
+     */
+    public function getControllerName(){
+        return $this->params['controller'];
+    }
+
+    /**
      * setQuery custom query for provider 
      *
      * @param string $query
@@ -113,5 +122,17 @@ class AbstractProvider extends QueryAbstractProvider
      */
     public function getModel(){
         return $this->model;
+    }
+
+    /**
+     * get const of foregin key from model
+     *
+     * @param string $name
+     *
+     * @return string from const
+     */
+    public function getForeignKeyConst($name){
+        $const = strtoupper($name).'_FOREIGN';
+        return constant("{$this->model}::{$const}");
     }
 }

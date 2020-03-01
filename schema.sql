@@ -88,30 +88,34 @@ CREATE TABLE IF NOT EXISTS grade_types(
     PRIMARY KEY (id)
 )
 
-CREATE TABLE IF NOT EXISTS grades(
+CREATE TABLE IF NOT EXISTS lesson_grades(
     id int AUTO_INCREMENT,
-    grade varchar(255),
-    weight varchar(255),
+    grade_id varchar(255) NOT NULL,
     student_id int NOT NULL,
-    school_subject_id int(10) NOT NULL,
     teacher_id int(10) NOT NULL,
+    school_subject_id int(10) NOT NULL,
     group_id int(10),
     native_grade_id int,
-    date date,
-    PRIMARY KEY (id)
+    created_date date,
+    updated_date date
+    PRIMARY KEY (id),
+    FOREIGN KEY (grade_id) REFERENCES grade_types(id),
     FOREIGN KEY (school_subject_id) REFERENCES school_subjects(id),
     FOREIGN KEY (teacher_id) REFERENCES teachers(id),
     FOREIGN KEY (group_id) REFERENCES groups(id),
     FOREIGN KEY (student_id) REFERENCES students(id)
 )
 
-CREATE TABLE IF NOT EXISTS behaviuor_notes(
+CREATE TABLE IF NOT EXISTS behaviuor_grades(
     id int AUTO_INCREMENT,
-    weight varchar(255),
+    grade_id varchar(255) NOT NULL,
     student_id int NOT NULL,
     teacher_id int NOT NULL,
-    date date,
+    native_grade_id int,
+    created_date date,
+    updated_date date
     PRIMARY KEY (id),
+    FOREIGN KEY (grade_id) REFERENCES grade_types(id),
     FOREIGN KEY (student_id) REFERENCES students(id),
     FOREIGN KEY (teacher_id) REFERENCES teachers(id)
 )

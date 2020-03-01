@@ -17,6 +17,8 @@ class Student extends AbstractModel
      */
     const TABLE = 'students';
 
+    const CLASSES_FOREIGN = 'class_id';
+
     public $id;
 
     public $firstname;

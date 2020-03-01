@@ -18,6 +18,8 @@ class Teacher extends AbstractModel
      */
     const TABLE = 'teachers';
 
+    const USERS_FOREIGN = 'user_id';
+
     public $id;
 
     public $user_id;

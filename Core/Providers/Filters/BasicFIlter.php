@@ -7,6 +7,7 @@ class BasicFilter
     protected $filtering;
     protected $provider;
     protected $filterData;
+    protected $controllerName;
     /**
      * onlyOptionalFilter
      * 
@@ -113,6 +114,7 @@ class BasicFilter
         if(!$this->filtering){
             return $this->filterData;
         }
+        $this->controllerName = $this->provider->getControllerName();
         foreach($this->filterData as $key => $singleData){
             foreach ($this->filters as $table){
                 $returnedData = $this->filterData[$key]->$table = $this->getSingleTablesData($table, $singleData->id);
@@ -136,10 +138,11 @@ class BasicFilter
         $provider = 'App\\Provider\\'.ucfirst($table).'Provider';
         if(class_exists($provider)){
             $dataProvider = new $provider;
+            $const = $dataProvider->getForeignKeyConst($this->controllerName);
         } else {
             return false;
         }
-        $dataProvider->setQuery(" WHERE class_id = {$id}");
+        $dataProvider->setQuery(" WHERE {$const} = {$id}");
         $getter = 'get'.ucfirst($table);
         $dataProvider->{$getter}();
         return $dataProvider->getOriginalData();
