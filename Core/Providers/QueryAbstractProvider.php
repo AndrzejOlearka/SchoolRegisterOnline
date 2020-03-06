@@ -109,8 +109,7 @@ class QueryAbstractProvider implements Provider
         $result = self::updaterHelper($query, $args);
         $statement = $db->prepare($result['query']);
         $statement = self::bind($statement, $result['values']);
-        $statement->execute();
-        return;
+        return ['success' => $statement->execute()];
     }
 
     /**

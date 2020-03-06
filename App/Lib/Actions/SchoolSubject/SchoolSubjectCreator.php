@@ -2,8 +2,6 @@
 
 namespace App\Lib\Actions\SchoolSubjects;
 
-use App\Lib\Validators\ContentValidator;
-use App\Lib\Validators\StringValidator;
 use App\Provider\SchoolSubjectsProvider;
 use Core\Action\AbstractAction;
 use Core\Action\CreatorAction;

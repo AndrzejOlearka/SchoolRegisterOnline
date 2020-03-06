@@ -8,8 +8,6 @@ use App\Provider\StudentsProvider;
 use App\Provider\TeachersProvider;
 use App\Provider\GradeTypesProvider;
 use App\Provider\LessonGradesProvider;
-use App\Lib\Validators\StringValidator;
-use App\Lib\Validators\ContentValidator;
 use App\Provider\SchoolSubjectsProvider;
 
 class LessonGradeCreator extends AbstractAction implements CreatorAction
@@ -50,8 +48,7 @@ class LessonGradeCreator extends AbstractAction implements CreatorAction
     }
 
     protected function isCorrectGradeType()
-    {
-        
+    {    
         $provider = new GradeTypesProvider;
         $provider->setQuery(" WHERE id = {$this->formData['grade_type_id']} AND type = '{$this->lessonGradeType}'");
         $provider->getGradeTypes();

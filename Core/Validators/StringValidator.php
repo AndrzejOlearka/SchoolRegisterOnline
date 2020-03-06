@@ -20,4 +20,12 @@ trait StringValidator{
     function isAlphaNumeric($data){
         return ctype_alnum($data) ? true : false; 
     }
+
+    function isAlphaNumericAndBasicChars($data){
+        return preg_match('/^[A-Za-z0-9_+-]*$/', $data) ? true : false; 
+    }
+
+    function sanitazeString($data){
+        return filter_var($data, FILTER_SANITIZE_STRING);
+    }
 }

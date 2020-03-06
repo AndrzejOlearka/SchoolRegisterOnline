@@ -2,9 +2,6 @@
 
 namespace App\Lib\Actions\GradeTypes;
 
-use App\Lib\Validators\ContentValidator;
-use App\Lib\Validators\NumberValidator;
-use App\Lib\Validators\StringValidator;
 use App\Provider\GradeTypesProvider;
 use Core\Action\AbstractAction;
 use Core\Action\CreatorAction;
