@@ -9,4 +9,12 @@ trait NumberValidator{
         return is_int($data) ? true : false;
     }
 
+    function isTinyInteger($data){
+        return $data < 0 || $data > 255 ? false : true;
+    }
+
+    function isNotZero($data){
+        return $data == 0 ? false : true;
+    }
+
 }

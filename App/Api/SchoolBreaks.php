@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Api;
 
 /**
- * Api users endpoint controller
+ * Api SchoolBreaks endpoint controller
  */
-class Notes 
+class SchoolBreaks
 {
-    public static function getParentContact(){
+    public static function getSchoolBreaks(){
         return [
             'type' => [
                 'GET'
@@ -16,46 +16,49 @@ class Notes
                 
             ], 
             'optional' => [
-                'id', 'student_id'
+                'number'
+            ],
+            'filters' => [
+                
             ]
         ];
     }
 
-    public static function addParentContact(){
+    public static function addSchoolBreak(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-                'student_id'
+                'number'
             ], 
             'optional' => [
-                'parent', 'description', 'email'
+                'date_start', 'date_end'
             ]
         ];
     }
-
-    public static function editParentContact(){
+        
+    public static function editSchoolBreak(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-                'id'
+                'number'
             ], 
             'optional' => [
-                'parent', 'description', 'email'
+                'date_start', 'date_end'
             ]
         ];
     }
-
-    public static function deleteParentContact(){
+        
+    public static function deleteSchoolBreak(){
         return [
             'type' => [
                 'POST', 'DELETE'
             ],
             'required' => [
-                'id', 
+                'id'
             ], 
             'optional' => [
                 

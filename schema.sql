@@ -238,27 +238,24 @@ CREATE TABLE IF NOT EXISTS templates(
 )
 
 CREATE TABLE IF NOT EXISTS school_lessons(
-    id int AUTO_INCREMENT,
     number int,
     date_start time,
     date_end time,
-    PRIMARY KEY (id)
+    UNIQUE KEY (number)
 )
     
 CREATE TABLE IF NOT EXISTS school_breaks(
-    id int AUTO_INCREMENT,
-    number int,
+    number tinyint,
     date_start time,
     date_end time,
-    PRIMARY KEY (id)
+    UNIQUE KEY (number)
 )
 
 CREATE TABLE IF NOT EXISTS frequency(
-    class_id int AUTO_INCREMENT,
-    number int,
+    number tinyint,
     date_start time,
     date_end time,
-    PRIMARY KEY (id)
+    UNIQUE KEY (number)
 )
     
 
