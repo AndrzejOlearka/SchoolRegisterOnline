@@ -190,11 +190,11 @@ CREATE TABLE IF NOT EXISTS lessons_subjects(
 CREATE TABLE IF NOT EXISTS parents_contacts(
     id int AUTO_INCREMENT,
     student_id int NOT NULL,
-    parent varchar(255),
+    user_id int,
+    parent enum ('mother', 'father', 'guardian', 'other') NOT NULL,
     email varchar(255),
     description text,
-    PRIMARY KEY (id),
-    FOREIGN KEY (class_id) REFERENCES classes(id)
+    PRIMARY KEY (id)
 )
 
 CREATE TABLE IF NOT EXISTS trips(

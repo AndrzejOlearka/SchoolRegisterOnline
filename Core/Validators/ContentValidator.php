@@ -30,6 +30,10 @@ trait ContentValidator
         return in_array($data, $predefiniedValues) ? true : false;
     }
 
+    public function isPredefinedEnum($data, $value){
+        return in_array($data, $value) ? true : false;
+    }
+
     public function changeToSqlDate($date){
         return date('Y-m-d', strtotime($date));
     }

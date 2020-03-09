@@ -35,7 +35,7 @@ class SchoolBreaksProvider extends AbstractProvider
 
     public function deleteSchoolBreak()
     {
-        $this->originalData = self::delete("DELETE FROM {$this->table} WHERE id = ?", $this->model, [$this->getFormData()['id']]);
+        $this->originalData = self::delete("DELETE FROM {$this->table} WHERE ".$this->model::UNIQUE." = ?", $this->model, [$this->getFormData()[$this->model::UNIQUE]]);
         return $this;
     }
 }

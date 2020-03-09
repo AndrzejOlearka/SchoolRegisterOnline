@@ -3,12 +3,13 @@
 namespace App\Model;
 
 use Core\Model\AbstractModel;
+use Core\Model\UniqueModelInterface;
 
 /**
  * SchoolLesson model
  *
  */
-class SchoolLesson extends AbstractModel 
+class SchoolLesson extends AbstractModel implements UniqueModelInterface
 {
     /**
      * model table name
@@ -16,6 +17,8 @@ class SchoolLesson extends AbstractModel
      * @var string
      */
     const TABLE = 'school_lessons';
+
+    const UNIQUE = 'number';
 
     public $number;
 

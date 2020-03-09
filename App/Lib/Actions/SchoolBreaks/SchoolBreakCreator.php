@@ -21,7 +21,7 @@ class SchoolBreakCreator extends AbstractAction implements CreatorAction
     {
         $this->provider = $provider;
         $this->formData = $this->provider->getFormData();
-        $this->provider->setQuery(" WHERE mark = '{$this->formData['mark']}' AND type = '{$this->formData['type']}' AND weight = {$this->formData['weight']}");
+        $this->provider->setQuery(" WHERE number = number");
         $this->provider->getSchoolBreaks();
         $this->originalData = $this->provider->getOriginalData();
     }
@@ -34,52 +34,63 @@ class SchoolBreakCreator extends AbstractAction implements CreatorAction
      */
     public function create()
     {
-        $this->isExistsSchoolBreak()
-            ->isTypePredefiniedValues()
-            ->isMarkDescriptionAlphaNumeric()
-            ->isWeightInteger()
+        $this->isNumberValid()
+            ->isNumberInOrder()
+            ->changeDateFormat()
             ->setResult()
-            ->addSchoolBreak()
-            ->sendResult();
+            ->addSchoolBreak();
+
+        return $this->sendResult();
     }
 
-    protected function isExistsSchoolBreak()
+    protected function isNumberValid()
     {
         if (empty($this->originalData)) {
             return $this;
         }
-        if (!empty($this->originalData->id)){
-            $this->errors['SchoolBreakExists'] = 'There is Grade Type with this mark, type and weight';
+        if (
+            !$this->isInteger($this->formData['number']) ||
+            !$this->isTinyInteger($this->formData['number']) || 
+            !$this->isNotZero($this->formData['number'])
+        ){
+            $this->errors['invalidNumber'] = 'Break Number has to be an integer between 1 and 255';
         }
         return $this;
     }
 
-    protected function isTypePredefiniedValues(){
-        if(!$this->isPredefinedValue($this->formData['type'], 2)){
-            $this->errors['typeValue'] = 'SchoolBreak type value can be only 1 for subject grade and 2 for behaviour grade';
-        }
-        return $this;
-    }
-
-    protected function isMarkDescriptionAlphaNumeric(){
-        if(!$this->isAlphaNumeric($this->formData['mark'])){
-            $this->errors['markAlphaNumeric'] = 'Mark has to contain only letters and numbers';
-        }
-        if(!isset($this->formData['description'])){
+    protected function isNumberInOrder(){
+        $numbers = [];
+        if (empty($this->originalData)) {
             return $this;
         }
-        if(!$this->isAlphaNumeric($this->formData['description'])){
-            $this->errors['descriptionAlphaNumeric'] = 'Description has to contain only letters and numbers';
+        foreach($this->originalData as $key => $data){
+            $numbers[] = $data->number;
+        }
+        $nextInOrder = max($numbers) + 1;
+        if($this->formData['number'] != $nextInOrder){
+            $this->errors['nextInOrder'] = 'Next Number in Order is '.$nextInOrder;
         }
         return $this;
     }
 
-    protected function isWeightInteger(){
-        if(!isset($this->formData['weight'])){
+    protected function changeDateFormat(){
+        if (empty($this->originalData['date_start'])) {
             return $this;
         }
-        if(!$this->isInteger($this->formData['weight'])){
-            $this->errors['weightNotInteger'] = 'Weight is not a integer value';
+        $date = date('H:i', strtotime($this->originalData['date_start']));
+        if(empty($date)){
+            $this->errors['invalidStartDate'] = 'Date Start is Invalid';
+        } else {
+            $this->originalData['date_start'] = $date;
+        }
+        if (empty($this->originalData['date_end'])) {
+            return $this;
+        }
+        $date = date('H:i', strtotime($this->originalData['date_end']));
+        if(empty($date)){
+            $this->errors['invalidEndDate'] = 'Date End is Invalid';
+        } else {
+            $this->originalData['date_end'] = $date;
         }
         return $this;
     }

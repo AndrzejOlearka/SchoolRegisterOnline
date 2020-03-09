@@ -2,10 +2,11 @@
 
 namespace Core\Provider;
 
-use Core\Provider\Provider;
 use Core\Database\Connection;
+use Core\Model\PrimaryModelInterface;
+use Core\Model\UniqueModelInterface;
 
-class QueryAbstractProvider implements Provider
+class QueryAbstractProvider
 {
     private static function getDatabaseConnection()
     {
@@ -90,8 +91,15 @@ class QueryAbstractProvider implements Provider
         $result = self::creatorHelper($query, $args);
         $statement = $db->prepare($result['query']);
         $statement = self::bind($statement, $result['values']);
-        $statement->execute();
-        return ['id' => $db->lastInsertId()];
+        $model = new $model;
+        $result = $statement->execute();
+        if(new $model instanceof UniqueModelInterface){
+            if($result){
+                return [$model::UNIQUE => $args[$model::UNIQUE]];
+            }
+        } else {
+            return ['id' => $db->lastInsertId()];
+        }
     }
 
     /**
@@ -106,7 +114,11 @@ class QueryAbstractProvider implements Provider
     public static function update($query, $model, $args = [])
     {
         $db = self::getDatabaseConnection();
-        $result = self::updaterHelper($query, $args);
+        if(new $model instanceof UniqueModelInterface){
+            $result = self::updaterHelper($query, $args, $model::UNIQUE);
+        } else {
+            $result = self::updaterHelper($query, $args);
+        }
         $statement = $db->prepare($result['query']);
         $statement = self::bind($statement, $result['values']);
         return ['success' => $statement->execute()];
@@ -166,15 +178,18 @@ class QueryAbstractProvider implements Provider
      *
      * @return array [string $query, string $values]
      */
-    public static function updaterHelper($query, $args){
-        $id = $args['id'];
+    public static function updaterHelper($query, $args, $uniqueKey = false){
         if(isset($args['id'])){
+            $id = $args['id'];
             unset($args['id']);
         }
         $iterator = 1;
         $amount = count($args);
         $values = [];
         foreach($args as $key => $value){
+            if($key == $uniqueKey){
+                $uniqueKeyValue = $value;
+            }
             $query .= " $key = ?";
             $values[] = $value;
             if($iterator != $amount){
@@ -182,7 +197,11 @@ class QueryAbstractProvider implements Provider
             }
             $iterator++;
         }
-        $query .= " WHERE id = $id ";
+        if($uniqueKey === false){
+            $query .= " WHERE id = $id ";
+        } else {
+            $query .= " WHERE $uniqueKey = '$uniqueKeyValue' ";
+        }
         return [
             'query' => $query,
             'values' => $values

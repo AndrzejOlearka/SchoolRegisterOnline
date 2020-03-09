@@ -3,13 +3,14 @@
 namespace App\Model;
 
 use Core\Model\AbstractModel;
+use Core\Model\PrimaryModelInterface;
 
 /**
- * Home model
+ * User model
  *
  * PHP version 5.4
  */
-class User extends AbstractModel
+class User extends AbstractModel implements PrimaryModelInterface
 {
     /**
      * model table name

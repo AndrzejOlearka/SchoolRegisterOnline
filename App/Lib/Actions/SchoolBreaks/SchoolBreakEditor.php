@@ -11,19 +11,26 @@ class SchoolBreakEditor extends SchoolBreakCreator implements EditAction
     {
         $this->provider = $provider;
         $this->formData = $this->provider->getFormData();
-        $this->provider->setQuery(" WHERE id = {$this->formData['id']}");
+        $this->provider->setQuery(" WHERE number = {$this->formData['number']}");
         $this->provider->getSchoolBreaks();
         $this->originalData = $this->provider->getOriginalData();
     }
 
     public function edit(){
-        $this->isExistsSchoolBreak()
-            ->isTypePredefiniedValues()
-            ->isMarkDescriptionAlphaNumeric()
-            ->isWeightInteger()
+        $this->isNumberExists()
+            ->isNumberValid()
+            ->changeDateFormat()
             ->setResult()
-             ->editSchoolBreak()
-             ->sendResult();
+            ->editSchoolBreak();
+
+        return $this->sendResult();
+    }
+
+    public function isNumberExists(){
+        if(empty($this->originalData)){
+            $this->errors['numberIsNotExists'] = 'Break Number with '.$this->formData['number'].' is not exists';
+        }
+        return $this;
     }
     
     public function editSchoolBreak(){

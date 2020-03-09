@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Api;
 
 /**
  * Api users endpoint controller
@@ -16,7 +16,7 @@ class ParentContacts
                 
             ], 
             'optional' => [
-                'id', 'student_id'
+                'id', 'student_id', 'user_id', 'parent', 'email'
             ]
         ];
     }
@@ -27,10 +27,10 @@ class ParentContacts
                 'POST'
             ],
             'required' => [
-                'student_id'
+                'student_id', 'parent'
             ], 
             'optional' => [
-                'parent', 'description', 'email'
+                'user_id', 'description', 'email'
             ]
         ];
     }
@@ -44,7 +44,7 @@ class ParentContacts
                 'id'
             ], 
             'optional' => [
-                'parent', 'description', 'email'
+                'user_id', 'parent', 'description', 'email'
             ]
         ];
     }

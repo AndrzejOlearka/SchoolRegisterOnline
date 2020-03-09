@@ -3,7 +3,7 @@
 namespace Core\Provider;
 
 
-interface Provider {
+interface UniqueProvider {
 
 
 }

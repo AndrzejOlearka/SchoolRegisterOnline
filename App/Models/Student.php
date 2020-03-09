@@ -3,12 +3,13 @@
 namespace App\Model;
 
 use Core\Model\AbstractModel;
+use Core\Model\PrimaryModelInterface;
 
 /**
  * Student model
  *
  */
-class Student extends AbstractModel 
+class Student extends AbstractModel implements PrimaryModelInterface
 {
     /**
      * model table name

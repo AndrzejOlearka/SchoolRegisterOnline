@@ -28,4 +28,9 @@ trait StringValidator{
     function sanitazeString($data){
         return filter_var($data, FILTER_SANITIZE_STRING);
     }
+
+    function validateAndSantizeEmail($data){
+        $email = filter_var($data, FILTER_SANITIZE_STRING);
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
 }

@@ -21,6 +21,7 @@ class SchoolLessonCreator extends AbstractAction implements CreatorAction
     {
         $this->provider = $provider;
         $this->formData = $this->provider->getFormData();
+        $this->provider->setQuery(" WHERE number = number");
         $this->provider->getSchoolLessons();
         $this->originalData = $this->provider->getOriginalData();
     }
@@ -52,7 +53,6 @@ class SchoolLessonCreator extends AbstractAction implements CreatorAction
             !$this->isTinyInteger($this->formData['number']) || 
             !$this->isNotZero($this->formData['number'])
         ){
-
             $this->errors['invalidNumber'] = 'Lesson Number has to be an integer between 1 and 255';
         }
         return $this;
@@ -63,7 +63,6 @@ class SchoolLessonCreator extends AbstractAction implements CreatorAction
         if (empty($this->originalData)) {
             return $this;
         }
-        d($this->originalData);
         foreach($this->originalData as $key => $data){
             $numbers[] = $data->number;
         }

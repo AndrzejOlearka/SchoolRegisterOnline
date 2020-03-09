@@ -11,19 +11,26 @@ class SchoolLessonEditor extends SchoolLessonCreator implements EditAction
     {
         $this->provider = $provider;
         $this->formData = $this->provider->getFormData();
-        $this->provider->setQuery(" WHERE id = {$this->formData['id']}");
+        $this->provider->setQuery(" WHERE number = {$this->formData['number']}");
         $this->provider->getSchoolLessons();
         $this->originalData = $this->provider->getOriginalData();
     }
 
     public function edit(){
-        $this->isExistsSchoolLesson()
-            ->isTypePredefiniedValues()
-            ->isMarkDescriptionAlphaNumeric()
-            ->isWeightInteger()
+        $this->isNumberExists()
+            ->isNumberValid()
+            ->changeDateFormat()
             ->setResult()
-             ->editSchoolLesson()
-             ->sendResult();
+            ->editSchoolLesson();
+
+        return $this->sendResult();
+    }
+
+    public function isNumberExists(){
+        if(empty($this->originalData)){
+            $this->errors['numberIsNotExists'] = 'Lesson Number with '.$this->formData['number'].' is not exists';
+        }
+        return $this;
     }
     
     public function editSchoolLesson(){

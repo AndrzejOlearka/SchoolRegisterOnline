@@ -3,12 +3,13 @@
 namespace App\Model;
 
 use Core\Model\AbstractModel;
+use Core\Model\PrimaryModelInterface;
 
 /**
  * Role model
  *
  */
-class Role extends AbstractModel 
+class Role extends AbstractModel implements PrimaryModelInterface
 {
     /**
      * model table name

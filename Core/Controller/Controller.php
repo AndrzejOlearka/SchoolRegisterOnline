@@ -51,6 +51,7 @@ abstract class Controller
             $this->setDataProvider();
             call_user_func_array([$this, $name], $args);
         } else {
+            var_dump($name);
             Header::httpCodeAndDie("HTTP/1.0 404 Method does not exists.");
         }
     }
