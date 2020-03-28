@@ -78,11 +78,11 @@ CREATE TABLE IF NOT EXISTS students (
 CREATE TABLE IF NOT EXISTS groups (
     id int AUTO_INCREMENT,
     name varchar(255) NOT NULL,
-    class_id int (10),
+    class_id int (10) NOT NULL,
     teacher_id int (10),
-    school_subject_id (10)
-    PRIMARY KEY (id),
-    FOREIGN KEY (class_id) REFERENCES classes(id)
+    school_subject_id (10),
+    students text
+    PRIMARY KEY (id)
 )
 
 CREATE TABLE IF NOT EXISTS class_school_subjects(
@@ -161,9 +161,8 @@ CREATE TABLE IF NOT EXISTS classes_schedule_default(
     thursday text,
     friday text,
     saturday text,
-    sunday text,
-    FOREIGN KEY (class_id) REFERENCES classes(id)
-    
+    sunday text
+    UNIQUE KEY (class_id)
 )
 
 CREATE TABLE IF NOT EXISTS classes_schedule_differences(

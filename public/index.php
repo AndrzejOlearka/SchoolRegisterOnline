@@ -1,7 +1,7 @@
 <?php
 
 require '../vendor/autoload.php';
-require '../core/functions.php';
+require '../Core/functions.php';
 
 use Core\Config;
 use Core\Router;

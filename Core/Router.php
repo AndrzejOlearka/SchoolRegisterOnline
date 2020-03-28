@@ -14,7 +14,7 @@ class Router
      * defined routes
      * @var array
      */
-    const ROUTES = '../core/routes.php';
+    const ROUTES = '../Core/routes.php';
 
     /**
      * Associative array of routes (the routing table)

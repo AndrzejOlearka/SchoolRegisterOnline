@@ -25,11 +25,13 @@ abstract class AbstractAction
     /**
      * setResult
      *
+     * @param boolean $error
+     * 
      * @return void
      */
-    protected function setResult()
+    protected function setResult($error = true)
     {
-        empty($this->errors) ? $this->result = true : $this->result = false;
+        empty($this->errors) || !$error ? $this->result = true : $this->result = false;
         return $this;
     }
 
@@ -71,5 +73,27 @@ abstract class AbstractAction
     public function getFormData()
     {
         return $this->formData;
+    }
+
+    /**
+     * set unique for queries
+     *
+     * @return void
+     */
+    protected function setUnique(){
+        $model = $this->provider->getModel();
+        if(constant("{$model}::UNIQUE")){
+            $this->unique = $model::UNIQUE;
+        } else {
+            $this->unique = 'id';
+        } 
+        return $this;
+    }
+
+    protected function isInvalidUnique(){
+        if(empty($this->originalData)){
+            $this->errors['invalidUnique'] = 'Invalid unique or id provided';
+        }
+        return $this;
     }
 }

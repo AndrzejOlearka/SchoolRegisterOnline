@@ -3,11 +3,11 @@
 namespace App\Api;
 
 /**
- * Api Roles endpoint controller
+ * Api SchoolLessons endpoint controller
  */
-class Roles
+class SchoolLessons
 {
-    public static function getRoles(){
+    public static function getSchoolLessons(){
         return [
             'type' => [
                 'GET'
@@ -16,43 +16,43 @@ class Roles
                 
             ], 
             'optional' => [
-                'id', 'name', 'description'
+                'number_id', 'monday', 'tue'
             ],
             'filters' => [
-                'with_users',
+                
             ]
         ];
     }
 
-    public static function addRole(){
+    public static function addSchoolLesson(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-                'name'
+                'number'
             ], 
             'optional' => [
-                'description'
+                'date_start', 'date_end'
             ]
         ];
     }
         
-    public static function editRole(){
+    public static function editSchoolLesson(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-                'id'
+                'number'
             ], 
             'optional' => [
-                'name', 'description'
+                'date_start', 'date_end'
             ]
         ];
     }
         
-    public static function deleteRole(){
+    public static function deleteSchoolLesson(){
         return [
             'type' => [
                 'POST', 'DELETE'

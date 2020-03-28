@@ -16,7 +16,7 @@ class Groups
                 
             ], 
             'optional' => [
-                'id', 'class_id', 'teacher_id'
+                'id', 'class_id', 'teacher_id', 'school_subject_id', 'name', 'students'
             ]
         ];
     }
@@ -27,15 +27,15 @@ class Groups
                 'POST'
             ],
             'required' => [
-                'name'
+               'class_id', 'name'
             ], 
             'optional' => [
-                'class_id', 'teacher_id', 'school_subject_id'
+               'teacher_id', 'school_subject_id', 'students'
             ]
         ];
     }
 
-    public static function editGrade(){
+    public static function editGroup(){
         return [
             'type' => [
                 'POST'
@@ -44,12 +44,12 @@ class Groups
                 'id'
             ], 
             'optional' => [
-                'class_id', 'teacher_id', 'school_subject_id'
+                'class_id', 'teacher_id', 'school_subject_id', 'students'
             ]
         ];
     }
 
-    public static function deleteGrade(){
+    public static function deleteGroup(){
         return [
             'type' => [
                 'POST', 'DELETE'

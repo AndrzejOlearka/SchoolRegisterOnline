@@ -17,6 +17,12 @@ class Group extends AbstractModel
      */
     const TABLE = 'groups';
 
+    const CLASSES_FOREIGN = 'class_id';
+
+    const TEACHERS_FOREIGN = 'taecher_id';
+
+    const SCHOOL_SUBJECTS = 'school_subject_id';
+
     public $id;
 
     public $name;
