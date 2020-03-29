@@ -3,11 +3,11 @@
 namespace App\Api;
 
 /**
- * Api SchoolLessons endpoint controller
+ * Api DefaultSchedules endpoint controller
  */
-class SchoolLessons
+class DefaultSchedules
 {
-    public static function getSchoolLessons(){
+    public static function getDefaultSchedules(){
         return [
             'type' => [
                 'GET'
@@ -24,7 +24,7 @@ class SchoolLessons
         ];
     }
 
-    public static function addSchoolLesson(){
+    public static function addDefaultSchedule(){
         return [
             'type' => [
                 'POST'
@@ -38,7 +38,7 @@ class SchoolLessons
         ];
     }
         
-    public static function editSchoolLesson(){
+    public static function editDefaultSchedule(){
         return [
             'type' => [
                 'POST'
@@ -52,7 +52,7 @@ class SchoolLessons
         ];
     }
         
-    public static function deleteSchoolLesson(){
+    public static function deleteDefaultSchedule(){
         return [
             'type' => [
                 'POST', 'DELETE'

@@ -23,6 +23,7 @@ class GroupEditor extends GroupCreator implements EditAction
         if(!empty($uniqueCheck)){
             $this->setResult(false);
             $this->sendResult();
+            return $this;
         }
         $this->isExistsGroup()
             ->isNameAlphaNumeric()
@@ -31,7 +32,7 @@ class GroupEditor extends GroupCreator implements EditAction
             ->issetSchoolSubject()
             ->isStudentsValidJson()
             ->setResult()
-            ->addGroup();
+            ->editGroup();
 
         $this->sendResult();
     }

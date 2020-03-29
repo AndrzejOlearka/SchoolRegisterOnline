@@ -33,4 +33,19 @@ trait StringValidator{
         $email = filter_var($data, FILTER_SANITIZE_STRING);
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
+
+    function IsLengthValid($data, $minLength, $maxLength){
+        $flag = true;
+        if(!empty($minLength)){
+            if(!strlen($data) >= $minLength){
+                $flag = false;
+            }
+        }
+        if(!empty($minLength)){
+            if(!strlen($data) <= $minLength){
+                $flag = false;
+            }
+        }
+        return $flag;
+    }
 }

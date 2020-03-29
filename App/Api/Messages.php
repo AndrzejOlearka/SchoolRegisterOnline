@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Api;
 
 /**
- * Api grades endpoint controller
+ * Api messages endpoint controller
  */
-class News 
+class Messages
 {
-    public static function get(){
+    public static function getMessages(){
         return [
             'type' => [
                 'GET'
@@ -21,21 +21,21 @@ class News
         ];
     }
 
-    public static function add(){
+    public static function addMessage(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-                'name', 'description'
+                'subject', 'content', 'recipients'
             ], 
             'optional' => [
-                'user_id'
+                'user_id', 'template_id'
             ]
         ];
     }
 
-    public static function edit(){
+    public static function editMessage(){
         return [
             'type' => [
                 'POST'
@@ -44,12 +44,12 @@ class News
                 'id'
             ], 
             'optional' => [
-                'name', 'description'
+                'subject', 'content', 'user_id', 'template_id', 'recipients'
             ]
         ];
     }
 
-    public static function deleteGrade(){
+    public static function deleteMessage(){
         return [
             'type' => [
                 'POST', 'DELETE'

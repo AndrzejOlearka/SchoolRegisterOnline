@@ -21,11 +21,15 @@ class Message extends AbstractModel
 
     public $user_id;
 
-    public $recipients_ids;
-
-    public $template;
+    public $template_id;
 
     public $subject;
 
-    public $message;
+    public $content;
+
+    public $recipients;
+
+    public $created_date;
+
+    public $updated_date;
 }

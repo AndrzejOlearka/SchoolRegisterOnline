@@ -80,8 +80,8 @@ CREATE TABLE IF NOT EXISTS groups (
     name varchar(255) NOT NULL,
     class_id int (10) NOT NULL,
     teacher_id int (10),
-    school_subject_id (10),
-    students text
+    school_subject_id int (10),
+    students text,
     PRIMARY KEY (id)
 )
 
@@ -215,18 +215,22 @@ CREATE TABLE IF NOT EXISTS classes_trips(
 CREATE TABLE IF NOT EXISTS news(
     id int AUTO_INCREMENT,
     user_id int,
-    name varchar(255) NOT NULL,
-    description text NOT NULL,
+    subject varchar(1000) NOT NULL,
+    content text NOT NULL,
+    created_date date,
+    updated_date date,
     PRIMARY KEY (id)
 )
 
 CREATE TABLE IF NOT EXISTS messages(
     id int AUTO_INCREMENT,
     user_id int,
-    recipients_ids varchar(1000),
-    template_id varchar (255),
-    subject varchar (255) NOT NULL,
-    message text NOT NULL,
+    template_id int,
+    subject varchar (1000) NOT NULL,
+    content text NOT NULL,
+    recipients text NOT NULL,
+    created_date date,
+    updated_date date,
     PRIMARY KEY (id)
 )
 

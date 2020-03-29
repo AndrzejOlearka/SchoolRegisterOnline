@@ -21,6 +21,7 @@ abstract class AbstractAction
     protected $formData;
     protected $originalData;
     protected $errors = [];
+    protected $unique;
 
     /**
      * setResult
@@ -82,7 +83,7 @@ abstract class AbstractAction
      */
     protected function setUnique(){
         $model = $this->provider->getModel();
-        if(constant("{$model}::UNIQUE")){
+        if(defined("{$model}::CONSTANT_NAME")){
             $this->unique = $model::UNIQUE;
         } else {
             $this->unique = 'id';

@@ -58,7 +58,7 @@ class GroupCreator extends AbstractAction implements CreatorAction
             ->setResult()
             ->addGroup();
 
-        $this->sendResult();
+        return $this->sendResult();
     }
 
     protected function isExistsGroup()
@@ -84,7 +84,7 @@ class GroupCreator extends AbstractAction implements CreatorAction
         $provider->setQuery(" WHERE id = {$this->formData['class_id']}");
         $provider->getClasses();
         if (empty($provider->getOriginalData()[0]->id)) {
-            $this->errors['noStudent'] = 'There is no class with this ID';
+            $this->errors['noClass'] = 'There is no class with this ID';
         }
         return $this;
     }
@@ -122,7 +122,7 @@ class GroupCreator extends AbstractAction implements CreatorAction
             return $this;
         } 
         if(!$this->isValidJson($this->formData['students'])){
-            $this->errors['invalidJsonStudents'] = 'Students list is not in string that is valid json';
+            $this->errors['invalidJsonStudents'] = 'Students list is not a string that is valid json';
         }
         return $this;
     }

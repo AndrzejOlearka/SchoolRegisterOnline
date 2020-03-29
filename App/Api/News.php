@@ -5,9 +5,9 @@ namespace App\Api;
 /**
  * Api grades endpoint controller
  */
-class Groups 
+class News 
 {
-    public static function getGroups(){
+    public static function getAllNews(){
         return [
             'type' => [
                 'GET'
@@ -16,26 +16,26 @@ class Groups
                 
             ], 
             'optional' => [
-                'id', 'class_id', 'teacher_id', 'school_subject_id', 'name', 'students'
+                'id'
             ]
         ];
     }
 
-    public static function addGroup(){
+    public static function addNews(){
         return [
             'type' => [
                 'POST'
             ],
             'required' => [
-               'class_id', 'name'
+                'subject', 'content'
             ], 
             'optional' => [
-               'teacher_id', 'school_subject_id', 'students'
+                'user_id', 'created_date'
             ]
         ];
     }
 
-    public static function editGroup(){
+    public static function editNews(){
         return [
             'type' => [
                 'POST'
@@ -44,12 +44,12 @@ class Groups
                 'id'
             ], 
             'optional' => [
-                'class_id', 'teacher_id', 'school_subject_id', 'students'
+                'subject', 'content', 'user_id', 'updated_date'
             ]
         ];
     }
 
-    public static function deleteGroup(){
+    public static function deleteNews(){
         return [
             'type' => [
                 'POST', 'DELETE'

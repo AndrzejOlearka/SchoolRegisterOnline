@@ -21,5 +21,11 @@ class News extends AbstractModel
 
     public $user_id;
 
-    public $description;
+    public $subject;
+
+    public $content;
+    
+    public $created_date;
+
+    public $updated_date;
 }
