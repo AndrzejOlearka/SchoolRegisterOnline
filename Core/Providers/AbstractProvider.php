@@ -2,6 +2,8 @@
 
 namespace Core\Provider;
 
+use Core\Model\UniqueModelInterface;
+
 class AbstractProvider extends QueryAbstractProvider
 {
     protected $params;
@@ -137,5 +139,21 @@ class AbstractProvider extends QueryAbstractProvider
     public function getForeignKeyConst($name){
         $const = strtoupper($name).'_FOREIGN';
         return constant("{$this->model}::{$const}");
+    }
+
+    public function getResult($result){
+        if($this->model instanceof UniqueModelInterface){
+            if(isset($result['success'])){
+                $unique = constant("{$this->model}::UNIQUE");
+                empty($result[$unique]) ? $id = $this->getFormData()[$unique] : $id = $result[$unique];
+                $this->originalData = self::first("SELECT * FROM {$this->table} WHERE {$unique} = {$id} ", $this->model);
+            }
+        } else {
+            if(isset($result['success'])){
+                empty($result['id']) ? $id = $this->getFormData()['id'] : $id = $result['id'];
+                $this->originalData = self::first("SELECT * FROM {$this->table} WHERE id = {$id} ", $this->model);
+            }
+        }
+        return $this;
     }
 }

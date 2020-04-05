@@ -95,10 +95,18 @@ class QueryAbstractProvider
         $result = $statement->execute();
         if(new $model instanceof UniqueModelInterface){
             if($result){
-                return [$model::UNIQUE => $args[$model::UNIQUE]];
+                return [
+                    'success' => true,
+                    $model::UNIQUE => $args[$model::UNIQUE]
+                ];
             }
         } else {
-            return ['id' => $db->lastInsertId()];
+            if($result){
+                return [
+                    'success' => true,
+                    'id' => $db->lastInsertId()
+                ];
+            }
         }
     }
 

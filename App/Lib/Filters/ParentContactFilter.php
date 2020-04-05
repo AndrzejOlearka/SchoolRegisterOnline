@@ -15,7 +15,7 @@ class ParentContactFilter extends BasicFilter
         $this->requestFilters();
     }
 
-    public function lessonGradesTableFilter()
+    public function parentContactTableFilter()
     {
         return parent::onlyOptionalFilter();
     }

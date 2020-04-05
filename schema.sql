@@ -198,18 +198,14 @@ CREATE TABLE IF NOT EXISTS parents_contacts(
 
 CREATE TABLE IF NOT EXISTS trips(
     id int AUTO_INCREMENT,
-    members tinyint,
+    name varchar(1000) NOT NULL,
+    teachers text NOT NULL,
     description text,
-    date_start date,
-    date_end date,
+    students text,
+    parents text,
+    date_from date NOT NULL,
+    date_to date NOT NULL,
     PRIMARY KEY (id)
-)
-
-CREATE TABLE IF NOT EXISTS classes_trips(
-    trip_id int,
-    class_id int,
-    FOREIGN KEY (trip_id) REFERENCES trips(id),
-    FOREIGN KEY (class_id) REFERENCES classes(id)
 )
 
 CREATE TABLE IF NOT EXISTS news(
@@ -254,6 +250,31 @@ CREATE TABLE IF NOT EXISTS school_breaks(
     UNIQUE KEY (number)
 )
 
+CREATE TABLE IF NOT EXISTS lessons_data(
+    id int AUTO_INCREMENT,
+    class_id int NOT NULL,
+    school_day_id int NOT NULL,
+    subject varchar(1000),
+    description text,
+    data text,
+    PRIMARY KEY (id)
+)
+
+CREATE TABLE IF NOT EXISTS school_days(
+    day int,
+    date date NOT NULL,
+    weekday char (20) NOT NULL,
+    UNIQUE KEY (day)
+)
+
+CREATE TABLE IF NOT EXISTS class_rooms(
+    id int AUTO_INCREMENT,
+    number smallint NOT NULL,
+    description text,
+    teachers text,
+    PRIMARY KEY (id)
+)
+
 CREATE TABLE IF NOT EXISTS frequency(
     number tinyint,
     date_start time,
@@ -263,9 +284,3 @@ CREATE TABLE IF NOT EXISTS frequency(
     
 
 
-CREATE TABLE IF NOT EXISTS lessons_data(
-    class_id int,
-    week tinyint,
-    data text //
-
-)

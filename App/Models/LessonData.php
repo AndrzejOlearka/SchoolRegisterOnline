@@ -17,9 +17,15 @@ class LessonData extends AbstractModel
      */
     const TABLE = 'lessons_data';
 
+    public $id;
+
     public $class_id;
 
-    public $week;
+    public $school_day_id;
+
+    public $subject;
+    
+    public $description;
 
     public $data;
 }

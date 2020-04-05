@@ -2,12 +2,12 @@
 
 namespace App\Lib\Filters;
 
-use App\Provider\UsersProvider;
+use App\Provider\SchoolDaysProvider;
 use Core\Providers\Filters\BasicFilter;
 
-class UserFilter extends BasicFilter
+class SchoolDayFilter extends BasicFilter
 {
-    public function __construct(UsersProvider $provider)
+    public function __construct(SchoolDaysProvider $provider)
     {
         $this->provider = $provider;
         $this->filtering = false;
@@ -15,7 +15,7 @@ class UserFilter extends BasicFilter
         $this->requestFilters();
     }
 
-    public function usersTableFilter()
+    public function schoolDayTableFilter()
     {
         return parent::onlyOptionalFilter();
     }

@@ -19,11 +19,17 @@ class Trip extends AbstractModel
 
     public $id;
 
-    public $members;
+    public $name;
+
+    public $teachers;
+
+    public $date_from;
+
+    public $date_to;
+
+    public $students;
+
+    public $parents;
 
     public $description;
-
-    public $date_start;
-
-    public $date_end;
 }

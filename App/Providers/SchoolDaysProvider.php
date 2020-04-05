@@ -2,40 +2,40 @@
 
 namespace App\Provider;
 
-use App\Lib\Filters\ParentContactFilter;
+use App\Lib\Filters\SchoolDayFilter;
 use Core\Provider\AbstractProvider;
 
-class ParentContactsProvider extends AbstractProvider
+class SchoolDaysProvider extends AbstractProvider
 {
     public function __construct()
     {
-        $this->model = 'App\\Model\\ParentContact';
+        $this->model = 'App\\Model\\SchoolDay';
         $this->table = $this->model::TABLE;
     }
 
-    public function getParentContacts()
+    public function getSchoolDays()
     {
-        $filter = new ParentContactFilter($this);
-        $this->query ?: $this->query = $filter->parentContactTableFilter();
+        $filter = new SchoolDayFilter($this);
+        $this->query ?: $this->query = $filter->schoolDayTableFilter();
         $this->originalData = $filter->setFilterData(self::data("SELECT * FROM {$this->table}{$this->query}", $this->model))->filterProcessing();
         return $this;
     }
 
-    public function addParentContact()
+    public function addSchoolDay()
     {
         $this->originalData = self::insert("INSERT INTO {$this->table} ", $this->model, $this->getFormData());
         return $this;
     }
 
-    public function editParentContact()
+    public function editSchoolDay()
     {
         $this->originalData = self::update("UPDATE {$this->table} SET ", $this->model, $this->getFormData());
         return $this;
     }
 
-    public function deleteParentContact()
+    public function deleteSchoolDay()
     {
-        $this->originalData = self::delete("DELETE FROM {$this->table} WHERE id = ?", $this->model, [$this->getFormData()['id']]);
+        $this->originalData = self::delete("DELETE FROM {$this->table} WHERE ".$this->model::UNIQUE." = ?", $this->model, [$this->getFormData()[$this->model::UNIQUE]]);
         return $this;
     }
 }

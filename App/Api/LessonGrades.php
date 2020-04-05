@@ -16,7 +16,7 @@ class LessonGrades
                 
             ], 
             'optional' => [
-                'id', 'student_id', 'class_id', 'school_subject_id', 'native_grade_id', 'created_date', 'updated_date'
+                'id', 'grade_type_id', 'student_id', 'class_id', 'school_subject_id', 'native_grade_id', 'created_date', 'updated_date'
             ]
         ];
     }

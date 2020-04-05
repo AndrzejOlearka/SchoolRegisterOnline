@@ -94,7 +94,8 @@ abstract class AbstractAction
     protected function isInvalidUnique(){
         if(empty($this->originalData)){
             $this->errors['invalidUnique'] = 'Invalid unique or id provided';
+            return true;
         }
-        return $this;
+        return false;
     }
 }

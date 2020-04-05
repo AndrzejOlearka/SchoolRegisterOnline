@@ -39,8 +39,9 @@ class GradeTypeCreator extends AbstractAction implements CreatorAction
             ->isMarkDescriptionAlphaNumeric()
             ->isWeightInteger()
             ->setResult()
-            ->addGradeType()
-            ->sendResult();
+            ->addGradeType();
+
+        return $this->sendResult();
     }
 
     protected function isExistsGradeType()

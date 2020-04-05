@@ -10,6 +10,9 @@ class TeachersFilter extends BasicFilter
     public function __construct(TeachersProvider $provider)
     {
         $this->provider = $provider;
+        $this->filtering = false;
+        $this->filters = [];
+        $this->requestFilters();
     }
 
     public function teachersTableFilter()

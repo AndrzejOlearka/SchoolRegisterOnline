@@ -20,7 +20,7 @@ class GroupEditor extends GroupCreator implements EditAction
     public function edit()
     {
         $uniqueCheck = $this->isInvalidUnique();
-        if(!empty($uniqueCheck)){
+        if($uniqueCheck){
             $this->setResult(false);
             $this->sendResult();
             return $this;
