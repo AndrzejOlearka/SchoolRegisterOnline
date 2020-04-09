@@ -2,9 +2,9 @@
 
 namespace App\Lib\Actions\ClassRooms;
 
-use Core\Action\EditAction;
-use App\Provider\ClassRoomsProvider;
 use App\Lib\Actions\ClassRooms\ClassRoomCreator;
+use App\Provider\ClassRoomsProvider;
+use Core\Action\EditAction;
 
 class ClassRoomEditor extends ClassRoomCreator implements EditAction
 {
@@ -20,12 +20,10 @@ class ClassRoomEditor extends ClassRoomCreator implements EditAction
 
     public function edit()
     {
-        $uniqueCheck = $this->isInvalidUnique();
-        if(!empty($uniqueCheck)){
-            $this->setResult(false);
-            $this->sendResult();
+        if (!$this->uniqueCheck()) {
             return $this;
         }
+
         $this->isExistsClassRoom()
             ->isClassRoomAlphaNumeric()
             ->isTeachersValidJson()
@@ -43,13 +41,13 @@ class ClassRoomEditor extends ClassRoomCreator implements EditAction
         $this->originalData = $this->provider->getOriginalData();
         if (!empty($this->originalData)) {
             $this->errors['ClassRoomExists'] = 'There is Class Room with this number';
-        } 
+        }
         return $this;
     }
-    
+
     public function editClassRoom()
     {
-        if($this->result){
+        if ($this->result) {
             $this->provider->editClassRoom();
             $this->originalData = $this->provider->getOriginalData();
         }

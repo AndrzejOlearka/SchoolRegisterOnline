@@ -5,61 +5,65 @@ namespace App\Api;
 /**
  * Api grades endpoint controller
  */
-class News 
+class News
 {
-    public static function getAllNews(){
+    public static function getAllNews()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
-            'required' => [ 
-                
-            ], 
+            'required' => [
+
+            ],
             'optional' => [
-                'id'
-            ]
+                'id',
+            ],
         ];
     }
 
-    public static function addNews(){
+    public static function addNews()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'subject', 'content'
-            ], 
+                'subject', 'content',
+            ],
             'optional' => [
-                'user_id', 'created_date'
-            ]
+                'user_id', 'created_date',
+            ],
         ];
     }
 
-    public static function editNews(){
+    public static function editNews()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                'subject', 'content', 'user_id', 'updated_date'
-            ]
+                'subject', 'content', 'user_id', 'updated_date',
+            ],
         ];
     }
 
-    public static function deleteNews(){
+    public static function deleteNews()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
 
-            ]
+            ],
         ];
     }
 }

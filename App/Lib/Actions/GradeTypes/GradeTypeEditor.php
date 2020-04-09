@@ -16,18 +16,25 @@ class GradeTypeEditor extends GradeTypeCreator implements EditAction
         $this->originalData = $this->provider->getOriginalData();
     }
 
-    public function edit(){
+    public function edit()
+    {
+        if (!$this->uniqueCheck()) {
+            return $this;
+        }
+
         $this->isExistsGradeType()
             ->isTypePredefiniedValues()
             ->isMarkDescriptionAlphaNumeric()
             ->isWeightInteger()
             ->setResult()
-             ->editGradeType()
-             ->sendResult();
+            ->editGradeType();
+
+        return $this->sendResult();
     }
-    
-    public function editGradeType(){
-        if($this->result){
+
+    public function editGradeType()
+    {
+        if ($this->result) {
             $this->provider->editGradeType();
             $this->originalData = $this->provider->getOriginalData();
         }

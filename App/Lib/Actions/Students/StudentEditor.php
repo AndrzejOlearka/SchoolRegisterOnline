@@ -18,13 +18,19 @@ class StudentEditor extends StudentCreator implements EditAction
 
     public function edit()
     {
+        if (!$this->uniqueCheck()) {
+            return $this;
+        }
+
         $this->isExistsStudentInThisClass()
-             ->isSexPredefiniedValues()
-             ->isClassInteger()
-             ->isFullnameAlpha()
-             ->isParentsAlpha()
-             ->editStudent()
-             ->sendResult();
+            ->isSexPredefiniedValues()
+            ->isClassInteger()
+            ->isFullnameAlpha()
+            ->isParentsAlpha()
+            ->editStudent()
+            ->sendResult();
+
+        return $this->sendResult();
     }
 
     public function editStudent()

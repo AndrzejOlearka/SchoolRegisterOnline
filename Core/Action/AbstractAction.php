@@ -2,9 +2,9 @@
 
 namespace Core\Action;
 
+use App\Lib\Validators\ContentValidator;
 use App\Lib\Validators\NumberValidator;
 use App\Lib\Validators\StringValidator;
-use App\Lib\Validators\ContentValidator;
 
 /**
  * Base Action interface
@@ -27,7 +27,7 @@ abstract class AbstractAction
      * setResult
      *
      * @param boolean $error
-     * 
+     *
      * @return void
      */
     protected function setResult($error = true)
@@ -47,7 +47,7 @@ abstract class AbstractAction
     }
 
     /**
-     * get request errors 
+     * get request errors
      *
      * @return void
      */
@@ -81,21 +81,34 @@ abstract class AbstractAction
      *
      * @return void
      */
-    protected function setUnique(){
+    protected function setUnique()
+    {
         $model = $this->provider->getModel();
-        if(defined("{$model}::CONSTANT_NAME")){
+        if (defined("{$model}::CONSTANT_NAME")) {
             $this->unique = $model::UNIQUE;
         } else {
             $this->unique = 'id';
-        } 
+        }
         return $this;
     }
 
-    protected function isInvalidUnique(){
-        if(empty($this->originalData)){
+    protected function isInvalidUnique()
+    {
+        if (empty($this->originalData)) {
             $this->errors['invalidUnique'] = 'Invalid unique or id provided';
             return true;
         }
         return false;
+    }
+
+    protected function uniqueCheck()
+    {
+        $uniqueCheck = $this->isInvalidUnique();
+        if (!empty($uniqueCheck)) {
+            $this->setResult(false);
+            $this->sendResult();
+            return false;
+        }
+        return true;
     }
 }

@@ -19,12 +19,10 @@ class MessageEditor extends MessageCreator implements EditAction
 
     public function edit()
     {
-        $uniqueCheck = $this->isInvalidUnique();
-        if(!empty($uniqueCheck)){
-            $this->setResult(false);
-            $this->sendResult();
+        if (!$this->uniqueCheck()) {
             return $this;
         }
+
         $this->issetTemplate()
             ->isSubjectLengthValid()
             ->isRecipientsValidJson()
@@ -32,12 +30,12 @@ class MessageEditor extends MessageCreator implements EditAction
             ->setResult()
             ->editMessage();
 
-        $this->sendResult();
+        return $this->sendResult();
     }
-    
+
     public function editMessage()
     {
-        if($this->result){
+        if ($this->result) {
             $this->provider->editMessage();
             $this->originalData = $this->provider->getOriginalData();
         }

@@ -25,12 +25,12 @@ class UsersProvider extends AbstractProvider
     }
 
     public function addUser(){
-        $this->originalData = self::insert("INSERT INTO {$this->table} ", $this->model, $this->getFormData());
+        $this->getResult(self::insert("INSERT INTO {$this->table} ", $this->model, $this->getFormData()));
         return $this;
     }
 
     public function editUser(){
-        $this->originalData = self::update("UPDATE {$this->table} SET ", $this->model, $this->getFormData());
+        $this->getResult(self::update("UPDATE {$this->table} SET ", $this->model, $this->getFormData()));
         return $this;
     }
 

@@ -2,12 +2,9 @@
 
 namespace App\Lib\Actions\Students;
 
-use Core\Action\EditAction;
-use App\Provider\TeachersProvider;
-use App\Lib\Validators\NumberValidator;
-use App\Lib\Validators\StringValidator;
-use App\Lib\Validators\ContentValidator;
 use App\Lib\Actions\Students\TeacherCreator;
+use App\Provider\TeachersProvider;
+use Core\Action\EditAction;
 
 class TeacherEditor extends TeacherCreator implements EditAction
 {
@@ -20,18 +17,24 @@ class TeacherEditor extends TeacherCreator implements EditAction
         $this->originalData = $this->provider->getOriginalData();
     }
 
-    public function edit(){
+    public function edit()
+    {
+        if (!$this->uniqueCheck()) {
+            return $this;
+        }
 
         $this->isSexPredefiniedValues()
-             ->isFullnameAlpha()
-             ->sanitazeSchoolSubjects()
-             ->setResult()
-             ->editTeacher()
-             ->sendResult();
+            ->isFullnameAlpha()
+            ->sanitazeSchoolSubjects()
+            ->setResult()
+            ->editTeacher();
+
+        return $this->sendResult();
     }
 
-    protected function editTeacher(){
-        if($this->result){
+    protected function editTeacher()
+    {
+        if ($this->result) {
             $this->provider->editTeacher();
             $this->originalData = $this->provider->getOriginalData();
         }

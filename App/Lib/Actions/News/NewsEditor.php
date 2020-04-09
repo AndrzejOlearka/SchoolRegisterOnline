@@ -19,19 +19,17 @@ class NewsEditor extends NewsCreator implements EditAction
 
     public function edit()
     {
-        $uniqueCheck = $this->isInvalidUnique();
-        if(!empty($uniqueCheck)){
-            $this->setResult(false);
-            $this->sendResult();
+        if (!$this->uniqueCheck()) {
             return $this;
         }
+        
         $this->issetUser()
             ->isSubjectLengthValid()
             ->sanitazeDate()
             ->setResult()
             ->addNews();
 
-        $this->sendResult();
+        return $this->sendResult();
     }
     public function editNews()
     {

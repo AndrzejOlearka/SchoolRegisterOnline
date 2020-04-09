@@ -5,9 +5,6 @@ namespace App\Lib\Actions\Users;
 use Core\Helpers\Encrypter;
 use App\Provider\UsersProvider;
 use Core\Action\AbstractAction;
-use App\Lib\Validators\NumberValidator;
-use App\Lib\Validators\StringValidator;
-use App\Lib\Validators\ContentValidator;
 
 class Registration extends AbstractAction
 {

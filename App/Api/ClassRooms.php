@@ -5,61 +5,65 @@ namespace App\Api;
 /**
  * Api ClassRooms endpoint controller
  */
-class ClassRooms 
+class ClassRooms
 {
-    public static function getClassRooms(){
+    public static function getClassRooms()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
-            'required' => [ 
-                
-            ], 
+            'required' => [
+
+            ],
             'optional' => [
-                'id', 'number', 'description', 'teachers'
-            ]
+                'id', 'number', 'description', 'teachers',
+            ],
         ];
     }
 
-    public static function addClassRoom(){
+    public static function addClassRoom()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'number'
-            ], 
+                'number',
+            ],
             'optional' => [
-                'description', 'teachers'
-            ]
+                'description', 'teachers',
+            ],
         ];
     }
 
-    public static function editClassRoom(){
+    public static function editClassRoom()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id', 'number'
-            ], 
+                'id', 'number',
+            ],
             'optional' => [
-                'description', 'teachers'
-            ]
+                'description', 'teachers',
+            ],
         ];
     }
 
-    public static function deleteClassRoom(){
+    public static function deleteClassRoom()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
 
-            ]
+            ],
         ];
     }
 }

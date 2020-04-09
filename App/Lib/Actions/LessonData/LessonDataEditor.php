@@ -19,12 +19,10 @@ class LessonDataEditor extends LessonDataCreator implements EditAction
 
     public function edit()
     {
-        $uniqueCheck = $this->isInvalidUnique();
-        if(!empty($uniqueCheck)){
-            $this->setResult(false);
-            $this->sendResult();
+        if (!$this->uniqueCheck()) {
             return $this;
         }
+
         $this->issetClass()
             ->issetSchoolDay()
             ->isSubjectValidString()
@@ -33,12 +31,12 @@ class LessonDataEditor extends LessonDataCreator implements EditAction
             ->setResult()
             ->addLessonData();
 
-        $this->sendResult();
+        return $this->sendResult();
     }
-    
+
     public function editLessonData()
     {
-        if($this->result){
+        if ($this->result) {
             $this->provider->editLessonData();
             $this->originalData = $this->provider->getOriginalData();
         }

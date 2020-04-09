@@ -7,62 +7,66 @@ namespace App\Api;
  */
 class Settings
 {
-    public static function getSettings(){
+    public static function getSettings()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
-            'required' => [ 
-                
-            ], 
+            'required' => [
+
+            ],
             'optional' => [
-                'id', 'name', 'role_id', 'description', 'value'
+                'id', 'name', 'role_id', 'description', 'value',
             ],
             'filters' => [
                 'with_roles',
-            ]
+            ],
         ];
     }
 
-    public static function addSetting(){
+    public static function addSetting()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'role_id', 'value'
-            ], 
+                'role_id', 'value',
+            ],
             'optional' => [
-                'description', 'name'
-            ]
+                'description', 'name',
+            ],
         ];
     }
-        
-    public static function editSetting(){
+
+    public static function editSetting()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                'role_id', 'name', 'description', 'value'
-            ]
+                'role_id', 'name', 'description', 'value',
+            ],
         ];
     }
-        
-    public static function deleteSetting(){
+
+    public static function deleteSetting()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                
-            ]
+
+            ],
         ];
     }
 }

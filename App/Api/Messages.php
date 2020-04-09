@@ -7,59 +7,63 @@ namespace App\Api;
  */
 class Messages
 {
-    public static function getMessages(){
+    public static function getMessages()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
-            'required' => [ 
-                
-            ], 
+            'required' => [
+
+            ],
             'optional' => [
-                'id'
-            ]
+                'id',
+            ],
         ];
     }
 
-    public static function addMessage(){
+    public static function addMessage()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'subject', 'content', 'recipients'
-            ], 
+                'subject', 'content', 'recipients',
+            ],
             'optional' => [
-                'user_id', 'template_id'
-            ]
+                'user_id', 'template_id',
+            ],
         ];
     }
 
-    public static function editMessage(){
+    public static function editMessage()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                'subject', 'content', 'user_id', 'template_id', 'recipients'
-            ]
+                'subject', 'content', 'user_id', 'template_id', 'recipients',
+            ],
         ];
     }
 
-    public static function deleteMessage(){
+    public static function deleteMessage()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
 
-            ]
+            ],
         ];
     }
 }

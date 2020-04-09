@@ -20,6 +20,10 @@ class SchoolDay extends AbstractModel implements UniqueModelInterface
 
     const UNIQUE = 'day';
 
+    public $day;
+
+    public $week;
+
     public $date;
 
     public $weekday;

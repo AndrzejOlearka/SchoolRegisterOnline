@@ -5,6 +5,7 @@ namespace App\Lib\Actions\SchoolDays;
 use Core\Action\CreatorAction;
 use Core\Action\AbstractAction;
 use App\Provider\SchoolDaysProvider;
+use App\Provider\SchoolWeeksProvider;
 
 class SchoolDayCreator extends AbstractAction implements CreatorAction
 {
@@ -39,6 +40,7 @@ class SchoolDayCreator extends AbstractAction implements CreatorAction
             ->isDayInOrder()
             ->isWeekdayOnlyAlpha()
             ->sanitazeDate()
+            ->issetSchoolWeek()
             ->setResult()
             ->sanitazeDate()
             ->addSchoolDay();
@@ -71,6 +73,17 @@ class SchoolDayCreator extends AbstractAction implements CreatorAction
         $nextInOrder = max($numbers) + 1;
         if($this->formData['day'] != $nextInOrder){
             $this->errors['nextInOrder'] = 'Next day in Order is '.$nextInOrder;
+        }
+        return $this;
+    }
+
+    protected function issetSchoolWeek()
+    {
+        $provider = new SchoolWeeksProvider;
+        $provider->setQuery(" WHERE week = {$this->formData['week']}");
+        $provider->getSchoolWeeks();
+        if (empty($provider->getOriginalData()[0]->id)) {
+            $this->errors['noSchoolWeek'] = 'There is no school week with this unique value';
         }
         return $this;
     }

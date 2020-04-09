@@ -153,23 +153,21 @@ CREATE TABLE IF NOT EXISTS additional_school_subjects(
     FOREIGN KEY (school_subject_id) REFERENCES school_subjects(id)
 )
 
-CREATE TABLE IF NOT EXISTS classes_schedule_default(
-    class_id int NOT NULL
-    monday text,
-    tuesday text,
-    wednesday text,
-    thursday text,
-    friday text,
-    saturday text,
-    sunday text
-    UNIQUE KEY (class_id)
+CREATE TABLE IF NOT EXISTS default_schedules(
+    id int AUTO_INCREMENT,
+    class_id int NOT NULL,
+    schedule text,
+    description text,
+    PRIMARY KEY (id)
 )
 
-CREATE TABLE IF NOT EXISTS classes_schedule_differences(
+CREATE TABLE IF NOT EXISTS class_schedules(
+    id int AUTO_INCREMENT,
+    week int NOT NULL,
     class_id int NOT NULL,
-    date date NOT NULL,
-    differences text,
-    FOREIGN KEY (class_id) REFERENCES classes(id)
+    schedule text,
+    description text,
+    PRIMARY KEY (id)
 )
 
 CREATE TABLE IF NOT EXISTS lessons_subjects(
@@ -260,8 +258,16 @@ CREATE TABLE IF NOT EXISTS lessons_data(
     PRIMARY KEY (id)
 )
 
+CREATE TABLE IF NOT EXISTS school_weeks(
+    week int,
+    date_from date NOT NULL,
+    date_to date NOT NULL,
+    UNIQUE KEY (week)
+)
+
 CREATE TABLE IF NOT EXISTS school_days(
     day int,
+    week int NOT NULL,
     date date NOT NULL,
     weekday char (20) NOT NULL,
     UNIQUE KEY (day)

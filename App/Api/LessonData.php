@@ -7,60 +7,63 @@ namespace App\Api;
  */
 class LessonDatas
 {
-    public static function getLessonDatas(){
+    public static function getLessonDatas()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
-            'required' => [ 
-                
-            ], 
+            'required' => [
+
+            ],
             'optional' => [
-                'id', 'class_id', 'school_day_id', 'subject', 'description', 'data'
-            ]
+                'id', 'class_id', 'school_day_id', 'subject', 'description', 'data',
+            ],
         ];
     }
 
-    public static function addLessonData(){
+    public static function addLessonData()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'class_id', 'school_day_id'
-            ], 
+                'class_id', 'school_day_id',
+            ],
             'optional' => [
-                'subject', 'description', 'data'
-            ]
+                'subject', 'description', 'data',
+            ],
         ];
     }
 
-
-    public static function editLessonData(){
+    public static function editLessonData()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id', 'class_id', 'school_day_id'
-            ], 
+                'id', 'class_id', 'school_day_id',
+            ],
             'optional' => [
-                'subject', 'description', 'data'
-            ]
+                'subject', 'description', 'data',
+            ],
         ];
     }
 
-    public static function deleteLessonData(){
+    public static function deleteLessonData()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
 
-            ]
+            ],
         ];
     }
 }

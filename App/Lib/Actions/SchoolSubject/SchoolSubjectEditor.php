@@ -16,16 +16,23 @@ class SchoolSubjectEditor extends SchoolSubjectCreator implements EditAction
         $this->originalData = $this->provider->getOriginalData();
     }
 
-    public function edit(){
+    public function edit()
+    {
+        if (!$this->uniqueCheck()) {
+            return $this;
+        }
+
         $this->isExistsSchoolSubject()
-             ->isNameAlpha()
-             ->setResult()
-             ->editSchoolSubject()
-             ->sendResult();
+            ->isNameAlpha()
+            ->setResult()
+            ->editSchoolSubject();
+
+        return $this->sendResult();
     }
-    
-    public function editSchoolSubject(){
-        if($this->result){
+
+    public function editSchoolSubject()
+    {
+        if ($this->result) {
             $this->provider->editSchoolSubject();
             $this->originalData = $this->provider->getOriginalData();
         }

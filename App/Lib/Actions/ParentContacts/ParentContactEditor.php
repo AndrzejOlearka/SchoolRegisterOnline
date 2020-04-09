@@ -16,12 +16,23 @@ class ParentContactEditor extends ParentContactCreator implements EditAction
         $this->originalData = $this->provider->getOriginalData();
     }
 
-    public function edit(){
-        $this->isExistsParentContact()
-             ->isNameAlpha()
-             ->setResult()
-             ->editParentContact()
-             ->sendResult();
+    public function edit()
+    {
+        if (!$this->uniqueCheck()) {
+            return $this;
+        }
+
+        $this->existsParent()
+            ->issetStudent()
+            ->issetUser()
+            ->isParentAlpa()
+            ->isDescriptionValid()
+            ->isParentPredefinedValue()
+            ->checkEmail()
+            ->setResult()
+            ->addParentContact();
+
+        return $this->sendResult();
     }
     
     public function editParentContact(){

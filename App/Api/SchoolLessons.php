@@ -7,62 +7,66 @@ namespace App\Api;
  */
 class SchoolLessons
 {
-    public static function getSchoolLessons(){
+    public static function getSchoolLessons()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
-            'required' => [ 
-                
-            ], 
+            'required' => [
+
+            ],
             'optional' => [
-                'number'
+                'number',
             ],
             'filters' => [
-                
-            ]
+
+            ],
         ];
     }
 
-    public static function addSchoolLesson(){
+    public static function addSchoolLesson()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'number'
-            ], 
+                'number',
+            ],
             'optional' => [
-                'date_start', 'date_end'
-            ]
+                'date_start', 'date_end',
+            ],
         ];
     }
-        
-    public static function editSchoolLesson(){
+
+    public static function editSchoolLesson()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'number'
-            ], 
+                'number',
+            ],
             'optional' => [
-                'date_start', 'date_end'
-            ]
+                'date_start', 'date_end',
+            ],
         ];
     }
-        
-    public static function deleteSchoolLesson(){
+
+    public static function deleteSchoolLesson()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                
-            ]
+
+            ],
         ];
     }
 }

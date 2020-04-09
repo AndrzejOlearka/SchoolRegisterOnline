@@ -7,72 +7,77 @@ namespace App\Api;
  */
 class Students
 {
-    public static function getStudents(){
+    public static function getStudents()
+    {
         return [
             'type' => [
-                'GET'
-            ],
-            'required' => [ 
-                
-            ], 
-            'optional' => [
-                'class_id', 'sex', 'firstname', 'lastname'
-            ]
-        ];
-    }
-    public static function getStudent(){
-        return [
-            'type' => [
-                'GET'
+                'GET',
             ],
             'required' => [
-                'id'
-            ], 
+
+            ],
             'optional' => [
-               'with_grades', 'with_notes', 'with_contacts', 'with_groups', 'with_frequency'
-            ]
+                'class_id', 'sex', 'firstname', 'lastname',
+            ],
+        ];
+    }
+    public static function getStudent()
+    {
+        return [
+            'type' => [
+                'GET',
+            ],
+            'required' => [
+                'id',
+            ],
+            'optional' => [
+                'with_grades', 'with_notes', 'with_contacts', 'with_groups', 'with_frequency',
+            ],
         ];
     }
 
-    public static function addStudent(){
+    public static function addStudent()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'class_id', 'firstname', 'lastname'
-            ], 
+                'class_id', 'firstname', 'lastname',
+            ],
             'optional' => [
-                'sex', 'birthday'
-            ]
+                'sex', 'birthday',
+            ],
         ];
     }
-        
-    public static function editStudent(){
+
+    public static function editStudent()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                'firstname', 'lastname', 'sex', 'class_id', 'birthday', 'father', 'mother'
-            ]
+                'firstname', 'lastname', 'sex', 'class_id', 'birthday', 'father', 'mother',
+            ],
         ];
     }
-        
-    public static function deleteStudent(){
+
+    public static function deleteStudent()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                
-            ]
+
+            ],
         ];
     }
 }

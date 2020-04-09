@@ -7,72 +7,77 @@ namespace App\Api;
  */
 class Teachers
 {
-    public static function getTeachers(){
+    public static function getTeachers()
+    {
         return [
             'type' => [
-                'GET'
-            ],
-            'required' => [ 
-                
-            ], 
-            'optional' => [
-                'sex', 'school_subjects', 'class_tutor'
-            ]
-        ];
-    }
-    public static function getTeacher(){
-        return [
-            'type' => [
-                'GET'
+                'GET',
             ],
             'required' => [
-                'id'
-            ], 
+
+            ],
             'optional' => [
-               'with_userdata', 'with_settings'
-            ]
+                'sex', 'school_subjects', 'class_tutor',
+            ],
+        ];
+    }
+    public static function getTeacher()
+    {
+        return [
+            'type' => [
+                'GET',
+            ],
+            'required' => [
+                'id',
+            ],
+            'optional' => [
+                'with_userdata', 'with_settings',
+            ],
         ];
     }
 
-    public static function addTeacher(){
+    public static function addTeacher()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'user_id', 'firstname', 'lastname'
-            ], 
+                'user_id', 'firstname', 'lastname',
+            ],
             'optional' => [
-                'sex', 'school_subjects', 'class_tutor'
-            ]
+                'sex', 'school_subjects', 'class_tutor',
+            ],
         ];
     }
-        
-    public static function editTeacher(){
+
+    public static function editTeacher()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                'firstname', 'lastname', 'sex', 'class_tutor', 'school_subjects'
-            ]
+                'firstname', 'lastname', 'sex', 'class_tutor', 'school_subjects',
+            ],
         ];
     }
-        
-    public static function deleteTeacher(){
+
+    public static function deleteTeacher()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                
-            ]
+
+            ],
         ];
     }
 }

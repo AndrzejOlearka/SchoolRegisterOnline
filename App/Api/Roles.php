@@ -7,62 +7,66 @@ namespace App\Api;
  */
 class Roles
 {
-    public static function getRoles(){
+    public static function getRoles()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
-            'required' => [ 
-                
-            ], 
+            'required' => [
+
+            ],
             'optional' => [
-                'id', 'name', 'description'
+                'id', 'name', 'description',
             ],
             'filters' => [
                 'with_users',
-            ]
+            ],
         ];
     }
 
-    public static function addRole(){
+    public static function addRole()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'name'
-            ], 
+                'name',
+            ],
             'optional' => [
-                'description'
-            ]
+                'description',
+            ],
         ];
     }
-        
-    public static function editRole(){
+
+    public static function editRole()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                'name', 'description'
-            ]
+                'name', 'description',
+            ],
         ];
     }
-        
-    public static function deleteRole(){
+
+    public static function deleteRole()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                
-            ]
+
+            ],
         ];
     }
 }

@@ -7,59 +7,63 @@ namespace App\Api;
  */
 class Trips
 {
-    public static function getTrips(){
+    public static function getTrips()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
-            'required' => [ 
-                
-            ], 
+            'required' => [
+
+            ],
             'optional' => [
-                'id', 'name'
-            ]
+                'id', 'name',
+            ],
         ];
     }
 
-    public static function addTrip(){
+    public static function addTrip()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'name', 'teachers', 'date_from', 'date_to'
-            ], 
+                'name', 'teachers', 'date_from', 'date_to',
+            ],
             'optional' => [
-                'description', 'students', 'parents'
-            ]
+                'description', 'students', 'parents',
+            ],
         ];
     }
-        
-    public static function editTrip(){
+
+    public static function editTrip()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id', 'name', 'teachers', 'date_from', 'date_to'
-            ], 
+                'id', 'name', 'teachers', 'date_from', 'date_to',
+            ],
             'optional' => [
-                'description', 'students', 'parents'
-            ]
+                'description', 'students', 'parents',
+            ],
         ];
     }
-        
-    public static function deleteTrip(){
+
+    public static function deleteTrip()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                
-            ]
+
+            ],
         ];
     }
 }

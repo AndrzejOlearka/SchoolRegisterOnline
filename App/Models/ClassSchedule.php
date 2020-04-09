@@ -8,18 +8,22 @@ use Core\Model\AbstractModel;
  * ScheduleDifferences model
  *
  */
-class ScheduleDifferences extends AbstractModel 
+class ClassSchedule extends AbstractModel 
 {
     /**
      * model table name
      *
      * @var string
      */
-    const TABLE = 'classes_schedule_differences';
+    const TABLE = 'class_schedules';
+
+    public $id;
 
     public $class_id;
 
     public $week;
 
-    public $data;
+    public $date_from;
+
+    public $date_to;
 }

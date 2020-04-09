@@ -7,62 +7,66 @@ namespace App\Api;
  */
 class GradeTypes
 {
-    public static function getGradeTypes(){
+    public static function getGradeTypes()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
-            'required' => [ 
-                
-            ], 
+            'required' => [
+
+            ],
             'optional' => [
-                'id', 'mark', 'type', 'description', 'weight'
+                'id', 'mark', 'type', 'description', 'weight',
             ],
             'filters' => [
-                
-            ]
+
+            ],
         ];
     }
 
-    public static function addGradeType(){
+    public static function addGradeType()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'mark', 'type'
-            ], 
+                'mark', 'type',
+            ],
             'optional' => [
-                'description', 'weight'
-            ]
+                'description', 'weight',
+            ],
         ];
     }
-        
-    public static function editGradeType(){
+
+    public static function editGradeType()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                'mark', 'type', 'description', 'weight'
-            ]
+                'mark', 'type', 'description', 'weight',
+            ],
         ];
     }
-        
-    public static function deleteGradeType(){
+
+    public static function deleteGradeType()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                
-            ]
+
+            ],
         ];
     }
 }

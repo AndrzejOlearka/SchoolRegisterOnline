@@ -23,13 +23,13 @@ class LessonGradesProvider extends AbstractProvider
 
     public function addLessonGrade()
     {
-        $this->originalData = self::insert("INSERT INTO {$this->table} ", $this->model, $this->getFormData());
+        $this->getResult(self::insert("INSERT INTO {$this->table} ", $this->model, $this->getFormData()));
         return $this;
     }
 
     public function editLessonGrade()
     {
-        $this->originalData = self::update("UPDATE {$this->table} SET ", $this->model, $this->getFormData());
+        $this->getResult(self::update("UPDATE {$this->table} SET ", $this->model, $this->getFormData()));
         return $this;
     }
 

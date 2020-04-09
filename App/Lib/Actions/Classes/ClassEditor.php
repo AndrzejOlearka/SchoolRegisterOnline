@@ -16,17 +16,24 @@ class ClassEditor extends ClassCreator implements EditAction
         $this->originalData = $this->provider->getOriginalData();
     }
 
-    public function edit(){
+    public function edit()
+    {
+        if (!$this->uniqueCheck()) {
+            return $this;
+        }
+
         $this->isExistsClass()
-             ->isNumberInteger()
-             ->isDepartmentAlpha()
-             ->setResult()
-             ->editClass()
-             ->sendResult();
+            ->isNumberInteger()
+            ->isDepartmentAlpha()
+            ->setResult()
+            ->editClass();
+
+        return $this->sendResult();
     }
-    
-    public function editClass(){
-        if($this->result){
+
+    public function editClass()
+    {
+        if ($this->result) {
             $this->provider->editClass();
             $this->originalData = $this->provider->getOriginalData();
         }

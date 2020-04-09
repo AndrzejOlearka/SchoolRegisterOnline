@@ -7,62 +7,66 @@ namespace App\Api;
  */
 class SchoolBreaks
 {
-    public static function getSchoolBreaks(){
+    public static function getSchoolBreaks()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
-            'required' => [ 
-                
-            ], 
+            'required' => [
+
+            ],
             'optional' => [
-                'number'
+                'number',
             ],
             'filters' => [
-                
-            ]
+
+            ],
         ];
     }
 
-    public static function addSchoolBreak(){
+    public static function addSchoolBreak()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'number'
-            ], 
+                'number',
+            ],
             'optional' => [
-                'date_start', 'date_end'
-            ]
+                'date_start', 'date_end',
+            ],
         ];
     }
-        
-    public static function editSchoolBreak(){
+
+    public static function editSchoolBreak()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'number'
-            ], 
+                'number',
+            ],
             'optional' => [
-                'date_start', 'date_end'
-            ]
+                'date_start', 'date_end',
+            ],
         ];
     }
-        
-    public static function deleteSchoolBreak(){
+
+    public static function deleteSchoolBreak()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                
-            ]
+
+            ],
         ];
     }
 }

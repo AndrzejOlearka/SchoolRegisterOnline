@@ -16,7 +16,12 @@ class SettingEditor extends SettingCreator implements EditAction
         $this->originalData = $this->provider->getOriginalData();
     }
 
-    public function edit(){
+    public function edit()
+    {
+        if (!$this->uniqueCheck()) {
+            return $this;
+        }
+
         $this->isExistsSettings()
             ->issetSimilarSetting()
             ->isNameString()
@@ -32,7 +37,7 @@ class SettingEditor extends SettingCreator implements EditAction
         if (!empty($this->originalData)) {
             return $this;
         }
-        if (empty($this->originalData->id)){
+        if (empty($this->originalData->id)) {
             $this->errors['SettingsExists'] = 'There is no setting with this id';
         }
         return $this;
@@ -41,21 +46,22 @@ class SettingEditor extends SettingCreator implements EditAction
     protected function issetSimilarSetting()
     {
         $this->provider->setQuery("
-            WHERE 
+            WHERE
                 role_id = {$this->formData['role_id']}
                 AND name = '{$this->formData['name']}'
-                AND value = {$this->formData['value']} 
+                AND value = {$this->formData['value']}
             ");
         $this->provider->getSettings();
         $this->originalData = $this->provider->getOriginalData();
-        if(!empty($this->originalData)){
+        if (!empty($this->originalData)) {
             $this->errors['SettingsExists'] = 'There is similar setting for this role';
         }
         return $this;
     }
-    
-    public function editSetting(){
-        if($this->result){
+
+    public function editSetting()
+    {
+        if ($this->result) {
             $this->provider->editSetting();
             $this->originalData = $this->provider->getOriginalData();
         }

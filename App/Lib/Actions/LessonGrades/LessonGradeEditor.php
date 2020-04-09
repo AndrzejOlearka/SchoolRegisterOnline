@@ -16,16 +16,27 @@ class LessonGradeEditor extends LessonGradeCreator implements EditAction
         $this->originalData = $this->provider->getOriginalData();
     }
 
-    public function edit(){
-        $this->isExistsLessonGrade()
-             ->isNameAlpha()
-             ->setResult()
-             ->editLessonGrade()
-             ->sendResult();
+    public function edit()
+    {
+        if (!$this->uniqueCheck()) {
+            return $this;
+        }
+
+        $this->isCorrectGradeType()
+            ->issetStudent()
+            ->issetTeacher()
+            ->issetSchoolSubject()
+            ->sanitazeDate()
+            ->setResult()
+            ->setResult()
+            ->editLessonGrade();
+
+        return $this->sendResult();
     }
-    
-    public function editLessonGrade(){
-        if($this->result){
+
+    public function editLessonGrade()
+    {
+        if ($this->result) {
             $this->provider->editLessonGrade();
             $this->originalData = $this->provider->getOriginalData();
         }

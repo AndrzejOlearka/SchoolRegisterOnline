@@ -19,33 +19,32 @@ class SchoolDayEditor extends SchoolDayCreator implements EditAction
 
     public function edit()
     {
-        $uniqueCheck = $this->isInvalidUnique();
-        if($uniqueCheck){
-            $this->setResult(false);
-            $this->sendResult();
+        if (!$this->uniqueCheck()) {
             return $this;
         }
+
         $this->isDayExists()
             ->isDayValid()
+            ->issetSchoolWeek()
             ->isWeekdayOnlyAlpha()
             ->sanitazeDate()
             ->setResult()
-            ->sanitazeDate()
             ->editSchoolDay();
 
         return $this->sendResult();
     }
 
-    public function isDayExists(){
-        if(empty($this->originalData)){
-            $this->errors['dayIsNotExists'] = 'Day Number with '.$this->formData['day'].' is not exists';
+    public function isDayExists()
+    {
+        if (empty($this->originalData)) {
+            $this->errors['dayIsNotExists'] = 'Day Number with ' . $this->formData['day'] . ' is not exists';
         }
         return $this;
     }
-    
+
     public function editSchoolDay()
     {
-        if($this->result){
+        if ($this->result) {
             $this->provider->editSchoolDay();
             $this->originalData = $this->provider->getOriginalData();
         }

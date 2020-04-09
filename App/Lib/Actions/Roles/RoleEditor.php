@@ -16,9 +16,13 @@ class RoleEditor extends RoleCreator implements EditAction
         $this->originalData = $this->provider->getOriginalData();
     }
 
-    public function edit(){
+    public function edit()
+    {
+        if (!$this->uniqueCheck()) {
+            return $this;
+        }
+
         $this->isExistsRole()
-             ->isExistsRole()
              ->isRoleAlphaNumAndSomeChars()
              ->sanitazeDescription()
              ->setResult()

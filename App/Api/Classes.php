@@ -5,78 +5,83 @@ namespace App\Api;
 /**
  * Api users endpoint controller
  */
-class Classes 
+class Classes
 {
-    public static function getClasses(){
+    public static function getClasses()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
             'required' => [
 
-            ], 
+            ],
             'optional' => [
-               'id', 'class_tutor', 'profile_id', 'default_year', 'number', 'department'
+                'id', 'class_tutor', 'profile_id', 'default_year', 'number', 'department',
             ],
             'filters' => [
-                'with_students', 'with_groups', 'with_schedule'
-            ]
+                'with_students', 'with_groups', 'with_schedule',
+            ],
         ];
     }
-    
-    public static function getClass(){
+
+    public static function getClass()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                'with_students', 'with_groups', 'with_schedule'
-            ]
+                'with_students', 'with_groups', 'with_schedule',
+            ],
         ];
     }
-        
-    public static function addClass(){
+
+    public static function addClass()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'number'
-            ], 
+                'number',
+            ],
             'optional' => [
-                'department', 'class_tutor', 'profile_id', 'default_year'
-            ]
+                'department', 'class_tutor', 'profile_id', 'default_year',
+            ],
         ];
     }
-        
-    public static function editClass(){
+
+    public static function editClass()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                'department', 'class_tutor', 'profile_id', 'default_year'
-            ]
+                'department', 'class_tutor', 'profile_id', 'default_year',
+            ],
         ];
     }
-        
-    public static function deleteClass(){
+
+    public static function deleteClass()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                
-            ]
+
+            ],
         ];
     }
 }

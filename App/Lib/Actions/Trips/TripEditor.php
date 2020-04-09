@@ -19,12 +19,10 @@ class TripEditor extends TripCreator implements EditAction
 
     public function edit()
     {
-        $uniqueCheck = $this->isInvalidUnique();
-        if($uniqueCheck){
-            $this->setResult(false);
-            $this->sendResult();
+        if (!$this->uniqueCheck()) {
             return $this;
         }
+        
         $this->isNameValidString()
             ->isDescriptionValidString()
             ->isTeachersValidJson()

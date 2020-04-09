@@ -2,93 +2,98 @@
 
 namespace App\Api;
 
-
 /**
  * Api users endpoint controller
  */
-class Users 
+class Users
 {
-    public static function getUsers(){
+    public static function getUsers()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
             'required' => [
-                
-            ], 
+
+            ],
             'optional' => [
-                'role', 'verified'
-            ]
+                'role', 'verified',
+            ],
         ];
     }
 
-    public static function getUser(){
+    public static function getUser()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
             'required' => [
-                
-            ], 
+
+            ],
             'optional' => [
-                'woth_settings', 'with_data'
-            ]
+                'woth_settings', 'with_data',
+            ],
         ];
     }
 
-    public static function verifyUser(){
+    public static function verifyUser()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'email', 'password'
-            ], 
+                'email', 'password',
+            ],
             'optional' => [
 
-            ]
+            ],
         ];
     }
 
-    public static function addUser(){
+    public static function addUser()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'email', 'password'
-            ], 
+                'email', 'password',
+            ],
             'optional' => [
-                'role', 'verified'
-            ]
+                'role', 'verified',
+            ],
         ];
     }
 
-    public static function editUser(){
+    public static function editUser()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                'email', 'role', 'verified', 'password'
-            ]
+                'email', 'role', 'verified', 'password',
+            ],
         ];
     }
 
-    public static function deleteUser(){
+    public static function deleteUser()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                
-            ]
+
+            ],
         ];
     }
 }

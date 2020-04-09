@@ -7,62 +7,66 @@ namespace App\Api;
  */
 class SchoolSubjects
 {
-    public static function getSchoolSubjects(){
+    public static function getSchoolSubjects()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
-            'required' => [ 
-                
-            ], 
+            'required' => [
+
+            ],
             'optional' => [
-                'id', 'name'
+                'id', 'name',
             ],
             'filters' => [
-                
-            ]
+
+            ],
         ];
     }
 
-    public static function addSchoolSubject(){
+    public static function addSchoolSubject()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'name'
-            ], 
+                'name',
+            ],
             'optional' => [
-                
-            ]
+
+            ],
         ];
     }
-        
-    public static function editSchoolSubject(){
+
+    public static function editSchoolSubject()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                'name'
-            ]
+                'name',
+            ],
         ];
     }
-        
-    public static function deleteSchoolSubject(){
+
+    public static function deleteSchoolSubject()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                
-            ]
+
+            ],
         ];
     }
 }

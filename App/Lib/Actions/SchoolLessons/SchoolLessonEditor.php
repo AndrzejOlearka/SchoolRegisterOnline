@@ -16,7 +16,12 @@ class SchoolLessonEditor extends SchoolLessonCreator implements EditAction
         $this->originalData = $this->provider->getOriginalData();
     }
 
-    public function edit(){
+    public function edit()
+    {
+        if (!$this->uniqueCheck()) {
+            return $this;
+        }
+
         $this->isNumberExists()
             ->isNumberValid()
             ->changeDateFormat()
@@ -26,15 +31,17 @@ class SchoolLessonEditor extends SchoolLessonCreator implements EditAction
         return $this->sendResult();
     }
 
-    public function isNumberExists(){
-        if(empty($this->originalData)){
-            $this->errors['numberIsNotExists'] = 'Lesson Number with '.$this->formData['number'].' is not exists';
+    public function isNumberExists()
+    {
+        if (empty($this->originalData)) {
+            $this->errors['numberIsNotExists'] = 'Lesson Number with ' . $this->formData['number'] . ' is not exists';
         }
         return $this;
     }
-    
-    public function editSchoolLesson(){
-        if($this->result){
+
+    public function editSchoolLesson()
+    {
+        if ($this->result) {
             $this->provider->editSchoolLesson();
             $this->originalData = $this->provider->getOriginalData();
         }

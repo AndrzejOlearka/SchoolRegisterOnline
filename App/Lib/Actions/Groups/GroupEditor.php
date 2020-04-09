@@ -19,42 +19,39 @@ class GroupEditor extends GroupCreator implements EditAction
 
     public function edit()
     {
-        $uniqueCheck = $this->isInvalidUnique();
-        if($uniqueCheck){
-            $this->setResult(false);
-            $this->sendResult();
+        if (!$this->uniqueCheck()) {
             return $this;
         }
+
         $this->isExistsGroup()
             ->isNameAlphaNumeric()
             ->issetClass()
             ->issetTeacher()
             ->issetSchoolSubject()
             ->isStudentsValidJson()
-            ->setResult()
-            ->editGroup();
+            ->setResult();
 
-        $this->sendResult();
+        return $this->sendResult();
     }
 
     protected function isExistsGroup()
     {
-        $this->provider->setQuery(" 
-            WHERE class_id = {$this->formData['class_id']} 
-            AND name = '{$this->formData['name']}' 
+        $this->provider->setQuery("
+            WHERE class_id = {$this->formData['class_id']}
+            AND name = '{$this->formData['name']}'
             AND id != {$this->formData['id']} "
         );
         $this->provider->getGroups();
         $this->originalData = $this->provider->getOriginalData();
         if (!empty($this->originalData)) {
             $this->errors['groupExists'] = 'There is group with this name in this class';
-        } 
+        }
         return $this;
     }
-    
+
     public function editGroup()
     {
-        if($this->result){
+        if ($this->result) {
             $this->provider->editGroup();
             $this->originalData = $this->provider->getOriginalData();
         }

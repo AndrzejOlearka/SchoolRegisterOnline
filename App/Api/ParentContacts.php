@@ -5,61 +5,65 @@ namespace App\Api;
 /**
  * Api users endpoint controller
  */
-class ParentContacts 
+class ParentContacts
 {
-    public static function getParentContact(){
+    public static function getParentContact()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
-            'required' => [ 
-                
-            ], 
+            'required' => [
+
+            ],
             'optional' => [
-                'id', 'student_id', 'user_id', 'parent', 'email'
-            ]
+                'id', 'student_id', 'user_id', 'parent', 'email',
+            ],
         ];
     }
 
-    public static function addParentContact(){
+    public static function addParentContact()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'student_id', 'parent'
-            ], 
+                'student_id', 'parent',
+            ],
             'optional' => [
-                'user_id', 'description', 'email'
-            ]
+                'user_id', 'description', 'email',
+            ],
         ];
     }
 
-    public static function editParentContact(){
+    public static function editParentContact()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'id'
-            ], 
+                'id',
+            ],
             'optional' => [
-                'user_id', 'parent', 'description', 'email'
-            ]
+                'user_id', 'parent', 'description', 'email',
+            ],
         ];
     }
 
-    public static function deleteParentContact(){
+    public static function deleteParentContact()
+    {
         return [
             'type' => [
-                'POST', 'DELETE'
+                'POST', 'DELETE',
             ],
             'required' => [
-                'id', 
-            ], 
+                'id',
+            ],
             'optional' => [
-                
-            ]
+
+            ],
         ];
     }
 }

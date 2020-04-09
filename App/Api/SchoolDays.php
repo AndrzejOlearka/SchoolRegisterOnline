@@ -7,59 +7,63 @@ namespace App\Api;
  */
 class SchoolDays
 {
-    public static function getSchoolDays(){
+    public static function getSchoolDays()
+    {
         return [
             'type' => [
-                'GET'
+                'GET',
             ],
-            'required' => [ 
-                
-            ], 
+            'required' => [
+
+            ],
             'optional' => [
-                'day', 'date', 'weekday'
-            ]
+                'day', 'week', 'date', 'weekday',
+            ],
         ];
     }
 
-    public static function addSchoolDay(){
+    public static function addSchoolDay()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'day', 'date', 'weekday'
-            ], 
+                'day', 'week', 'date', 'weekday',
+            ],
             'optional' => [
 
-            ]
+            ],
         ];
     }
 
-    public static function editSchoolDay(){
+    public static function editSchoolDay()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'day', 'date', 'weekday'
-            ], 
+                'day', 'week', 'date', 'weekday',
+            ],
             'optional' => [
-                
-            ]
+
+            ],
         ];
     }
 
-    public static function deleteSchoolDay(){
+    public static function deleteSchoolDay()
+    {
         return [
             'type' => [
-                'POST'
+                'POST',
             ],
             'required' => [
-                'day'
-            ], 
+                'day',
+            ],
             'optional' => [
 
-            ]
+            ],
         ];
     }
 }

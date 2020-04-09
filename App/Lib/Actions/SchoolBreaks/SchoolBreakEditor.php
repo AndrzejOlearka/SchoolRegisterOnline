@@ -16,7 +16,12 @@ class SchoolBreakEditor extends SchoolBreakCreator implements EditAction
         $this->originalData = $this->provider->getOriginalData();
     }
 
-    public function edit(){
+    public function edit()
+    {
+        if (!$this->uniqueCheck()) {
+            return $this;
+        }
+
         $this->isNumberExists()
             ->isNumberValid()
             ->changeDateFormat()
